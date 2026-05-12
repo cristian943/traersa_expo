@@ -22,7 +22,7 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* --- VIDEO Y CAPA DE FONDO --- */
+
 .video-background {
     position: fixed;
     top: 0;
@@ -41,7 +41,7 @@ body {
     background: radial-gradient(circle at center, rgba(100, 0, 0, 0.25) 0%, rgba(0,0,0,0.95) 85%);
 }
 
-/* --- LÍNEAS ROJAS LATERALES --- */
+
 .decoration-line {
     position: absolute;
     top: 22%;
@@ -54,7 +54,7 @@ body {
 .line-left { left: 12%; }
 .line-right { right: 12%; }
 
-/* --- BOTÓN VOLVER --- */
+
 .btn-volver {
     position: absolute;
     top: 40px;
@@ -70,7 +70,7 @@ body {
     z-index: 10;
 }
 
-/* --- TARJETA --- */
+
 .login-card {
     background: var(--black-card);
     width: 380px;
@@ -90,7 +90,7 @@ h2 {
     margin-bottom: 25px;
 }
 
-/* --- INPUTS --- */
+
 .input-group {
     text-align: left;
     margin-bottom: 15px;
@@ -133,7 +133,7 @@ h2 {
     color: #333;
 }
 
-/* --- BOTONES --- */
+
 .btn-submit {
     width: 65%;
     background: linear-gradient(180deg, #ff2e2e 0%, #b30000 100%);
