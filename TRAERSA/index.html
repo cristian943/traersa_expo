@@ -15,6 +15,14 @@
 
 <link rel="stylesheet" href="styles.css">
 <style>
+    /* IMAGEN DEL MODAL */
+
+.modal-img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px 15px 0 0;
+}
     /* Estilos para el texto y botón en las cards */
 .card-text {
     font-size: 16px;
@@ -209,12 +217,35 @@
 </div>
 
 <div id="miModal" class="modal">
+
     <div class="modal-content">
-        <span class="close-modal" onclick="cerrarModal()">&times;</span>
-        <h2 id="tituloModal" style="font-family:'Bebas Neue'; color:red; font-size:40px;"></h2>
+
+        <span class="close-modal" onclick="cerrarModal()">
+            &times;
+        </span>
+
+        <!-- IMAGEN -->
+        <img id="imagenModal" src="" alt="" class="modal-img">
+
+        <h2 id="tituloModal"
+            style="font-family:'Bebas Neue';
+            color:red;
+            font-size:40px;
+            margin-top:20px;">
+        </h2>
+
         <div class="line"></div>
-        <p id="textoModal" style="font-size:18px; color:#333; margin-top:20px; font-family: Arial;"></p>
+
+        <p id="textoModal"
+           style="font-size:18px;
+           color:#333;
+           margin-top:20px;
+           font-family: Arial;
+           padding:0 20px 25px;">
+        </p>
+
     </div>
+
 </div>
 </section>
 
@@ -296,41 +327,89 @@
 
     </div>
 
-</footer>
-<script>
-    // Seleccionamos los elementos
-    const modal = document.getElementById("miModal");
-    const titulo = document.getElementById("tituloModal");
-    const texto = document.getElementById("textoModal");
+</footer><script>
 
-    // Función para abrir
-    function abrirModal(tipo) {
-        modal.style.display = "flex"; // Usamos flex para centrarlo
-        titulo.innerText = tipo.toUpperCase();
-        
-        // Textos descriptivos
-        if(tipo === 'gestión aduanal') {
-            texto.innerText = "Ofrecemos asesoría completa en trámites de aduana y cumplimiento legal.";
-        } else if(tipo === 'transporte terrestre') {
-            texto.innerText = "Servicio de transporte con monitoreo constante y seguridad garantizada.";
-        } else if(tipo === 'almacenaje') {
-            texto.innerText = "Contamos con amplias bodegas y control estricto de inventarios.";
-        } else if(tipo === 'proyectos especiales') {
-            texto.innerText = "Soluciones logísticas para cargas sobredimensionadas o de manejo delicado.";
-        }
+const modal = document.getElementById("miModal");
+const titulo = document.getElementById("tituloModal");
+const texto = document.getElementById("textoModal");
+const imagen = document.getElementById("imagenModal");
+
+
+function abrirModal(tipo){
+
+    modal.style.display = "flex";
+
+
+
+    if(tipo === 'gestión aduanal'){
+
+        titulo.innerText = "GESTIÓN ADUANAL";
+
+        texto.innerText =
+        "Ofrecemos asesoría completa en trámites de aduana y cumplimiento legal.";
+
+        imagen.src = "imagenes/aduana.jpg";
+
     }
 
-    // Función para cerrar
-    function cerrarModal() {
-        modal.style.display = "none";
+
+    else if(tipo === 'transporte terrestre'){
+
+        titulo.innerText = "TRANSPORTE TERRESTRE";
+
+        texto.innerText =
+        "Servicio de transporte con monitoreo constante y seguridad garantizada.";
+
+        imagen.src = "imagenes/transporte.jpg";
+
     }
 
-    // Cerrar si hacen clic fuera de la ventana blanca
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            cerrarModal();
-        }
+
+    else if(tipo === 'almacenaje'){
+
+        titulo.innerText = "ALMACENAJE";
+
+        texto.innerText =
+        "Contamos con amplias bodegas y control estricto de inventarios.";
+
+        imagen.src = "imagenes/almacen.jpg";
+
     }
+
+
+    else if(tipo === 'proyectos especiales'){
+
+        titulo.innerText = "PROYECTOS ESPECIALES";
+
+        texto.innerText =
+        "Soluciones logísticas para cargas sobredimensionadas o delicadas.";
+
+        imagen.src = "imagenes/proyecto.jpg";
+
+    }
+
+}
+
+
+
+function cerrarModal(){
+
+    modal.style.display = "none";
+
+}
+
+
+
+window.onclick = function(event){
+
+    if(event.target == modal){
+
+        cerrarModal();
+
+    }
+
+}
+
 </script>
 </body>
 </html>
