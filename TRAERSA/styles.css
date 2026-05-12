@@ -40,7 +40,7 @@ nav ul{
 }
 
 nav ul li a{
-    text-decoration:none;
+     text-decoration:none;
     color:black;
     font-size:18px;
     transition:.3s;
@@ -51,6 +51,7 @@ nav ul li a{
 nav ul li a:hover{
     color:red;
 }
+
 
 .login{
     display:flex;
@@ -123,14 +124,14 @@ nav ul li a:hover{
 }
 
 .overlay p{
-    margin-top:25px;
+  margin-top:25px;
     font-size:25px;
     max-width:500px;
     font-family:'Arial Nova', Arial, sans-serif;
 }
 
 .overlay button{
-    margin-top:25px;
+     margin-top:25px;
     background:red;
     color:white;
     border:none;
