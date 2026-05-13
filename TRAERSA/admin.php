@@ -1,0 +1,1 @@
+<?php   echo "Bienvenido al panel de administración";   ?>
