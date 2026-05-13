@@ -1,0 +1,12 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "pc3_masc";
+
+$conn = new mysqli($servername,$username,$password,$database);
+
+if ($conn->connect_error){
+    die("Error en la conexion a la base de datos: " . $conn->connect_error);
+}
+?>
