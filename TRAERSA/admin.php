@@ -23,7 +23,7 @@
 <aside class="sidebar fade-up" id="sidebar">
 
     <div class="logo-container">
-        <img src="logo2.png" alt="Logo">
+        <img src="imagenes\logo2.png" alt="Logo">
         <h1>TRAERSA</h1>
     </div>
 
