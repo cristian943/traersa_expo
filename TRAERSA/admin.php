@@ -1,1 +1,433 @@
 <?php   echo "Bienvenido al panel de administración";   ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard TRAERSA</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="Styles\AEstilo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar fade-up" id="sidebar">
+
+    <div class="logo-container">
+        <img src="logo2.png" alt="Logo">
+        <h1>TRAERSA</h1>
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">OPERACIONES</div>
+
+        <a href="#" class="menu-item active">
+            <i class="fa-solid fa-tags"></i>
+            <span>Servicios</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>En ejecución</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Completados</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Clientes</span>
+        </a>
+
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">CONTENIDOS</div>
+
+        <a href="#" class="menu-item">
+            <i class="fa-regular fa-image"></i>
+            <span>Carrusel</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-border-all"></i>
+            <span>Galería</span>
+        </a>
+
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">ADMINISTRACIÓN</div>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-shield"></i>
+            <span>Roles</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Usuarios</span>
+        </a>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <button class="btn-logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Cerrar sesión</span>
+        </button>
+
+    </div>
+
+</aside>
+
+<main class="main-content fade-up">
+
+    <header class="header">
+
+        <div class="header-title">
+            <h2>Bienvenido Administrador</h2>
+          
+        </div>
+
+        <div class="user-profile">
+
+            <div class="user-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="user-info">
+                ADMIN
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-tag"></i>
+            </div>
+
+            <div class="stat-info">
+                <small>Servicios</small>
+                <h3>0</h3>
+                <p>Total registrados</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-truck"></i>
+            </div>
+
+            <div class="stat-info">
+                <small>En ejecución</small>
+                <h3>0</h3>
+                <p>Actualmente activos</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-shield"></i>
+            </div>
+
+            <div class="stat-info">
+                <small>Completados</small>
+                <h3>0</h3>
+                <p>Servicios finalizados</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="stat-info">
+                <small>Clientes</small>
+                <h3>0</h3>
+                <p>Total registrados</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TABLAS -->
+
+    <div class="tables-grid">
+
+        <!-- ACCIONES -->
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <h3>ACCIONES RECIENTES</h3>
+            </div>
+
+            <div class="table-content">
+
+                <div class="table-row">
+                    <span>ID</span>
+
+                    <div>
+                        <strong>ACCIÓN</strong>
+                        <p>DESCRIPCIÓN XXXXXXXX</p>
+                    </div>
+
+                    <small>HORA</small>
+                    <small>XX/XX/XXXX</small>
+                </div>
+
+                <div class="table-row">
+                    <span>ID</span>
+
+                    <div>
+                        <strong>ACCIÓN</strong>
+                        <p>DESCRIPCIÓN XXXXXXXX</p>
+                    </div>
+
+                    <small>HORA</small>
+                    <small>XX/XX/XXXX</small>
+                </div>
+
+                <div class="table-row">
+                    <span>ID</span>
+
+                    <div>
+                        <strong>ACCIÓN</strong>
+                        <p>DESCRIPCIÓN XXXXXXXX</p>
+                    </div>
+
+                    <small>HORA</small>
+                    <small>XX/XX/XXXX</small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SERVICIOS -->
+
+        <div class="table-card">
+
+            <div class="table-header services-header">
+
+                <h3>SERVICIOS RECIENTES</h3>
+
+                <button class="btn-view">
+                    VER TODOS
+                </button>
+
+            </div>
+
+            <div class="table-content">
+
+                <div class="table-row">
+
+                    <span>ID</span>
+
+                    <div>
+                        <strong>SERVICIO</strong>
+                        <p>CLIENTE XXXXXXXX</p>
+                    </div>
+
+                    <button class="status-btn running">
+                        EJECUCIÓN
+                    </button>
+
+                    <small>XX/XX/XXXX</small>
+
+                </div>
+
+                <div class="table-row">
+
+                    <span>ID</span>
+
+                    <div>
+                        <strong>SERVICIO</strong>
+                        <p>CLIENTE XXXXXXXX</p>
+                    </div>
+
+                    <button class="status-btn completed">
+                        COMPLETADO
+                    </button>
+
+                    <small>XX/XX/XXXX</small>
+
+                </div>
+
+                <div class="table-row">
+
+                    <span>ID</span>
+
+                    <div>
+                        <strong>SERVICIO</strong>
+                        <p>CLIENTE XXXXXXXX</p>
+                    </div>
+
+                    <button class="status-btn completed">
+                        COMPLETADO
+                    </button>
+
+                    <small>XX/XX/XXXX</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+
+                <h4>Síguenos en redes sociales</h4>
+
+                <div class="social">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Servicios</h4>
+
+                <ul>
+                    <li>Gestión Aduanal</li>
+                    <li>Transporte Terrestre</li>
+                    <li>Transporte Marítimo</li>
+                    <li>Almacenaje</li>
+                    <li>Proyectos Especiales</li>
+                </ul>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Grupo TRAERSA</h4>
+
+                <ul>
+                    <li>Únete a nuestro equipo</li>
+                    <li>Sobre nosotros</li>
+                    <li>Deseas ser proveedor</li>
+                </ul>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Nuestros valores</h4>
+
+                <ul>
+                    <li>Sostenibilidad</li>
+                    <li>Garantía total</li>
+                    <li>Responsabilidad</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="contact">
+
+            <div>
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>+502 78562384</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-envelope"></i>
+                <span>traersa2026@gmail.com</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>31 av 2-48 zona 6 de mixco</span>
+            </div>
+
+        </div>
+
+    </footer>
+
+</main>
+
+<script>
+
+const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menuToggle");
+const overlay = document.getElementById("overlay");
+
+menuToggle.addEventListener("click", () => {
+
+    if(window.innerWidth <= 900){
+
+        sidebar.classList.toggle("mobile-active");
+        overlay.classList.toggle("active");
+
+    }else{
+
+        sidebar.classList.toggle("closed");
+
+    }
+
+});
+
+overlay.addEventListener("click", () => {
+
+    sidebar.classList.remove("mobile-active");
+    overlay.classList.remove("active");
+
+});
+
+const menuItems = document.querySelectorAll(".menu-item");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        menuItems.forEach(el => {
+            el.classList.remove("active");
+        });
+
+        item.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+
