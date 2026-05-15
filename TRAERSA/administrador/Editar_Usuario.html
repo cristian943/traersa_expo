@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard TRAERSA</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="..Styles\ECA.css" rel="stylesheet">
+
+</head>
+<style>
+
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&display=swap');
 
@@ -633,235 +647,90 @@ label,
 }
 
 .completed{
-   
-   
     background:linear-gradient(135deg,#7b1111,#d32f2f);
-}
-
-
-/* =========================
-   GALERIA
-========================= */
-
-.gallery-container{
-    margin-top:30px;
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-}
-
-.gallery-top{
-    background:linear-gradient(145deg,#101010,#0a0a0a);
-    border:1px solid #1c1c1c;
-    border-radius:22px;
-    padding:25px;
-    display:flex;
-    align-items:end;
-    gap:18px;
-    flex-wrap:wrap;
-}
-
-.gallery-input{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-.gallery-input label{
-    font-size:12px;
-    font-weight:700;
-    color:#d2d2d2;
-    letter-spacing:1px;
-}
-
-.gallery-input input{
-    width:190px;
-    height:45px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    background:#111;
-    border:1px solid #222;
-    padding:0 15px;
-    color:#fff;
-    transition:.3s;
-}
-
-.gallery-input input:focus{
-    border-color:#9b111e;
-    box-shadow:0 0 15px rgba(211,47,47,.2);
-}
-
-.gallery-btn{
-    height:45px;
-    padding:0 30px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,#7b1111,#d32f2f);
-    color:#fff;
-    font-weight:700;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.gallery-btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(211,47,47,.35);
-}
-
-.gallery-date{
-    margin-left:auto;
-    color:#b5b5b5;
-    font-size:13px;
-    font-weight:700;
-}
-
-.gallery-table{
-    background:linear-gradient(145deg,#101010,#0a0a0a);
-    border:1px solid #1c1c1c;
-    border-radius:22px;
-    padding:25px;
-    transition:.4s;
-}
-
-.gallery-table:hover{
-    border-color:#9b111e;
-    box-shadow:0 10px 30px rgba(211,47,47,.15);
-}
-
-.gallery-header{
-    margin-bottom:20px;
-}
-
-.gallery-header h3{
-    font-size:22px;
-    letter-spacing:1px;
-}
-
-.gallery-head{
-    background:transparent !important;
-    border:none !important;
-    padding-bottom:5px;
-}
-
-.gallery-head span{
-    color:#8f8f8f;
-    font-size:11px;
-}
-
-.gallery-row{
-    display:grid;
-    grid-template-columns:100px 1fr 220px 120px;
-    align-items:center;
-    gap:20px;
-    padding:16px;
-    border-radius:16px;
-    background:#0b0b0b;
-    border:1px solid #191919;
-    margin-bottom:14px;
-    transition:.3s;
-}
-
-.gallery-row:hover{
-    background:#121212;
-    border-color:#292929;
-}
-
-.gallery-img img{
-    width:70px;
-    height:55px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-.gallery-info strong{
-    display:block;
-    font-size:15px;
-    margin-bottom:5px;
-}
-
-.gallery-info p{
-    color:#8f8f8f;
-    font-size:12px;
-}
-
-.gallery-actions{
-    display:flex;
-    gap:12px;
-}
-
-.edit-btn,
-.delete-btn{
-    border:none;
-    padding:11px 18px;
-    border-radius:10px;
-    color:#fff;
-    font-size:11px;
-    font-weight:700;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.edit-btn{
-    background:#111;
-    border:1px solid #ffffff20;
-}
-
-.delete-btn{
-    background:linear-gradient(135deg,#7b1111,#d32f2f);
-}
-
-.edit-btn:hover,
-.delete-btn:hover{
-    transform:translateY(-2px);
-}
-
-.gallery-row small{
-    color:#8f8f8f;
-    font-size:12px;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-    .gallery-row{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .gallery-actions{
-        justify-content:center;
-    }
-
-    .gallery-img{
-        display:flex;
-        justify-content:center;
-    }
-
-}
-
-@media(max-width:700px){
-
-    .gallery-top{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .gallery-input input{
-        width:100%;
-    }
-
-    .gallery-date{
-        margin-left:0;
-    }
-
 }
 
 /* ANIMACIONES */
 
 .fade-up{
     animation:fadeUp .8s ease;
+}
+/* =========================
+   USUARIOS
+========================= */
+
+.users-content{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.user-row{
+    display:grid;
+    grid-template-columns:70px 1fr 170px 120px;
+    align-items:center;
+    gap:20px;
+    background:#0b0b0b;
+    border:1px solid #191919;
+    padding:18px;
+    border-radius:16px;
+    transition:.3s;
+}
+
+.user-row:hover{
+    background:#121212;
+    border-color:#2a2a2a;
+}
+
+.user-id{
+    font-size:34px;
+    font-weight:900;
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:2px;
+}
+
+.user-data strong{
+    display:block;
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+.user-data p{
+    font-size:11px;
+    color:#8f8f8f;
+}
+
+.delete-user{
+    border:none;
+    height:45px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#a30000,#e00000);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.delete-user:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(255,0,0,.2);
+}
+
+.user-row small{
+    color:#8f8f8f;
+    font-size:11px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    .user-row{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
 }
 
 @keyframes fadeUp{
@@ -964,3 +833,332 @@ label,
 
 }
 
+
+
+</style>
+
+
+<body>
+
+<div class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar fade-up" id="sidebar">
+
+    <div class="logo-container">
+        <img src="../imagenes/logo2.png" alt="Logo">
+        <h1>TRAERSA</h1>
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">OPERACIONES</div>
+
+        <a href="#" class="menu-item ">
+            <i class="fa-solid fa-tags"></i>
+            <span>Servicios</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>En ejecución</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Completados</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Clientes</span>
+        </a>
+
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">CONTENIDOS</div>
+
+        <a href="#" class="menu-item ">
+            <i class="fa-regular fa-image"></i>
+            <span>Carrusel</span>
+        </a>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-border-all"></i>
+            <span>Galería</span>
+        </a>
+
+    </div>
+
+    <div class="menu-section">
+
+        <div class="menu-title">ADMINISTRACIÓN</div>
+
+        <a href="#" class="menu-item">
+            <i class="fa-solid fa-shield"></i>
+            <span>Roles</span>
+        </a>
+
+        <a href="#" class="menu-item active">
+            <i class="fa-solid fa-users"></i>
+            <span>Usuarios</span>
+        </a>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <button class="btn-logout">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Cerrar sesión</span>
+        </button>
+
+    </div>
+
+</aside>
+
+<main class="main-content fade-up">
+
+    <header class="header">
+
+        <div class="header-title">
+            <h2>Bienvenido Administrador</h2>
+          
+        </div>
+
+        <div class="user-profile">
+
+            <div class="user-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="user-info">
+                ADMIN
+            </div>
+
+        </div>
+
+    </header>
+    <!-- USUARIOS -->
+
+<div class="table-card fade-up">
+
+    <div class="table-header services-header">
+
+        <h3>USUARIOS:</h3>
+
+        <button class="btn-view">
+            VER TODOS
+        </button>
+
+    </div>
+
+    <div class="users-content">
+
+        <!-- FILA -->
+
+        <div class="user-row">
+
+            <span class="user-id">ID</span>
+
+            <div class="user-data">
+                <strong>USUARIO</strong>
+                <p>CORREO</p>
+            </div>
+
+            <button class="delete-user">
+                ELIMINAR
+            </button>
+
+            <small>XX/XX/XXXX</small>
+
+        </div>
+
+        <div class="user-row">
+
+            <span class="user-id">ID</span>
+
+            <div class="user-data">
+                <strong>USUARIO</strong>
+                <p>CORREO</p>
+            </div>
+
+            <button class="delete-user">
+                ELIMINAR
+            </button>
+
+            <small>XX/XX/XXXX</small>
+
+        </div>
+
+        <div class="user-row">
+
+            <span class="user-id">ID</span>
+
+            <div class="user-data">
+                <strong>USUARIO</strong>
+                <p>CORREO</p>
+            </div>
+
+            <button class="delete-user">
+                ELIMINAR
+            </button>
+
+            <small>XX/XX/XXXX</small>
+
+        </div>
+
+        <div class="user-row">
+
+            <span class="user-id">ID</span>
+
+            <div class="user-data">
+                <strong>USUARIO</strong>
+                <p>CORREO</p>
+            </div>
+
+            <button class="delete-user">
+                ELIMINAR
+            </button>
+
+            <small>XX/XX/XXXX</small>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+
+                <h4>Síguenos en redes sociales</h4>
+
+                <div class="social">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Servicios</h4>
+
+                <ul>
+                    <li>Gestión Aduanal</li>
+                    <li>Transporte Terrestre</li>
+                    <li>Transporte Marítimo</li>
+                    <li>Almacenaje</li>
+                    <li>Proyectos Especiales</li>
+                </ul>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Grupo TRAERSA</h4>
+
+                <ul>
+                    <li>Únete a nuestro equipo</li>
+                    <li>Sobre nosotros</li>
+                    <li>Deseas ser proveedor</li>
+                </ul>
+
+            </div>
+
+            <div class="footer-box">
+
+                <h4>Nuestros valores</h4>
+
+                <ul>
+                    <li>Sostenibilidad</li>
+                    <li>Garantía total</li>
+                    <li>Responsabilidad</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="contact">
+
+            <div>
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>+502 78562384</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-envelope"></i>
+                <span>traersa2026@gmail.com</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>31 av 2-48 zona 6 de mixco</span>
+            </div>
+
+        </div>
+
+    </footer>
+
+</main>
+
+<script>
+
+const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menuToggle");
+const overlay = document.getElementById("overlay");
+
+menuToggle.addEventListener("click", () => {
+
+    if(window.innerWidth <= 900){
+
+        sidebar.classList.toggle("mobile-active");
+        overlay.classList.toggle("active");
+
+    }else{
+
+        sidebar.classList.toggle("closed");
+
+    }
+
+});
+
+overlay.addEventListener("click", () => {
+
+    sidebar.classList.remove("mobile-active");
+    overlay.classList.remove("active");
+
+});
+
+const menuItems = document.querySelectorAll(".menu-item");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        menuItems.forEach(el => {
+            el.classList.remove("active");
+        });
+
+        item.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
