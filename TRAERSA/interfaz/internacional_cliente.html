@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TRAERSA Dashboard</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ========================= */
+/* GENERAL */
+/* ========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    overflow-x:hidden;
+}
+
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+
+.top-navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    z-index:2000;
+}
+
+.nav-left,
+.nav-right{
+    width:250px;
+    display:flex;
+    align-items:center;
+}
+
+.nav-right{
+    justify-content:flex-end;
+    gap:25px;
+}
+
+.nav-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.navbar-logo{
+    height:60px;
+    object-fit:contain;
+}
+
+.nav-icon{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.nav-icon:hover{
+    color:#c40000;
+}
+
+.nav-icon i{
+    font-size:20px;
+}
+
+/* ========================= */
+/* BOTÓN MENU */
+/* ========================= */
+
+.menu-toggle{
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:#c40000;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.menu-toggle:hover{
+    transform:scale(1.05);
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar{
+    position:fixed;
+    top:80px;
+    left:0;
+    width:280px;
+    height:100%;
+    background:linear-gradient(180deg,#c40000,#6e0000);
+    padding:25px;
+    color:white;
+    overflow-y:auto;
+    transition:.4s ease;
+    z-index:1500;
+}
+
+.sidebar.closed{
+    transform:translateX(-100%);
+}
+
+.menu-section{
+    margin-bottom:35px;
+}
+
+.menu-title{
+    margin-bottom:15px;
+    font-size:14px;
+    font-weight:bold;
+    opacity:.7;
+    letter-spacing:1px;
+}
+
+.menu-item{
+    width:100%;
+    height:50px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:0 18px;
+    margin-bottom:10px;
+    border-radius:14px;
+    text-decoration:none;
+    color:white;
+    transition:.3s;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.12);
+    transform:translateX(5px);
+}
+
+.menu-item.active{
+    background:white;
+    color:#c40000;
+}
+
+.sidebar-bottom{
+    margin-top:40px;
+}
+
+.btn-logout{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:14px;
+    background:white;
+    color:#c40000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* ========================= */
+/* MAIN */
+/* ========================= */
+
+.main-content{
+    margin-top:100px;
+    margin-left:280px;
+    padding:30px;
+    transition:.4s;
+}
+
+.main-content.full{
+    margin-left:0;
+}
+
+/* ========================= */
+/* GALERÍA MOSAICO */
+/* ========================= */
+
+.mosaic-gallery{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:220px;
+    gap:15px;
+    margin-bottom:50px;
+}
+
+.mosaic-item{
+    overflow:hidden;
+    border-radius:22px;
+}
+
+.mosaic-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.mosaic-item:hover img{
+    transform:scale(1.08);
+}
+
+.mosaic-item.big{
+    grid-column:span 2;
+    grid-row:span 2;
+}
+
+.mosaic-item.wide{
+    grid-column:span 2;
+}
+
+/* ========================= */
+/* HEADER INTERNACIONAL */
+/* ========================= */
+
+.international-header{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.international-header small{
+    color:#c40000;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.international-header h1{
+    font-size:55px;
+    margin:15px 0;
+}
+
+.international-header h1 span{
+    color:#c40000;
+}
+
+.international-header p{
+    max-width:800px;
+    margin:auto;
+    color:#666;
+    line-height:30px;
+    font-size:18px;
+}
+
+/* ========================= */
+/* CARDS */
+/* ========================= */
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.service-card{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+}
+
+.service-card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.service-content{
+    padding:25px;
+}
+
+.service-content h3{
+    font-size:30px;
+    margin-bottom:20px;
+}
+
+.service-info{
+    color:#666;
+    line-height:35px;
+    margin-bottom:20px;
+}
+
+.service-info i{
+    color:#c40000;
+    margin-right:8px;
+}
+
+.price{
+    font-size:35px;
+    color:#c40000;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.service-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.btn-primary,
+.btn-secondary{
+    flex:1;
+    height:50px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#c40000;
+    color:white;
+}
+
+.btn-secondary{
+    background:#f3f3f3;
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer{
+    margin-top:60px;
+    background:#111;
+    color:white;
+    padding:50px 30px 20px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:35px;
+    margin-bottom:35px;
+}
+
+.footer-box h4{
+    margin-bottom:20px;
+    color:#ff2b2b;
+    font-size:20px;
+}
+
+.footer-box ul{
+    list-style:none;
+}
+
+.footer-box ul li{
+    margin-bottom:12px;
+    color:#ccc;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.footer-box ul li:hover{
+    color:white;
+    transform:translateX(5px);
+}
+
+.social{
+    display:flex;
+    gap:15px;
+    margin-top:15px;
+}
+
+.social i{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#222;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:18px;
+}
+
+.social i:hover{
+    background:#c40000;
+    transform:translateY(-5px);
+}
+
+.contact{
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:20px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+    color:#ccc;
+}
+
+.contact div{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.contact i{
+    color:#ff2b2b;
+}
+
+/* ========================= */
+/* OVERLAY */
+/* ========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1200;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:900px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.mobile-active{
+        transform:translateX(0);
+    }
+
+    .main-content{
+        margin-left:0;
+    }
+
+    .mosaic-gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .mosaic-item.big{
+        grid-column:span 2;
+    }
+
+    .mosaic-item.wide{
+        grid-column:span 2;
+    }
+
+    .international-header h1{
+        font-size:38px;
+    }
+
+    .nav-right span{
+        display:none;
+    }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="top-navbar">
+
+    <div class="nav-left">
+
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+
+   <div class="nav-center">
+
+            <a href="cliente.html">
+                <img src="imagenes/logo.png" class="navbar-logo" alt="Logo">
+            </a>
+        </div>
+
+    <div class="nav-right">
+
+        <div class="nav-icon">
+            <i class="fa-regular fa-heart"></i>
+            <span>Favoritos</span>
+        </div>
+
+        <div class="nav-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Carrito</span>
+        </div>
+
+        <div class="nav-icon">
+            <i class="fa-regular fa-user"></i>
+            <span>Mi cuenta</span>
+        </div>
+
+    </div>
+
+</header>
+
+<!-- OVERLAY -->
+
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+   
+
+    <!-- ENVÍOS -->
+
+    <div class="menu-section">
+
+        <div class="menu-title">
+            ENVÍOS
+        </div>
+
+        <a href="internacional_cliente.html" class="menu-item active">
+            <i class="fa-solid fa-plane"></i>
+            <span>Internacional</span>
+        </a>
+
+        <a href="nacional_cliente.html" class="menu-item">
+            <i class="fa-solid fa-truck"></i>
+            <span>Nacional</span>
+        </a>
+
+        <a href="departamento_cliente.html" class="menu-item">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span>Departamentos</span>
+        </a>
+
+        <a href="ciudad_cliente.html" class="menu-item">
+            <i class="fa-solid fa-city"></i>
+            <span>Ciudad</span>
+        </a>
+
+    </div>
+
+    <!-- GESTIÓN -->
+
+    <div class="menu-section">
+
+        <div class="menu-title">
+            GESTIÓN
+        </div>
+
+        <a href="cotizaciones_cliente.html" class="menu-item">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Cotizaciones</span>
+        </a>
+
+        <a href="completados_cliente.html" class="menu-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Completados</span>
+        </a>
+
+    </div>
+
+    <div class="sidebar-bottom">
+
+        <button class="btn-logout">
+
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            Cerrar sesión
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- MAIN -->
+
+<!-- ========================= -->
+<!-- INTERNACIONAL -->
+<!-- ========================= -->
+
+<main class="main-content" id="mainContent">
+
+    <!-- GALERÍA MOSAICO -->
+
+    <section class="mosaic-gallery">
+
+        <div class="mosaic-item big">
+            <img src="imagenes/internacional1.jpg">
+        </div>
+
+        <div class="mosaic-item">
+            <img src="imagenes/internacional2.jpg">
+        </div>
+
+        <div class="mosaic-item">
+            <img src="imagenes/internacional3.jpg">
+        </div>
+
+        <div class="mosaic-item">
+            <img src="imagenes/internacional4.jpg">
+        </div>
+
+        <div class="mosaic-item wide">
+            <img src="imagenes/internacional5.jpg">
+        </div>
+
+    </section>
+
+    <!-- TITULO -->
+
+    <section class="international-header">
+
+        <small>Envíos globales</small>
+
+        <h1>
+            ENVÍOS <span>INTERNACIONALES</span>
+        </h1>
+
+        <p>
+            Transporte seguro y rápido para paquetes internacionales,
+            importaciones y exportaciones alrededor del mundo.
+        </p>
+
+    </section>
+
+    <!-- SERVICIO AVIÓN -->
+
+    <section class="services-grid">
+
+        <div class="service-card international-card">
+
+            <img src="imagenes/avion-carga.jpg">
+
+            <div class="service-content">
+
+                <h3>Avión de carga internacional</h3>
+
+                <div class="service-info">
+
+                    <p>
+                        <i class="fa-solid fa-box"></i>
+                        Hasta 5,000 paquetes
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-weight-hanging"></i>
+                        30 toneladas máximo
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-earth-americas"></i>
+                        Cobertura mundial
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-clock"></i>
+                        Entrega express
+                    </p>
+
+                </div>
+
+                <div class="price">
+                    Desde Q15,000
+                </div>
+
+                <div class="service-buttons">
+
+                    <button class="btn-secondary">
+                        Ver detalles
+                    </button>
+
+                    <button class="btn-primary">
+                        Cotizar envío
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menuToggle");
+const overlay = document.getElementById("overlay");
+const mainContent = document.getElementById("mainContent");
+
+/* INICIA OCULTO */
+
+window.addEventListener("load", () => {
+
+    if(window.innerWidth > 900){
+
+        sidebar.classList.add("closed");
+        mainContent.classList.add("full");
+
+    }
+
+});
+
+menuToggle.addEventListener("click", () => {
+
+    if(window.innerWidth <= 900){
+
+        sidebar.classList.toggle("mobile-active");
+        overlay.classList.toggle("active");
+
+    }else{
+
+        sidebar.classList.toggle("closed");
+        mainContent.classList.toggle("full");
+
+    }
+
+});
+
+/* OVERLAY */
+
+overlay.addEventListener("click", () => {
+
+    sidebar.classList.remove("mobile-active");
+    overlay.classList.remove("active");
+
+});
+
+/* ACTIVE MENU */
+
+const menuItems = document.querySelectorAll(".menu-item");
+
+menuItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        menuItems.forEach(el => {
+            el.classList.remove("active");
+        });
+
+        item.classList.add("active");
+
+    });
+
+});
+
+</script>
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-box">
+
+            <h4>Síguenos en redes sociales</h4>
+
+            <div class="social">
+
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+
+            </div>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h4>Servicios</h4>
+
+            <ul>
+                <li>Gestión Aduanal</li>
+                <li>Transporte Terrestre</li>
+                <li>Transporte Marítimo</li>
+                <li>Almacenaje</li>
+                <li>Proyectos Especiales</li>
+            </ul>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h4>Grupo TRAERSA</h4>
+
+            <ul>
+                <li>Únete a nuestro equipo</li>
+                <li>Sobre nosotros</li>
+                <li>Deseas ser proveedor</li>
+            </ul>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h4>Nuestros valores</h4>
+
+            <ul>
+                <li>Sostenibilidad</li>
+                <li>Garantía total</li>
+                <li>Responsabilidad</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="contact">
+
+        <div>
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>+502 78562384</span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-envelope"></i>
+            <span>traersa2026@gmail.com</span>
+        </div>
+
+        <div>
+            <i class="fa-solid fa-location-dot"></i>
+            <span>31 av 2-48 zona 6 de mixco</span>
+        </div>
+
+    </div>
+
+</footer>
+</body>
+</html>
