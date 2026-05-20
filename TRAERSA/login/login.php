@@ -53,15 +53,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             switch ((int)$usuario['rol_id']) {
 
                 case 1:
-                    header("Location: admin.php");
+                    header("Location: administrador/admin.php");
                     break;
 
                 case 2:
-                    header("Location: cliente.php");
+                    header("Location: cliente/cliente.php");
                     break;
 
                 case 3:
-                    header("Location: empleado.php");
+                    header("Location: empleado/empleado.php");
                     break;
 
                 default:

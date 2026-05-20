@@ -1,1 +1,0 @@
-<?php   echo "Bienvenido al panel de cliente";   ?>
