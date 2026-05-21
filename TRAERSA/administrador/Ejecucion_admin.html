@@ -38,7 +38,7 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="Cotizaciones_admin.html" class="menu-item active ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
@@ -73,7 +73,7 @@
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item active">
+            <a href="Editar_Usuario.html" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -114,65 +114,178 @@
 
         </header>
 
-       
+        
+  <!-- CONTENIDO EJECUCIÓN -->
 
-<div class="table-card completados-card">
+<div class="gallery-container fade-up">
 
-    <div class="table-header services-header">
+    <!-- FORMULARIO -->
 
-        <h3>SERVICIOS COMPLETADOS</h3>
+    <div class="gallery-top">
 
-        <button class="btn-view">
-            VER TODOS
+        <h2>SEGUIMIENTO DE ENVÍOS</h2>
+
+        <!-- GUIA -->
+        <div class="gallery-input">
+            <label>NÚMERO DE GUÍA:</label>
+            <input type="text" placeholder="Ejemplo: TRX-2026-001">
+        </div>
+
+        <!-- CLIENTE -->
+        <div class="gallery-input">
+            <label>ID CLIENTE:</label>
+            <input type="text" placeholder="ID DEL CLIENTE">
+        </div>
+
+        <!-- CLIENTE -->
+        <div class="gallery-input">
+            <label>NOMBRE DEL CLIENTE:</label>
+            <input type="text" placeholder="Nombre completo">
+        </div>
+
+        <!-- ESTADO -->
+        <div class="gallery-input">
+            <label>ESTADO DEL ENVÍO:</label>
+
+            <select>
+                <option>Paquete recibido</option>
+                <option>En centro logístico</option>
+                <option>Preparando despacho</option>
+                <option>En ruta de entrega</option>
+                <option>Entrega realizada</option>
+            </select>
+        </div>
+
+        <!-- CONFIRMACION -->
+        <div class="gallery-input">
+            <label>CONFIRMACIÓN DEL CLIENTE:</label>
+
+            <div class="radio-group">
+
+                <label>
+                    <input type="radio" name="confirmacion">
+                    Recibido correctamente
+                </label>
+
+                <label>
+                    <input type="radio" name="confirmacion">
+                    Pendiente
+                </label>
+
+            </div>
+        </div>
+
+        <!-- BOTON -->
+        <button class="gallery-btn">
+            ACTUALIZAR ESTADO
         </button>
+
+        <!-- FECHA -->
+        <div class="gallery-date">
+            FECHA ACTUAL
+        </div>
 
     </div>
 
-   <div class="table-content">
+    <!-- TABLA -->
 
-    <table class="completed-table">
+    <div class="gallery-table">
 
-        <thead>
+        <div class="gallery-header">
+            <h3>ENVÍOS EN EJECUCIÓN</h3>
+        </div>
 
-            <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>EMAIL</th>
-            </tr>
+        <!-- ENCABEZADOS -->
 
-        </thead>
+        <div class="gallery-row gallery-head">
 
-        <tbody>
+            <span>GUÍA</span>
+            <span>CLIENTE</span>
+            <span>ESTADO</span>
+            <span>CONFIRMACIÓN</span>
 
-            <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-            </tr>
+        </div>
 
-            <tr>
-                <td>2</td>
-                <td>María López</td>
-                <td>marialopez@gmail.com</td>
-            </tr>
+        <!-- FILA -->
 
-            <tr>
-                <td>3</td>
-                <td>Carlos Méndez</td>
-                <td>carlosmendez@gmail.com</td>
-            </tr>
+        <div class="gallery-row">
 
-            <tr>
-                <td>4</td>
-                <td>Ana Rodríguez</td>
-                <td>anarodriguez@gmail.com</td>
-            </tr>
+            <div class="gallery-info">
+                <strong>TRX-2026-001</strong>
+                <p>Registro activo</p>
+            </div>
 
-        </tbody>
+            <div class="gallery-info">
+                <strong>Juan Pérez</strong>
+                <p>ID: CL-001</p>
+            </div>
 
-    </table>
+            <div class="gallery-actions">
+                <button class="edit-btn">
+                    EN RUTA
+                </button>
+            </div>
+
+            <small>PENDIENTE</small>
+
+        </div>
+
+        <!-- FILA -->
+
+        <div class="gallery-row">
+
+            <div class="gallery-info">
+                <strong>TRX-2026-002</strong>
+                <p>Registro activo</p>
+            </div>
+
+            <div class="gallery-info">
+                <strong>María López</strong>
+                <p>ID: CL-002</p>
+            </div>
+
+            <div class="gallery-actions">
+                <button class="delete-btn">
+                    ENTREGA REALIZADA
+                </button>
+            </div>
+
+            <small>RECIBIDO ✔</small>
+
+        </div>
+
+        <!-- FILA -->
+
+        <div class="gallery-row">
+
+            <div class="gallery-info">
+                <strong>TRX-2026-003</strong>
+                <p>Registro activo</p>
+            </div>
+
+            <div class="gallery-info">
+                <strong>Carlos Méndez</strong>
+                <p>ID: CL-003</p>
+            </div>
+
+            <div class="gallery-actions">
+                <button class="edit-btn">
+                    EN CENTRO LOGÍSTICO
+                </button>
+            </div>
+
+            <small>PENDIENTE</small>
+
+        </div>
+
+    </div>
 
 </div>
+
+</div>
+
+        <!-- FOOTER -->
+
         <footer class="footer">
 
             <div class="footer-container">

@@ -8,7 +8,7 @@
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css\AEstilo.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
 
 </head>
 
@@ -24,36 +24,23 @@
 
         <div class="logo-container">
 
-            <a href="admin.html">
-                <img src="imagenes/logo2.png" alt="Logo">
-            </a>
-
+            <img src="imagenes\logo2.png"  href="admin.html">
             <h1>TRAERSA</h1>
         </div>
 
-
+       
 
 
         <div class="menu-section">
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="#" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
-                <span>Cotizaciones</span>
+                <span>Servicios</span>
             </a>
 
-            <a href="Ejecucion_admin.html" class="menu-item">
-                <i class="fa-regular fa-clock"></i>
-                <span>En ejecución</span>
-            </a>
-
-            <a href="Completados_admin.html" class="menu-item">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Completados</span>
-            </a>
-
-
+           
 
         </div>
 
@@ -61,24 +48,19 @@
 
             <div class="menu-title">CONTENIDOS</div>
 
+            <a href="Editar_Carussel.html" class="menu-item">
+                <i class="fa-regular fa-image"></i>
+                <span>Carrusel</span>
+            </a>
 
-            <a href="Editar_Servicios.html" class="menu-item">
+            <a href="#" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Servicios</span>
+                <span>Galería</span>
             </a>
 
         </div>
 
-        <div class="menu-section">
-
-            <div class="menu-title">ADMINISTRACIÓN</div>
-
-            <a href="Editar_Usuario.html" class="menu-item active">
-                <i class="fa-solid fa-users"></i>
-                <span>Usuarios</span>
-            </a>
-
-        </div>
+     
 
         <div class="sidebar-bottom">
 
@@ -96,7 +78,7 @@
         <header class="header">
 
             <div class="header-title">
-                <h2>Bienvenido Administrador</h2>
+                <h2>Bienvenido Empleado</h2>
 
             </div>
 
@@ -107,72 +89,145 @@
                 </div>
 
                 <div class="user-info">
-                    ADMIN
+                    EMPLEADO
                 </div>
 
             </div>
 
         </header>
 
-       
+        <!-- STATS -->
 
-<div class="table-card completados-card">
+        <div class="stats-grid">
 
-    <div class="table-header services-header">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
 
-        <h3>SERVICIOS COMPLETADOS</h3>
+                <div class="stat-info">
+                    <small>Servicios</small>
+                    <h3>0</h3>
+                    <p>Total registrados</p>
+                </div>
+            </div>
 
-        <button class="btn-view">
-            VER TODOS
-        </button>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
 
-    </div>
+                <div class="stat-info">
+                    <small>En ejecución</small>
+                    <h3>0</h3>
+                    <p>Actualmente activos</p>
+                </div>
+            </div>
 
-   <div class="table-content">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-shield"></i>
+                </div>
 
-    <table class="completed-table">
+                <div class="stat-info">
+                    <small>Completados</small>
+                    <h3>0</h3>
+                    <p>Servicios finalizados</p>
+                </div>
+            </div>
 
-        <thead>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
 
-            <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>EMAIL</th>
-            </tr>
+                <div class="stat-info">
+                    <small>Clientes</small>
+                    <h3>0</h3>
+                    <p>Total registrados</p>
+                </div>
+            </div>
 
-        </thead>
+        </div>
 
-        <tbody>
+        <!-- TABLAS -->
 
-            <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-            </tr>
 
-            <tr>
-                <td>2</td>
-                <td>María López</td>
-                <td>marialopez@gmail.com</td>
-            </tr>
+            <!-- SERVICIOS -->
 
-            <tr>
-                <td>3</td>
-                <td>Carlos Méndez</td>
-                <td>carlosmendez@gmail.com</td>
-            </tr>
+            <div class="table-card">
 
-            <tr>
-                <td>4</td>
-                <td>Ana Rodríguez</td>
-                <td>anarodriguez@gmail.com</td>
-            </tr>
+                <div class="table-header services-header">
 
-        </tbody>
+                    <h3>SERVICIOS RECIENTES</h3>
 
-    </table>
+                    <button class="btn-view">
+                        VER TODOS
+                    </button>
 
-</div>
+                </div>
+
+                <div class="table-content">
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn running">
+                            EJECUCIÓN
+                        </button>
+
+                        <small>XX/XX/XXXX</small>
+
+                    </div>
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn completed">
+                            COMPLETADO
+                        </button>
+
+                        <small>XX/XX/XXXX</small>
+
+                    </div>
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn completed">
+                            COMPLETADO
+                        </button>
+
+                        <small>XX/XX/XXXX</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+
         <footer class="footer">
 
             <div class="footer-container">

@@ -24,36 +24,36 @@
 
         <div class="logo-container">
 
-            <img src="imagenes\logo2.png"  href="admin.html">
+            <a href="admin.html">
+                <img src="imagenes/logo2.png" alt="Logo">
+            </a>
+
             <h1>TRAERSA</h1>
         </div>
 
-       
+
 
 
         <div class="menu-section">
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="#" class="menu-item ">
+            <a href="Cotizaciones_admin.html" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
-                <span>Servicios</span>
+                <span>Cotizaciones</span>
             </a>
 
-            <a href="#" class="menu-item">
+            <a href="Ejecucion_admin.html" class="menu-item">
                 <i class="fa-regular fa-clock"></i>
                 <span>En ejecución</span>
             </a>
 
-            <a href="#" class="menu-item">
+            <a href="Completados_admin.html" class="menu-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
 
-            <a href="#" class="menu-item">
-                <i class="fa-regular fa-user"></i>
-                <span>Clientes</span>
-            </a>
+
 
         </div>
 
@@ -61,14 +61,10 @@
 
             <div class="menu-title">CONTENIDOS</div>
 
-            <a href="Editar_Carussel.html" class="menu-item">
-                <i class="fa-regular fa-image"></i>
-                <span>Carrusel</span>
-            </a>
 
-            <a href="#" class="menu-item">
+            <a href="Editar_Servicios.html" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Galería</span>
+                <span>Servicios</span>
             </a>
 
         </div>
@@ -76,11 +72,6 @@
         <div class="menu-section">
 
             <div class="menu-title">ADMINISTRACIÓN</div>
-
-            <a href="#" class="menu-item">
-                <i class="fa-solid fa-shield"></i>
-                <span>Roles</span>
-            </a>
 
             <a href="Editar_Usuario.html" class="menu-item">
                 <i class="fa-solid fa-users"></i>
@@ -123,186 +114,7 @@
 
         </header>
 
-        <!-- STATS -->
-
-        <div class="stats-grid">
-
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-tag"></i>
-                </div>
-
-                <div class="stat-info">
-                    <small>Servicios</small>
-                    <h3>0</h3>
-                    <p>Total registrados</p>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-truck"></i>
-                </div>
-
-                <div class="stat-info">
-                    <small>En ejecución</small>
-                    <h3>0</h3>
-                    <p>Actualmente activos</p>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-shield"></i>
-                </div>
-
-                <div class="stat-info">
-                    <small>Completados</small>
-                    <h3>0</h3>
-                    <p>Servicios finalizados</p>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-
-                <div class="stat-info">
-                    <small>Clientes</small>
-                    <h3>0</h3>
-                    <p>Total registrados</p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- TABLAS -->
-
-        <div class="tables-grid">
-
-            <!-- ACCIONES -->
-
-            <div class="table-card">
-
-                <div class="table-header">
-                    <h3>ACCIONES RECIENTES</h3>
-                </div>
-
-                <div class="table-content">
-
-                    <div class="table-row">
-                        <span>ID</span>
-
-                        <div>
-                            <strong>ACCIÓN</strong>
-                            <p>DESCRIPCIÓN XXXXXXXX</p>
-                        </div>
-
-                        <small>HORA</small>
-                        <small>XX/XX/XXXX</small>
-                    </div>
-
-                    <div class="table-row">
-                        <span>ID</span>
-
-                        <div>
-                            <strong>ACCIÓN</strong>
-                            <p>DESCRIPCIÓN XXXXXXXX</p>
-                        </div>
-
-                        <small>HORA</small>
-                        <small>XX/XX/XXXX</small>
-                    </div>
-
-                    <div class="table-row">
-                        <span>ID</span>
-
-                        <div>
-                            <strong>ACCIÓN</strong>
-                            <p>DESCRIPCIÓN XXXXXXXX</p>
-                        </div>
-
-                        <small>HORA</small>
-                        <small>XX/XX/XXXX</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- SERVICIOS -->
-
-            <div class="table-card">
-
-                <div class="table-header services-header">
-
-                    <h3>SERVICIOS RECIENTES</h3>
-
-                    <button class="btn-view">
-                        VER TODOS
-                    </button>
-
-                </div>
-
-                <div class="table-content">
-
-                    <div class="table-row">
-
-                        <span>ID</span>
-
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
-
-                        <button class="status-btn running">
-                            EJECUCIÓN
-                        </button>
-
-                        <small>XX/XX/XXXX</small>
-
-                    </div>
-
-                    <div class="table-row">
-
-                        <span>ID</span>
-
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
-
-                        <button class="status-btn completed">
-                            COMPLETADO
-                        </button>
-
-                        <small>XX/XX/XXXX</small>
-
-                    </div>
-
-                    <div class="table-row">
-
-                        <span>ID</span>
-
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
-
-                        <button class="status-btn completed">
-                            COMPLETADO
-                        </button>
-
-                        <small>XX/XX/XXXX</small>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+      
 
         <!-- FOOTER -->
 

@@ -38,7 +38,7 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="Cotizaciones_admin.html" class="menu-item active ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
@@ -73,7 +73,7 @@
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item active">
+            <a href="Editar_Usuario.html" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -114,65 +114,127 @@
 
         </header>
 
-       
+        
 
-<div class="table-card completados-card">
+
+
+   
+    <div class="table-card">
 
     <div class="table-header services-header">
 
-        <h3>SERVICIOS COMPLETADOS</h3>
+        <h3>COTIZACIONES ACTIVAS</h3>
 
         <button class="btn-view">
-            VER TODOS
+            VER TODAS
         </button>
 
     </div>
 
-   <div class="table-content">
+    <div class="table-content">
 
-    <table class="completed-table">
+        <!-- FILA -->
 
-        <thead>
+        <div class="table-row">
 
-            <tr>
-                <th>ID</th>
-                <th>NOMBRE</th>
-                <th>EMAIL</th>
-            </tr>
+            <span>#001</span>
 
-        </thead>
+            <div>
+                <strong>Transporte terrestre</strong>
+                <p>Cliente: Juan Pérez</p>
+            </div>
 
-        <tbody>
+            <!-- ESTADO -->
 
-            <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-            </tr>
+            <div class="quote-actions">
 
-            <tr>
-                <td>2</td>
-                <td>María López</td>
-                <td>marialopez@gmail.com</td>
-            </tr>
+                <select class="quote-select">
+                    <option>En revisión</option>
+                    <option>Aprobada</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
 
-            <tr>
-                <td>3</td>
-                <td>Carlos Méndez</td>
-                <td>carlosmendez@gmail.com</td>
-            </tr>
+                <button class="confirm-btn">
+                    CONFIRMAR
+                </button>
 
-            <tr>
-                <td>4</td>
-                <td>Ana Rodríguez</td>
-                <td>anarodriguez@gmail.com</td>
-            </tr>
+            </div>
 
-        </tbody>
+            <small>Q450.00</small>
 
-    </table>
+        </div>
+
+        <!-- FILA -->
+
+        <div class="table-row">
+
+            <span>#002</span>
+
+            <div>
+                <strong>Envío marítimo</strong>
+                <p>Cliente: María López</p>
+            </div>
+
+            <div class="quote-actions">
+
+                <select class="quote-select approved">
+                    <option selected>Aprobada</option>
+                    <option>En revisión</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
+
+                <button class="confirm-btn">
+                    GUARDAR
+                </button>
+
+            </div>
+
+            <small>Q1,250.00</small>
+
+        </div>
+
+        <!-- FILA -->
+
+        <div class="table-row">
+
+            <span>#003</span>
+
+            <div>
+                <strong>Servicio express</strong>
+                <p>Cliente: Carlos Méndez</p>
+            </div>
+
+            <div class="quote-actions">
+
+                <select class="quote-select pending">
+                    <option selected>Pendiente</option>
+                    <option>En revisión</option>
+                    <option>Aprobada</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
+
+                <button class="confirm-btn">
+                    ACTUALIZAR
+                </button>
+
+            </div>
+
+            <small>Q320.00</small>
+
+        </div>
+
+    </div>
 
 </div>
+
+
+</div>
+
+        <!-- FOOTER -->
+
         <footer class="footer">
 
             <div class="footer-container">

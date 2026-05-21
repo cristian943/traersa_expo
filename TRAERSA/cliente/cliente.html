@@ -11,477 +11,631 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
-       
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
         }
 
-        body {
-            background: #f5f5f5;
-            overflow-x: hidden;
+        body{
+            background:#f5f5f5;
+            overflow-x:hidden;
         }
 
-      
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
-            z-index: 2000;
+        .top-navbar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:80px;
+            background:white;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 25px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            z-index:2000;
         }
 
         .nav-left,
-        .nav-right {
-            width: 250px;
-            display: flex;
-            align-items: center;
+        .nav-right{
+            width:250px;
+            display:flex;
+            align-items:center;
         }
 
-        .nav-right {
-            justify-content: flex-end;
-            gap: 25px;
+        .nav-right{
+            justify-content:flex-end;
+            gap:25px;
         }
 
-        .nav-center {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .nav-center{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
         }
 
-        .navbar-logo {
-            height: 60px;
-            object-fit: contain;
+        .navbar-logo{
+            height:60px;
+            object-fit:contain;
         }
 
-        .nav-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: .3s;
+        .nav-icon{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            cursor:pointer;
+            font-weight:600;
+            transition:.3s;
         }
 
-        .nav-icon:hover {
-            color: #c40000;
+        .nav-icon:hover{
+            color:#c40000;
         }
 
-        .nav-icon i {
-            font-size: 20px;
+        .nav-icon i{
+            font-size:20px;
         }
 
-       
-        .menu-toggle {
-            width: 50px;
-            height: 50px;
-            border: none;
-            border-radius: 50%;
-            background: #c40000;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: .3s;
+        .menu-toggle{
+            width:50px;
+            height:50px;
+            border:none;
+            border-radius:50%;
+            background:#c40000;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:.3s;
         }
 
-        .menu-toggle:hover {
-            transform: scale(1.05);
+        .menu-toggle:hover{
+            transform:scale(1.05);
         }
 
-        .sidebar {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 280px;
-            height: 100%;
-            background: linear-gradient(180deg, #c40000, #6e0000);
-            padding: 25px;
-            color: white;
-            overflow-y: auto;
-            transition: .4s ease;
-            z-index: 1500;
+        .sidebar{
+            position:fixed;
+            top:80px;
+            left:0;
+            width:280px;
+            height:calc(100vh - 80px);
+            background:linear-gradient(180deg,#c40000,#6e0000);
+            padding:25px;
+            color:white;
+            overflow-y:auto;
+            transition:.4s ease;
+            z-index:1500;
         }
 
-        .sidebar.closed {
-            transform: translateX(-100%);
+        .sidebar.closed{
+            transform:translateX(-100%);
         }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: 30px;
+        .menu-section{
+            margin-bottom:35px;
         }
 
-        .logo-container img {
-            width: 90px;
-            margin-bottom: 10px;
+        .menu-title{
+            margin-bottom:15px;
+            font-size:14px;
+            font-weight:bold;
+            opacity:.7;
+            letter-spacing:1px;
         }
 
-        .logo-container h1 {
-            font-size: 28px;
+        .menu-item{
+            width:100%;
+            min-height:50px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            padding:12px 18px;
+            margin-bottom:10px;
+            border-radius:14px;
+            text-decoration:none;
+            color:white;
+            transition:.3s;
         }
 
-        .menu-section {
-            margin-bottom: 35px;
+        .menu-item:hover{
+            background:rgba(255,255,255,.12);
+            transform:translateX(5px);
         }
 
-        .menu-title {
-            margin-bottom: 15px;
-            font-size: 14px;
-            font-weight: bold;
-            opacity: .7;
-            letter-spacing: 1px;
+        .menu-item.active{
+            background:white;
+            color:#c40000;
         }
 
-        .menu-item {
-            width: 100%;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 0 18px;
-            margin-bottom: 10px;
-            border-radius: 14px;
-            text-decoration: none;
-            color: white;
-            transition: .3s;
+        .sidebar-bottom{
+            margin-top:40px;
         }
 
-        .menu-item:hover {
-            background: rgba(255, 255, 255, .12);
-            transform: translateX(5px);
+        .btn-logout{
+            width:100%;
+            height:50px;
+            border:none;
+            border-radius:14px;
+            background:white;
+            color:#c40000;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
         }
 
-        .menu-item.active {
-            background: white;
-            color: #c40000;
+        .btn-logout:hover{
+            transform:scale(1.03);
         }
 
-        .sidebar-bottom {
-            margin-top: 40px;
+        .main-content{
+            margin-top:100px;
+            margin-left:280px;
+            padding:30px;
+            transition:.4s;
+            width:calc(100% - 280px);
         }
 
-        .btn-logout {
-            width: 100%;
-            height: 50px;
-            border: none;
-            border-radius: 14px;
-            background: white;
-            color: #c40000;
-            font-weight: bold;
-            cursor: pointer;
-            transition: .3s;
+        .main-content.full{
+            margin-left:0;
+            width:100%;
         }
 
-        .btn-logout:hover {
-            transform: scale(1.03);
+        .hero-card{
+            background:white;
+            border-radius:25px;
+            padding:35px;
+            box-shadow:0 4px 18px rgba(0,0,0,.08);
+            margin-bottom:35px;
+            text-align:center;
         }
 
-       
-        .main-content {
-            margin-top: 100px;
-            margin-left: 280px;
-            padding: 30px;
-            transition: .4s;
+        .hero-card h1{
+            font-size:45px;
+            margin-bottom:10px;
+            word-wrap:break-word;
         }
 
-        .main-content.full {
-            margin-left: 0;
+        .hero-card h1 span{
+            color:#c40000;
         }
 
-       
-        .hero-card {
-            background: white;
-            border-radius: 25px;
-            padding: 35px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, .08);
-            margin-bottom: 35px;
+        .hero-card p{
+            color:#666;
+            margin-bottom:30px;
         }
 
-        .hero-card h1 {
-            font-size: 45px;
-            margin-bottom: 10px;
+        .section-title{
+            font-size:35px;
+            margin-bottom:25px;
+            text-align:center;
         }
 
-        .hero-card h1 span {
-            color: #c40000;
+        .services-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:25px;
+            align-items:stretch;
         }
 
-        .hero-card p {
-            color: #666;
-            margin-bottom: 30px;
+        .service-card{
+            background:white;
+            border-radius:22px;
+            overflow:hidden;
+            box-shadow:0 5px 18px rgba(0,0,0,.08);
+            transition:.3s;
+            display:flex;
+            flex-direction:column;
         }
 
-        .hero-search {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+        .service-card:hover{
+            transform:translateY(-8px);
         }
 
-        .hero-search input,
-        .hero-search select {
-            height: 55px;
-            border-radius: 14px;
-            border: 1px solid #ddd;
-            padding: 0 15px;
-            outline: none;
+        .service-card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
         }
 
-        .btn-search {
-            border: none;
-            border-radius: 14px;
-            background: #c40000;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: .3s;
+        .service-content{
+            padding:20px;
+            display:flex;
+            flex-direction:column;
+            flex:1;
         }
 
-        .btn-search:hover {
-            background: #990000;
+        .service-content h3{
+            font-size:24px;
+            margin-bottom:15px;
+            text-align:center;
         }
 
-       
-        .section-title {
-            font-size: 35px;
-            margin-bottom: 25px;
+        .service-info{
+            color:#666;
+            line-height:30px;
+            margin-bottom:20px;
+            flex:1;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        .price{
+            font-size:32px;
+            color:#c40000;
+            font-weight:bold;
+            margin-bottom:20px;
+            text-align:center;
         }
 
-        .service-card {
-            background: white;
-            border-radius: 22px;
-            overflow: hidden;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, .08);
-            transition: .3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .service-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .service-content {
-            padding: 20px;
-        }
-
-        .service-content h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .service-info {
-            color: #666;
-            line-height: 30px;
-            margin-bottom: 20px;
-        }
-
-        .price {
-            font-size: 32px;
-            color: #c40000;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .service-buttons {
-            display: flex;
-            gap: 10px;
+        .service-buttons{
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
         }
 
         .btn-primary,
-        .btn-secondary {
-            flex: 1;
-            height: 45px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
+        .btn-secondary{
+            flex:1;
+            min-width:120px;
+            height:45px;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:.3s;
         }
 
-        .btn-primary {
-            background: #c40000;
-            color: white;
+        .btn-primary{
+            background:#c40000;
+            color:white;
         }
 
-        .btn-secondary {
-            background: #f3f3f3;
+        .btn-secondary{
+            background:#f3f3f3;
         }
 
-     
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .5);
-            z-index: 1200;
-            opacity: 0;
-            visibility: hidden;
-            transition: .3s;
+        .btn-primary:hover,
+        .btn-secondary:hover{
+            transform:scale(1.02);
         }
 
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
+        .overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.5);
+            z-index:1200;
+            opacity:0;
+            visibility:hidden;
+            transition:.3s;
         }
 
-       
-        .footer {
-            margin-top: 60px;
-            background: #111;
-            color: white;
-            padding: 50px 30px 20px;
+        .overlay.active{
+            opacity:1;
+            visibility:visible;
         }
 
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 35px;
-            margin-bottom: 35px;
+        .footer{
+            margin-top:60px;
+            background:#111;
+            color:white;
+            padding:50px 30px 20px;
         }
 
-        .footer-box h4 {
-            margin-bottom: 20px;
-            color: #ff2b2b;
-            font-size: 20px;
+        .footer-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:35px;
+            margin-bottom:35px;
         }
 
-        .footer-box ul {
-            list-style: none;
+        .footer-box h4{
+            margin-bottom:20px;
+            color:#ff2b2b;
+            font-size:20px;
         }
 
-        .footer-box ul li {
-            margin-bottom: 12px;
-            color: #ccc;
-            transition: .3s;
-            cursor: pointer;
+        .footer-box ul{
+            list-style:none;
         }
 
-        .footer-box ul li:hover {
-            color: white;
-            transform: translateX(5px);
+        .footer-box ul li{
+            margin-bottom:12px;
+            color:#ccc;
         }
 
-        .social {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
+        .social{
+            display:flex;
+            gap:15px;
+            margin-top:15px;
+            flex-wrap:wrap;
         }
 
-        .social i {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #222;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: .3s;
-            font-size: 18px;
+        .social i{
+            width:45px;
+            height:45px;
+            border-radius:50%;
+            background:#222;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            transition:.3s;
+            font-size:18px;
         }
 
-        .social i:hover {
-            background: #c40000;
-            transform: translateY(-5px);
+        .social i:hover{
+            background:#c40000;
+            transform:translateY(-5px);
         }
 
-        .contact {
-            border-top: 1px solid rgba(255, 255, 255, .1);
-            padding-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            color: #ccc;
+        .contact{
+            border-top:1px solid rgba(255,255,255,.1);
+            padding-top:20px;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:30px;
+            color:#ccc;
+            text-align:center;
         }
 
-        .contact div {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .contact div{
+            display:flex;
+            align-items:center;
+            gap:10px;
         }
 
-        .contact i {
-            color: #ff2b2b;
+        .contact i{
+            color:#ff2b2b;
         }
 
-       
-        @media(max-width:900px) {
+        .modal{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.6);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:3000;
+            opacity:0;
+            visibility:hidden;
+            transition:.3s;
+            padding:20px;
+        }
 
-            .sidebar {
-                transform: translateX(-100%);
+        .modal.active{
+            opacity:1;
+            visibility:visible;
+        }
+
+        .modal-content{
+            background:white;
+            width:100%;
+            max-width:700px;
+            border-radius:25px;
+            position:relative;
+            overflow:hidden;
+            max-height:90vh;
+            overflow-y:auto;
+            animation:modalShow .3s ease;
+        }
+
+        .quote-content{
+            max-width:650px;
+        }
+
+        .modal-content img{
+            width:100%;
+            height:300px;
+            object-fit:cover;
+        }
+
+        .modal-body{
+            padding:30px;
+        }
+
+        .modal-body h2{
+            font-size:32px;
+            margin-bottom:15px;
+            color:#c40000;
+            text-align:center;
+        }
+
+        .modal-body p{
+            color:#555;
+            line-height:28px;
+            margin-bottom:20px;
+        }
+
+        .modal-extra{
+            background:#f5f5f5;
+            padding:20px;
+            border-radius:15px;
+            line-height:30px;
+        }
+
+        .quote-form{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+            padding-bottom:20px;
+        }
+
+        .quote-form input{
+            min-height:55px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            padding:15px;
+            outline:none;
+            font-size:15px;
+            width:100%;
+        }
+
+        .quote-form h3{
+            margin-top:10px;
+            color:#c40000;
+        }
+
+        .btn-send{
+            min-height:55px;
+            border:none;
+            border-radius:14px;
+            background:#c40000;
+            color:white;
+            font-weight:bold;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-send:hover{
+            transform:scale(1.02);
+        }
+
+        .close-modal{
+            position:absolute;
+            top:15px;
+            right:15px;
+            width:45px;
+            height:45px;
+            border:none;
+            border-radius:50%;
+            background:#c40000;
+            color:white;
+            cursor:pointer;
+            font-size:18px;
+            z-index:10;
+        }
+
+        @keyframes modalShow{
+
+            from{
+                transform:translateY(30px);
+                opacity:0;
             }
 
-            .sidebar.mobile-active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .hero-card h1 {
-                font-size: 32px;
-            }
-
-            .nav-right {
-                gap: 15px;
-            }
-
-            .nav-icon span {
-                display: none;
+            to{
+                transform:translateY(0);
+                opacity:1;
             }
 
         }
+
+        @media(max-width:900px){
+
+            .sidebar{
+                transform:translateX(-100%);
+            }
+
+            .sidebar.mobile-active{
+                transform:translateX(0);
+            }
+
+            .main-content{
+                margin-left:0;
+                width:100%;
+                padding:20px;
+            }
+
+            .hero-card{
+                padding:25px;
+            }
+
+            .hero-card h1{
+                font-size:32px;
+            }
+
+            .section-title{
+                font-size:28px;
+            }
+
+            .nav-right{
+                width:auto;
+                gap:15px;
+            }
+
+            .nav-icon span{
+                display:none;
+            }
+
+            .modal-content{
+                max-height:95vh;
+            }
+
+            .modal-body{
+                padding:20px;
+            }
+
+            .modal-body h2{
+                font-size:25px;
+            }
+
+        }
+
+        @media(max-width:600px){
+
+            .top-navbar{
+                padding:0 15px;
+            }
+
+            .nav-left{
+                width:auto;
+            }
+
+            .navbar-logo{
+                height:45px;
+            }
+
+            .hero-card h1{
+                font-size:26px;
+            }
+
+            .service-buttons{
+                flex-direction:column;
+            }
+
+            .btn-primary,
+            .btn-secondary{
+                width:100%;
+            }
+
+            .contact{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .contact div{
+                justify-content:center;
+            }
+
+        }
+
     </style>
 
 </head>
 
 <body>
 
-  
-
     <header class="top-navbar">
 
-        <div class="nav-left">
+        <nav class="nav-left">
 
             <button class="menu-toggle" id="menuToggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-        </div>
-
-
+        </nav>
 
         <div class="nav-center">
 
             <a href="cliente.html">
-                <img src="imagenes/logo.png" class="navbar-logo" alt="Logo">
+                <img src="imagenes/logo.png" class="navbar-logo" alt="Logo TRAERSA">
             </a>
+
         </div>
 
-
-        <div class="nav-right">
-
-            
+        <nav class="nav-right">
 
             <div class="nav-icon">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -493,33 +647,24 @@
                 <span>Mi cuenta</span>
             </div>
 
-        </div>
+        </nav>
 
     </header>
 
-
-
     <div class="overlay" id="overlay"></div>
-
 
     <aside class="sidebar" id="sidebar">
 
+        <section class="menu-section">
 
+            <div class="menu-title">ENVÍOS</div>
 
-   
-
-        <div class="menu-section">
-
-            <div class="menu-title">
-                ENVÍOS
-            </div>
-
-            <a href="internacional_cliente.html" class="menu-item ">
+            <a href="internacional_cliente.html" class="menu-item">
                 <i class="fa-solid fa-plane"></i>
                 <span>Internacional</span>
             </a>
 
-            <a href="nacional_cliente.html" class="menu-item">
+            <a href="nacional_cliente.html" class="menu-item active">
                 <i class="fa-solid fa-truck"></i>
                 <span>Nacional</span>
             </a>
@@ -534,15 +679,11 @@
                 <span>Ciudad</span>
             </a>
 
-        </div>
+        </section>
 
-      
+        <section class="menu-section">
 
-        <div class="menu-section">
-
-            <div class="menu-title">
-                GESTIÓN
-            </div>
+            <div class="menu-title">GESTIÓN</div>
 
             <a href="cotizaciones_cliente.html" class="menu-item">
                 <i class="fa-solid fa-map-marker-alt"></i>
@@ -554,27 +695,20 @@
                 <span>Completados</span>
             </a>
 
-        </div>
+        </section>
 
         <div class="sidebar-bottom">
 
             <button class="btn-logout">
-
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
-
                 Cerrar sesión
-
             </button>
 
         </div>
 
     </aside>
 
-    <!-- MAIN -->
-
     <main class="main-content" id="mainContent">
-
-        <!-- HERO -->
 
         <section class="hero-card">
 
@@ -586,191 +720,171 @@
                 Encuentra el mejor transporte para tus paquetes.
             </p>
 
-            <div class="hero-search">
-
-                <input type="text" placeholder="Origen">
-
-                <input type="text" placeholder="Destino">
-
-                <input type="number" placeholder="Peso total">
-
-                <input type="number" placeholder="Cantidad paquetes">
-
-                <select>
-                    <option>Tipo de carga</option>
-                    <option>Documentos</option>
-                    <option>Mercadería</option>
-                    <option>Electrónicos</option>
-                </select>
-
-                <button class="btn-search">
-                    Cotizar
-                </button>
-
-            </div>
-
         </section>
 
-        <!-- SERVICIOS -->
+        <section>
 
-        <h2 class="section-title">
-            Servicios disponibles
-        </h2>
+            <h2 class="section-title">
+                Servicios disponibles
+            </h2>
 
-        <section class="services-grid">
+            <div class="services-grid">
 
-            <!-- CARD -->
+                <article class="service-card">
 
-            <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop">
 
-                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop">
+                    <div class="service-content">
 
-                <div class="service-content">
+                        <h3>Moto Express</h3>
 
-                    <h3>Moto Express</h3>
+                        <div class="service-info">
+                            <p>• Hasta 5 paquetes</p>
+                            <p>• 20kg máximo</p>
+                            <p>• Entrega urbana</p>
+                        </div>
 
-                    <div class="service-info">
+                        <div class="price">
+                            Q350
+                        </div>
 
-                        <p>• Hasta 5 paquetes</p>
-                        <p>• 20kg máximo</p>
-                        <p>• Entrega urbana</p>
+                        <div class="service-buttons">
 
-                    </div>
+                            <button class="btn-secondary btn-view"
+                                data-title="Moto Express"
+                                data-image="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop"
+                                data-description="Servicio rápido para entregas urbanas y paquetes pequeños."
+                                data-extra="• Entrega rápida<br>• Máximo 20kg<br>• Cobertura urbana">
+                                Ver
+                            </button>
 
-                    <div class="price">
-                        Q35000
-                    </div>
+                            <button class="btn-primary btn-cotizar"
+                                data-servicio="Moto Express">
+                                Cotizar
+                            </button>
 
-                    <div class="service-buttons">
-
-                        <button class="btn-secondary">
-                            Ver
-                        </button>
-
-                        <button class="btn-primary">
-                            Cotizar
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- CARD -->
-
-            <div class="service-card">
-
-                <img
-                    src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200&auto=format&fit=crop">
-
-                <div class="service-content">
-
-                    <h3>Furgón Mediano</h3>
-
-                    <div class="service-info">
-
-                        <p>• 80 paquetes</p>
-                        <p>• 1500kg máximo</p>
-                        <p>• Departamentos</p>
+                        </div>
 
                     </div>
 
-                    <div class="price">
-                        Q450
-                    </div>
+                </article>
 
-                    <div class="service-buttons">
+                <article class="service-card">
 
-                        <button class="btn-secondary">
-                            Ver
-                        </button>
+                    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200&auto=format&fit=crop">
 
-                        <button class="btn-primary">
-                            Cotizar
-                        </button>
+                    <div class="service-content">
 
-                    </div>
+                        <h3>Furgón Mediano</h3>
 
-                </div>
+                        <div class="service-info">
+                            <p>• 80 paquetes</p>
+                            <p>• 1500kg máximo</p>
+                            <p>• Departamentos</p>
+                        </div>
 
-            </div>
+                        <div class="price">
+                            Q450
+                        </div>
 
-            <!-- CARD -->
+                        <div class="service-buttons">
 
-            <div class="service-card">
+                            <button class="btn-secondary btn-view"
+                                data-title="Furgón Mediano"
+                                data-image="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200&auto=format&fit=crop"
+                                data-description="Ideal para mercadería y entregas entre departamentos."
+                                data-extra="• Hasta 1500kg<br>• Rastreo GPS<br>• Seguro incluido">
+                                Ver
+                            </button>
 
-                <img
-                    src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop">
+                            <button class="btn-primary btn-cotizar"
+                                data-servicio="Furgón Mediano">
+                                Cotizar
+                            </button>
 
-                <div class="service-content">
-
-                    <h3>Camión de carga</h3>
-
-                    <div class="service-info">
-
-                        <p>• 300 paquetes</p>
-                        <p>• 10 toneladas</p>
-                        <p>• Nacional</p>
-
-                    </div>
-
-                    <div class="price">
-                        Q2,500
-                    </div>
-
-                    <div class="service-buttons">
-
-                        <button class="btn-secondary">
-                            Ver
-                        </button>
-
-                        <button class="btn-primary">
-                            Cotizar
-                        </button>
+                        </div>
 
                     </div>
 
-                </div>
+                </article>
 
-            </div>
+                <article class="service-card">
 
-            <!-- CARD -->
+                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop">
 
-            <div class="service-card">
+                    <div class="service-content">
 
-                <img
-                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop">
+                        <h3>Camión de carga</h3>
 
-                <div class="service-content">
+                        <div class="service-info">
+                            <p>• 300 paquetes</p>
+                            <p>• 10 toneladas</p>
+                            <p>• Nacional</p>
+                        </div>
 
-                    <h3>Avión de carga</h3>
+                        <div class="price">
+                            Q2,500
+                        </div>
 
-                    <div class="service-info">
+                        <div class="service-buttons">
 
-                        <p>• Internacional</p>
-                        <p>• Entrega urgente</p>
-                        <p>• Grandes volúmenes</p>
+                            <button class="btn-secondary btn-view"
+                                data-title="Camión de carga"
+                                data-image="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop"
+                                data-description="Servicio pesado para carga empresarial."
+                                data-extra="• 10 toneladas<br>• Cobertura nacional<br>• Ideal para empresas">
+                                Ver
+                            </button>
+
+                            <button class="btn-primary btn-cotizar"
+                                data-servicio="Camión de carga">
+                                Cotizar
+                            </button>
+
+                        </div>
 
                     </div>
 
-                    <div class="price">
-                        Variable
+                </article>
+
+                <article class="service-card">
+
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop">
+
+                    <div class="service-content">
+
+                        <h3>Avión de carga</h3>
+
+                        <div class="service-info">
+                            <p>• Internacional</p>
+                            <p>• Entrega urgente</p>
+                            <p>• Grandes volúmenes</p>
+                        </div>
+
+                        <div class="price">
+                            Variable
+                        </div>
+
+                        <div class="service-buttons">
+
+                            <button class="btn-secondary btn-view"
+                                data-title="Avión de carga"
+                                data-image="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop"
+                                data-description="Servicio internacional urgente y seguro."
+                                data-extra="• Envíos internacionales<br>• Entrega express<br>• Grandes volúmenes">
+                                Ver
+                            </button>
+
+                            <button class="btn-primary btn-cotizar"
+                                data-servicio="Avión de carga">
+                                Cotizar
+                            </button>
+
+                        </div>
+
                     </div>
 
-                    <div class="service-buttons">
-
-                        <button class="btn-secondary">
-                            Ver
-                        </button>
-
-                        <button class="btn-primary">
-                            Cotizar
-                        </button>
-
-                    </div>
-
-                </div>
+                </article>
 
             </div>
 
@@ -778,96 +892,106 @@
 
     </main>
 
-    <script>
+    <!-- MODAL SERVICIO -->
 
-        /* ========================= */
-        /* SIDEBAR */
-        /* ========================= */
+    <div class="modal" id="serviceModal">
 
-        const sidebar = document.getElementById("sidebar");
-        const menuToggle = document.getElementById("menuToggle");
-        const overlay = document.getElementById("overlay");
-        const mainContent = document.getElementById("mainContent");
+        <div class="modal-content">
 
-        /* INICIA OCULTO */
+            <button class="close-modal" id="closeModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-        window.addEventListener("load", () => {
+            <img id="modalImage" src="" alt="Servicio">
 
-            if (window.innerWidth > 900) {
+            <div class="modal-body">
 
-                sidebar.classList.add("closed");
-                mainContent.classList.add("full");
+                <h2 id="modalTitle"></h2>
 
-            }
+                <p id="modalDescription"></p>
 
-        });
+                <div class="modal-extra" id="modalExtra"></div>
 
-        menuToggle.addEventListener("click", () => {
+            </div>
 
-            if (window.innerWidth <= 900) {
+        </div>
 
-                sidebar.classList.toggle("mobile-active");
-                overlay.classList.toggle("active");
+    </div>
 
-            } else {
+    <!-- MODAL COTIZAR -->
 
-                sidebar.classList.toggle("closed");
-                mainContent.classList.toggle("full");
+    <div class="modal" id="quoteModal">
 
-            }
+        <div class="modal-content quote-content">
 
-        });
+            <button class="close-modal" id="closeQuoteModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-        /* OVERLAY */
+            <div class="modal-body">
 
-        overlay.addEventListener("click", () => {
+                <h2 id="quoteTitle">
+                    Cotizar servicio
+                </h2>
 
-            sidebar.classList.remove("mobile-active");
-            overlay.classList.remove("active");
+                <form id="quoteForm" class="quote-form">
 
-        });
+                    <input type="text" placeholder="Nombre completo" required>
 
-        /* ACTIVE MENU */
+                    <input type="tel" placeholder="Teléfono" required>
 
-        const menuItems = document.querySelectorAll(".menu-item");
+                    <input type="text" id="serviceSubject" readonly>
 
-        menuItems.forEach(item => {
+                    <input type="number" placeholder="Número de paquetes" required>
 
-            item.addEventListener("click", () => {
+                    <input type="number" placeholder="Kilogramos" required>
 
-                menuItems.forEach(el => {
-                    el.classList.remove("active");
-                });
+                    <h3>Dirección de origen</h3>
 
-                item.classList.add("active");
+                    <input type="text" placeholder="Dirección origen" required>
 
-            });
+                    <input type="text" placeholder="Departamento origen" required>
 
-        });
+                    <input type="text" placeholder="Zona origen" required>
 
-    </script>
-    <!-- FOOTER -->
+                    <h3>Dirección de entrega</h3>
+
+                    <input type="text" placeholder="Dirección entrega" required>
+
+                    <input type="text" placeholder="Departamento entrega" required>
+
+                    <input type="text" placeholder="Zona entrega" required>
+
+                    <button type="submit" class="btn-send">
+                        Enviar correo
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <footer class="footer">
 
         <div class="footer-container">
 
-            <div class="footer-box">
+            <section class="footer-box">
 
                 <h4>Síguenos en redes sociales</h4>
 
                 <div class="social">
-
                     <i class="fa-brands fa-facebook"></i>
                     <i class="fa-brands fa-x-twitter"></i>
                     <i class="fa-brands fa-instagram"></i>
                     <i class="fa-brands fa-linkedin"></i>
-
                 </div>
 
-            </div>
+            </section>
 
-            <div class="footer-box">
+            <section class="footer-box">
 
                 <h4>Servicios</h4>
 
@@ -876,12 +1000,11 @@
                     <li>Transporte Terrestre</li>
                     <li>Transporte Marítimo</li>
                     <li>Almacenaje</li>
-                    <li>Proyectos Especiales</li>
                 </ul>
 
-            </div>
+            </section>
 
-            <div class="footer-box">
+            <section class="footer-box">
 
                 <h4>Grupo TRAERSA</h4>
 
@@ -891,9 +1014,9 @@
                     <li>Deseas ser proveedor</li>
                 </ul>
 
-            </div>
+            </section>
 
-            <div class="footer-box">
+            <section class="footer-box">
 
                 <h4>Nuestros valores</h4>
 
@@ -903,7 +1026,7 @@
                     <li>Responsabilidad</li>
                 </ul>
 
-            </div>
+            </section>
 
         </div>
 
@@ -927,6 +1050,188 @@
         </div>
 
     </footer>
+
+    <script>
+
+        const sidebar = document.getElementById("sidebar");
+        const menuToggle = document.getElementById("menuToggle");
+        const overlay = document.getElementById("overlay");
+        const mainContent = document.getElementById("mainContent");
+
+        window.addEventListener("load", () => {
+
+            if(window.innerWidth > 900){
+
+                sidebar.classList.add("closed");
+                mainContent.classList.add("full");
+
+            }
+
+        });
+
+        menuToggle.addEventListener("click", () => {
+
+            if(window.innerWidth <= 900){
+
+                sidebar.classList.toggle("mobile-active");
+                overlay.classList.toggle("active");
+
+            }else{
+
+                sidebar.classList.toggle("closed");
+                mainContent.classList.toggle("full");
+
+            }
+
+        });
+
+        overlay.addEventListener("click", () => {
+
+            sidebar.classList.remove("mobile-active");
+            overlay.classList.remove("active");
+
+        });
+
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+
+            item.addEventListener("click", () => {
+
+                menuItems.forEach(el => {
+                    el.classList.remove("active");
+                });
+
+                item.classList.add("active");
+
+            });
+
+        });
+
+        const modal = document.getElementById("serviceModal");
+        const closeModal = document.getElementById("closeModal");
+
+        const modalTitle = document.getElementById("modalTitle");
+        const modalImage = document.getElementById("modalImage");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalExtra = document.getElementById("modalExtra");
+
+        const viewButtons = document.querySelectorAll(".btn-view");
+
+        viewButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                modalTitle.textContent = button.dataset.title;
+                modalImage.src = button.dataset.image;
+                modalDescription.textContent = button.dataset.description;
+                modalExtra.innerHTML = button.dataset.extra;
+
+                modal.classList.add("active");
+
+            });
+
+        });
+
+        closeModal.addEventListener("click", () => {
+
+            modal.classList.remove("active");
+
+        });
+
+        modal.addEventListener("click", (e) => {
+
+            if(e.target === modal){
+
+                modal.classList.remove("active");
+
+            }
+
+        });
+
+        const quoteModal = document.getElementById("quoteModal");
+        const closeQuoteModal = document.getElementById("closeQuoteModal");
+        const serviceSubject = document.getElementById("serviceSubject");
+
+        const quoteButtons = document.querySelectorAll(".btn-cotizar");
+
+        quoteButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const servicio = button.dataset.servicio;
+
+                serviceSubject.value = "Cotización - " + servicio;
+
+                quoteModal.classList.add("active");
+
+            });
+
+        });
+
+        closeQuoteModal.addEventListener("click", () => {
+
+            quoteModal.classList.remove("active");
+
+        });
+
+        quoteModal.addEventListener("click", (e) => {
+
+            if(e.target === quoteModal){
+
+                quoteModal.classList.remove("active");
+
+            }
+
+        });
+
+        document.getElementById("quoteForm").addEventListener("submit", function(e){
+
+            e.preventDefault();
+
+            const inputs = this.querySelectorAll("input");
+
+            let mensaje = `
+Nombre: ${inputs[0].value}
+
+Telefono: ${inputs[1].value}
+
+Asunto: ${inputs[2].value}
+
+Paquetes: ${inputs[3].value}
+
+Kilogramos: ${inputs[4].value}
+
+--- ORIGEN ---
+
+Direccion: ${inputs[5].value}
+
+Departamento: ${inputs[6].value}
+
+Zona: ${inputs[7].value}
+
+--- ENTREGA ---
+
+Direccion: ${inputs[8].value}
+
+Departamento: ${inputs[9].value}
+
+Zona: ${inputs[10].value}
+            `;
+
+            const correo = "traersa2026@gmail.com";
+
+            const asunto = encodeURIComponent(inputs[2].value);
+
+            const body = encodeURIComponent(mensaje);
+
+            window.location.href =
+            `mailto:${correo}?subject=${asunto}&body=${body}`;
+
+        });
+
+    </script>
+
 </body>
 
 </html>
