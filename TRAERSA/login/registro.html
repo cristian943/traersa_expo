@@ -25,26 +25,26 @@
 
     <main class="login-card">
         <h2>REGISTRO</h2>
-        <form>
+        <form action="registro.php" method="POST">
             <div class="input-group">
                 <label>Usuario</label>
                 <div class="input-field">
                     <i class="fa-solid fa-circle-user"></i>
-                    <input type="text" placeholder="Usuario">
+                    <input type="text" placeholder="Usuario" name="username" required>
                 </div>
             </div>
             <div class="input-group">
                 <label>Correo Electrónico</label>
                 <div class="input-field">
                     <i class="fa-solid fa-circle-user"></i>
-                    <input type="email" placeholder="Correo Electrónico">
+                    <input type="email" placeholder="Correo Electrónico" name="email" required>
                 </div>
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Contraseña">
+                    <input type="password" placeholder="Contraseña" name="password" required>
                     <i class="fa-solid fa-eye eye-toggle"></i>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <label>Confirmar contraseña</label>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Confirmar contraseña">
+                    <input type="password" placeholder="Confirmar contraseña" name="confirm_password" required>
                     <i class="fa-solid fa-eye eye-toggle"></i>
                 </div>
             </div>
