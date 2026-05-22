@@ -1,3 +1,18 @@
+<?php if(isset($_GET['error'])): ?>
+
+<div class="alert alert-danger text-center">
+    <?= htmlspecialchars($_GET['error']) ?>
+</div>
+
+<?php endif; ?>
+
+<?php if(isset($_GET['success'])): ?>
+
+<div class="alert alert-success text-center">
+    <?= htmlspecialchars($_GET['success']) ?>
+</div>
+
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,12 +40,12 @@
 
     <main class="login-card">
         <h2>REGISTRO</h2>
-        <form action="registro.php" method="POST">
+        <form action="registrar.php" method="POST">
             <div class="input-group">
                 <label>Usuario</label>
                 <div class="input-field">
                     <i class="fa-solid fa-circle-user"></i>
-                    <input type="text" placeholder="Usuario" name="username" required>
+                    <input type="text" placeholder="Usuario" name="nombre" required>
                 </div>
             </div>
             <div class="input-group">
@@ -52,7 +67,7 @@
                 <label>Confirmar contraseña</label>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Confirmar contraseña" name="confirm_password" required>
+                    <input type="password" placeholder="Confirmar contraseña" name="confirmar" required>
                     <i class="fa-solid fa-eye eye-toggle"></i>
                 </div>
             </div>
