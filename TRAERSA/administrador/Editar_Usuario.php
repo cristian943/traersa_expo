@@ -1,3 +1,14 @@
+<?php
+
+require '../backend/auth.php';
+
+if ($_SESSION['rol_id'] != 1) {
+
+    header("Location: ../login/login.php");
+    exit();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +35,7 @@
 
         <div class="logo-container">
 
-            <a href="admin.html">
+            <a href="admin.php">
                 <img src="imagenes/logo2.png" alt="Logo">
             </a>
 
@@ -38,17 +49,17 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="Cotizaciones_admin.php" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
 
-            <a href="Ejecucion_admin.html" class="menu-item">
+            <a href="Ejecucion_admin.php" class="menu-item">
                 <i class="fa-regular fa-clock"></i>
                 <span>En ejecución</span>
             </a>
 
-            <a href="Completados_admin.html" class="menu-item">
+            <a href="Completados_admin.php" class="menu-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
@@ -62,7 +73,7 @@
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.html" class="menu-item">
+            <a href="Editar_Servicios.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
                 <span>Servicios</span>
             </a>
@@ -73,7 +84,7 @@
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item active">
+            <a href="Editar_Usuario.php" class="menu-item active">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>

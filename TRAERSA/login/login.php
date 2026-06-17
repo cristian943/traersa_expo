@@ -54,7 +54,7 @@ if (password_verify($password, $usuario['password'])) {
             switch ((int)$usuario['rol_id']) {
 
                 case 1:
-                    header("Location: ../administrador/admin.html");
+                    header("Location: ../administrador/admin.php");
                     break;
 
                 case 2:

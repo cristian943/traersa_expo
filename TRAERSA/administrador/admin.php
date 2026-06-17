@@ -1,3 +1,14 @@
+<?php
+
+require '../backend/auth.php';
+
+if ($_SESSION['rol_id'] != 1) {
+
+    header("Location: ../login/login.php");
+    exit();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +35,7 @@
 
         <div class="logo-container">
 
-            <a href="admin.html">
+            <a href="admin.php">
                 <img src="imagenes/logo2.png" alt="Logo">
             </a>
 
@@ -38,17 +49,17 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="Cotizaciones_admin.php" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
 
-            <a href="Ejecucion_admin.html" class="menu-item">
+            <a href="Ejecucion_admin.php" class="menu-item">
                 <i class="fa-regular fa-clock"></i>
                 <span>En ejecución</span>
             </a>
 
-            <a href="Completados_admin.html" class="menu-item active">
+            <a href="Completados_admin.php" class="menu-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
@@ -62,7 +73,7 @@
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.html" class="menu-item">
+            <a href="Editar_Servicios.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
                 <span>Servicios</span>
             </a>
@@ -73,7 +84,7 @@
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item ">
+            <a href="Editar_Usuario.php" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -82,7 +93,7 @@
 
         <div class="sidebar-bottom">
 
-             <button href="../login/logout.php" class="btn-logout">
+            <button href="../login/logout.php" class="btn-logout">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Cerrar sesión</span>
             </button>
@@ -114,99 +125,134 @@
 
         </header>
 
-       
+      
 
 
-<div class="table-card completados-card">
+        <!-- STATS -->
 
-    <div class="table-header services-header">
+        <div class="stats-grid">
 
-        <h3>SERVICIOS COMPLETADOS</h3>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
 
-        <button class="btn-view">
-            VER TODOS
-        </button>
+                <div class="stat-info">
+                    <small>Servicios</small>
+                    <h3>0</h3>
+                    <p>Total registrados</p>
+                </div>
+            </div>
 
-    </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
 
-    <div class="table-content">
+                <div class="stat-info">
+                    <small>En ejecución</small>
+                    <h3>0</h3>
+                    <p>Actualmente activos</p>
+                </div>
+            </div>
 
-        <table class="completed-table">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-shield"></i>
+                </div>
 
-            <thead>
+                <div class="stat-info">
+                    <small>Completados</small>
+                    <h3>0</h3>
+                    <p>Servicios finalizados</p>
+                </div>
+            </div>
 
-                <tr>
-                    <th>GUÍA</th>
-                    <th>CLIENTE</th>
-                    <th>DESTINO</th>
-                    <th>TIPO</th>
-                    <th>FECHA</th>
-                    <th>ESTADO</th>
-                </tr>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
 
-            </thead>
+                <div class="stat-info">
+                    <small>Clientes</small>
+                    <h3>0</h3>
+                    <p>Total registrados</p>
+                </div>
+            </div>
 
-            <tbody>
+        </div>
 
-                <tr>
-                    <td>TR001</td>
-                    <td>Juan Pérez</td>
-                    <td>Ciudad de Guatemala</td>
-                    <td>Express</td>
-                    <td>18/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
+        
+            <div class="table-card">
+
+                <div class="table-header services-header">
+
+                    <h3>SERVICIOS RECIENTES</h3>
+
+                    <button class="btn-view">
+                        VER TODOS
+                    </button>
+
+                </div>
+
+                <div class="table-content">
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn running">
+                            EJECUCIÓN
+                        </button>
+
+                        <small>XX/XX/XXXX</small>
+
+                    </div>
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn completed">
                             COMPLETADO
-                        </span>
-                    </td>
-                </tr>
+                        </button>
 
-                <tr>
-                    <td>TR002</td>
-                    <td>María López</td>
-                    <td>Quetzaltenango</td>
-                    <td>Terrestre</td>
-                    <td>17/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
+                        <small>XX/XX/XXXX</small>
+
+                    </div>
+
+                    <div class="table-row">
+
+                        <span>ID</span>
+
+                        <div>
+                            <strong>SERVICIO</strong>
+                            <p>CLIENTE XXXXXXXX</p>
+                        </div>
+
+                        <button class="status-btn completed">
                             COMPLETADO
-                        </span>
-                    </td>
-                </tr>
+                        </button>
 
-                <tr>
-                    <td>TR003</td>
-                    <td>Carlos Méndez</td>
-                    <td>Puerto Barrios</td>
-                    <td>Marítimo</td>
-                    <td>15/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
-                            COMPLETADO
-                        </span>
-                    </td>
-                </tr>
+                        <small>XX/XX/XXXX</small>
 
-                <tr>
-                    <td>TR004</td>
-                    <td>Ana Rodríguez</td>
-                    <td>Escuintla</td>
-                    <td>Aéreo</td>
-                    <td>14/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
-                            COMPLETADO
-                        </span>
-                    </td>
-                </tr>
+                    </div>
 
-            </tbody>
+                </div>
 
-        </table>
+            </div>
 
-    </div>
-
-</div>
+        </div>
         <footer class="footer">
 
             <div class="footer-container">

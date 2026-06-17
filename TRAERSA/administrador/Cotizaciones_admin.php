@@ -1,3 +1,14 @@
+<?php
+
+require '../backend/auth.php';
+
+if ($_SESSION['rol_id'] != 1) {
+
+    header("Location: ../login/login.php");
+    exit();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -24,7 +35,7 @@
 
         <div class="logo-container">
 
-            <a href="admin.html">
+            <a href="admin.php">
                 <img src="imagenes/logo2.png" alt="Logo">
             </a>
 
@@ -38,17 +49,17 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item active ">
+            <a href="Cotizaciones_admin.php" class="menu-item active ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
 
-            <a href="Ejecucion_admin.html" class="menu-item">
+            <a href="Ejecucion_admin.php" class="menu-item">
                 <i class="fa-regular fa-clock"></i>
                 <span>En ejecución</span>
             </a>
 
-            <a href="Completados_admin.html" class="menu-item">
+            <a href="Completados_admin.php" class="menu-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
@@ -62,7 +73,7 @@
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.html" class="menu-item">
+            <a href="Editar_Servicios.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
                 <span>Servicios</span>
             </a>
@@ -73,7 +84,7 @@
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item">
+            <a href="Editar_Usuario.php" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -82,7 +93,7 @@
 
         <div class="sidebar-bottom">
 
-            <button href="../login/logout.php" class="btn-logout">
+             <button href="../login/logout.php" class="btn-logout">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Cerrar sesión</span>
             </button>
@@ -115,172 +126,121 @@
         </header>
 
         
-  <!-- CONTENIDO EJECUCIÓN -->
 
-<div class="gallery-container fade-up">
 
-    <!-- FORMULARIO -->
 
-    <div class="gallery-top">
+   
+    <div class="table-card">
 
-        <h2>SEGUIMIENTO DE ENVÍOS</h2>
+    <div class="table-header services-header">
 
-        <!-- GUIA -->
-        <div class="gallery-input">
-            <label>NÚMERO DE GUÍA:</label>
-            <input type="text" placeholder="Ejemplo: TRX-2026-001">
-        </div>
+        <h3>COTIZACIONES ACTIVAS</h3>
 
-        <!-- CLIENTE -->
-        <div class="gallery-input">
-            <label>ID CLIENTE:</label>
-            <input type="text" placeholder="ID DEL CLIENTE">
-        </div>
-
-        <!-- CLIENTE -->
-        <div class="gallery-input">
-            <label>NOMBRE DEL CLIENTE:</label>
-            <input type="text" placeholder="Nombre completo">
-        </div>
-
-        <!-- ESTADO -->
-        <div class="gallery-input">
-            <label>ESTADO DEL ENVÍO:</label>
-
-            <select>
-                <option>Paquete recibido</option>
-                <option>En centro logístico</option>
-                <option>Preparando despacho</option>
-                <option>En ruta de entrega</option>
-                <option>Entrega realizada</option>
-            </select>
-        </div>
-
-        <!-- CONFIRMACION -->
-        <div class="gallery-input">
-            <label>CONFIRMACIÓN DEL CLIENTE:</label>
-
-            <div class="radio-group">
-
-                <label>
-                    <input type="radio" name="confirmacion">
-                    Recibido correctamente
-                </label>
-
-                <label>
-                    <input type="radio" name="confirmacion">
-                    Pendiente
-                </label>
-
-            </div>
-        </div>
-
-        <!-- BOTON -->
-        <button class="gallery-btn">
-            ACTUALIZAR ESTADO
+        <button class="btn-view">
+            VER TODAS
         </button>
-
-        <!-- FECHA -->
-        <div class="gallery-date">
-            FECHA ACTUAL
-        </div>
 
     </div>
 
-    <!-- TABLA -->
+    <div class="table-content">
 
-    <div class="gallery-table">
+        <!-- FILA -->
 
-        <div class="gallery-header">
-            <h3>ENVÍOS EN EJECUCIÓN</h3>
-        </div>
+        <div class="table-row">
 
-        <!-- ENCABEZADOS -->
+            <span>#001</span>
 
-        <div class="gallery-row gallery-head">
+            <div>
+                <strong>Transporte terrestre</strong>
+                <p>Cliente: Juan Pérez</p>
+            </div>
 
-            <span>GUÍA</span>
-            <span>CLIENTE</span>
-            <span>ESTADO</span>
-            <span>CONFIRMACIÓN</span>
+            <!-- ESTADO -->
+
+            <div class="quote-actions">
+
+                <select class="quote-select">
+                    <option>En revisión</option>
+                    <option>Aprobada</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
+
+                <button class="confirm-btn">
+                    CONFIRMAR
+                </button>
+
+            </div>
+
+            <small>Q450.00</small>
 
         </div>
 
         <!-- FILA -->
 
-        <div class="gallery-row">
+        <div class="table-row">
 
-            <div class="gallery-info">
-                <strong>TRX-2026-001</strong>
-                <p>Registro activo</p>
+            <span>#002</span>
+
+            <div>
+                <strong>Envío marítimo</strong>
+                <p>Cliente: María López</p>
             </div>
 
-            <div class="gallery-info">
-                <strong>Juan Pérez</strong>
-                <p>ID: CL-001</p>
-            </div>
+            <div class="quote-actions">
 
-            <div class="gallery-actions">
-                <button class="edit-btn">
-                    EN RUTA
+                <select class="quote-select approved">
+                    <option selected>Aprobada</option>
+                    <option>En revisión</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
+
+                <button class="confirm-btn">
+                    GUARDAR
                 </button>
+
             </div>
 
-            <small>PENDIENTE</small>
+            <small>Q1,250.00</small>
 
         </div>
 
         <!-- FILA -->
 
-        <div class="gallery-row">
+        <div class="table-row">
 
-            <div class="gallery-info">
-                <strong>TRX-2026-002</strong>
-                <p>Registro activo</p>
+            <span>#003</span>
+
+            <div>
+                <strong>Servicio express</strong>
+                <p>Cliente: Carlos Méndez</p>
             </div>
 
-            <div class="gallery-info">
-                <strong>María López</strong>
-                <p>ID: CL-002</p>
-            </div>
+            <div class="quote-actions">
 
-            <div class="gallery-actions">
-                <button class="delete-btn">
-                    ENTREGA REALIZADA
+                <select class="quote-select pending">
+                    <option selected>Pendiente</option>
+                    <option>En revisión</option>
+                    <option>Aprobada</option>
+                    <option>Rechazada</option>
+                    <option>Finalizada</option>
+                </select>
+
+                <button class="confirm-btn">
+                    ACTUALIZAR
                 </button>
+
             </div>
 
-            <small>RECIBIDO ✔</small>
-
-        </div>
-
-        <!-- FILA -->
-
-        <div class="gallery-row">
-
-            <div class="gallery-info">
-                <strong>TRX-2026-003</strong>
-                <p>Registro activo</p>
-            </div>
-
-            <div class="gallery-info">
-                <strong>Carlos Méndez</strong>
-                <p>ID: CL-003</p>
-            </div>
-
-            <div class="gallery-actions">
-                <button class="edit-btn">
-                    EN CENTRO LOGÍSTICO
-                </button>
-            </div>
-
-            <small>PENDIENTE</small>
+            <small>Q320.00</small>
 
         </div>
 
     </div>
 
 </div>
+
 
 </div>
 
