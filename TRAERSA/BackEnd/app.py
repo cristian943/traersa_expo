@@ -66,3 +66,34 @@ def iniciar_sesion():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+#obtener reportes de clientes
+@app.route('/reportes', methods=['GET'])
+def obtener_reportes_clientes():
+    try:
+        reportes = admin_manager.buscar_reportes_clientes()#utiliza la funcion buscar_reportes_clientes del manager que contiene la consulta sql
+        return jsonify(reportes), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+#guardar reporte de cliente
+@app.route('/reportes', methods=['POST'])
+def guardar_reporte_cliente():
+    try:
+        data = request.get_json() 
+
+        if 'descripcion' not in data or 'id_cliente' not in data: 
+            return jsonify({'error': 'Descripción e ID de cliente son requeridos'}), 400
+
+        descripcion = data['descripcion']
+        id_cliente = data['id_cliente']
+
+        resultado = admin_manager.guardar_reporte_cliente(descripcion, id_cliente)
+
+        if resultado:
+            return jsonify({'mensaje': 'Reporte guardado exitosamente'}), 201
+        else:
+            return jsonify({'error': 'No se pudo guardar el reporte'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
