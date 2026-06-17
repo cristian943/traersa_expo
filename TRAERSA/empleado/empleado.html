@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard TRAERSA</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar fade-up" id="sidebar">
+
+        <div class="logo-container">
+
+            <img src="imagenes\logo2.png"  href="admin.html">
+            <h1>TRAERSA</h1>
+        </div>
+
+       
+
+
+        <div class="menu-section">
+
+            <div class="menu-title">OPERACIONES</div>
+
+            <a href="empleado.html" class="menu-item ">
+                <i class="fa-solid fa-tags"></i>
+                <span>Servicios</span>
+            </a>
+
+             <a href="Proceso_empleado.html" class="menu-item ">
+                <i class="fa-solid fa-tags"></i>
+                <span>Proceso</span>
+            </a>
+
+
+        </div>
+
+       
+     
+
+        <div class="sidebar-bottom">
+
+           <button href="../login/logout.php" class="btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Cerrar sesión</span>
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content fade-up">
+
+        <div class="table-card">
+
+    <div class="table-header">
+        <h3>SERVICIOS - ASIGNACIÓN DE ENVÍOS</h3>
+    </div>
+
+    <div class="gallery-top">
+
+        <div class="gallery-input">
+            <label>NOMBRE DEL EMPLEADO</label>
+            <input type="text" placeholder="Empleado asignado">
+        </div>
+
+        <div class="gallery-input">
+            <label>ID CLIENTE</label>
+            <input type="text" placeholder="CL-000">
+        </div>
+
+        <div class="gallery-input">
+            <label>ID SERVICIO</label>
+            <input type="text" placeholder="SRV-000">
+        </div>
+
+        <div class="gallery-input">
+            <label>TOTAL</label>
+            <input type="number" placeholder="Q0.00">
+        </div>
+
+        <div class="gallery-input">
+            <label>NÚMERO DE GUÍA</label>
+            <input type="text" placeholder="TRX-2026-000">
+        </div>
+
+        <div class="gallery-input">
+            <label>ESTADO DEL ENVÍO</label>
+            <select>
+                <option>En centro logístico</option>
+                <option>Paquete recibido</option>
+                <option>Preparando despacho</option>
+                <option>En ruta</option>
+                <option>Entrega realizada</option>
+            </select>
+        </div>
+
+        <button class="gallery-btn">REGISTRAR SERVICIO</button>
+
+    </div>
+
+    
+</div>
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <div class="footer-container">
+
+                <div class="footer-box">
+
+                    <h4>Síguenos en redes sociales</h4>
+
+                    <div class="social">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Servicios</h4>
+
+                    <ul>
+                        <li>Gestión Aduanal</li>
+                        <li>Transporte Terrestre</li>
+                        <li>Transporte Marítimo</li>
+                        <li>Almacenaje</li>
+                        <li>Proyectos Especiales</li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Grupo TRAERSA</h4>
+
+                    <ul>
+                        <li>Únete a nuestro equipo</li>
+                        <li>Sobre nosotros</li>
+                        <li>Deseas ser proveedor</li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Nuestros valores</h4>
+
+                    <ul>
+                        <li>Sostenibilidad</li>
+                        <li>Garantía total</li>
+                        <li>Responsabilidad</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="contact">
+
+                <div>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>+502 78562384</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>traersa2026@gmail.com</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>31 av 2-48 zona 6 de mixco</span>
+                </div>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+    <script>
+
+        const sidebar = document.getElementById("sidebar");
+        const menuToggle = document.getElementById("menuToggle");
+        const overlay = document.getElementById("overlay");
+
+        menuToggle.addEventListener("click", () => {
+
+            if (window.innerWidth <= 900) {
+
+                sidebar.classList.toggle("mobile-active");
+                overlay.classList.toggle("active");
+
+            } else {
+
+                sidebar.classList.toggle("closed");
+
+            }
+
+        });
+
+        overlay.addEventListener("click", () => {
+
+            sidebar.classList.remove("mobile-active");
+            overlay.classList.remove("active");
+
+        });
+
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+
+            item.addEventListener("click", () => {
+
+                menuItems.forEach(el => {
+                    el.classList.remove("active");
+                });
+
+                item.classList.add("active");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

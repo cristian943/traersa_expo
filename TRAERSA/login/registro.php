@@ -1,3 +1,18 @@
+<?php if(isset($_GET['error'])): ?>
+
+<div class="alert alert-danger text-center">
+    <?= htmlspecialchars($_GET['error']) ?>
+</div>
+
+<?php endif; ?>
+
+<?php if(isset($_GET['success'])): ?>
+
+<div class="alert alert-success text-center">
+    <?= htmlspecialchars($_GET['success']) ?>
+</div>
+
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -7,13 +22,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css\style.css">
 </head>
 
 <body>
     <div class="video-background">
         <video autoplay muted loop playsinline id="bg-video">
-            <source src="/Video/AdminiStrador.mp4" type="video/mp4">
+            <source src="Video/AdminiStrador.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>
     </div>
@@ -25,26 +40,26 @@
 
     <main class="login-card">
         <h2>REGISTRO</h2>
-        <form>
+        <form action="registrar.php" method="POST">
             <div class="input-group">
                 <label>Usuario</label>
                 <div class="input-field">
                     <i class="fa-solid fa-circle-user"></i>
-                    <input type="text" placeholder="Usuario">
+                    <input type="text" placeholder="Usuario" name="nombre" required>
                 </div>
             </div>
             <div class="input-group">
                 <label>Correo Electrónico</label>
                 <div class="input-field">
                     <i class="fa-solid fa-circle-user"></i>
-                    <input type="email" placeholder="Correo Electrónico">
+                    <input type="email" placeholder="Correo Electrónico" name="email" required>
                 </div>
             </div>
             <div class="input-group">
                 <label>Contraseña</label>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Contraseña">
+                    <input type="password" placeholder="Contraseña" name="password" required>
                     <i class="fa-solid fa-eye eye-toggle"></i>
                 </div>
             </div>
@@ -52,7 +67,7 @@
                 <label>Confirmar contraseña</label>
                 <div class="input-field">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="password" placeholder="Confirmar contraseña">
+                    <input type="password" placeholder="Confirmar contraseña" name="confirmar" required>
                     <i class="fa-solid fa-eye eye-toggle"></i>
                 </div>
             </div>

@@ -66,3 +66,69 @@ def iniciar_sesion():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+#obtener reportes de clientes
+@app.route('/reportes', methods=['GET'])
+def obtener_reportes_clientes():
+    try:
+        reportes = admin_manager.buscar_reportes_clientes()#utiliza la funcion buscar_reportes_clientes del manager que contiene la consulta sql
+        return jsonify(reportes), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+#guardar reporte de cliente
+@app.route('/reportes', methods=['POST'])
+def guardar_reporte_cliente():
+    try:
+        data = request.get_json() 
+
+        if 'descripcion' not in data or 'id_cliente' not in data: 
+            return jsonify({'error': 'Descripción e ID de cliente son requeridos'}), 400
+
+        descripcion = data['descripcion']
+        id_cliente = data['id_cliente']
+
+        resultado = admin_manager.guardar_reporte_cliente(descripcion, id_cliente)
+
+        if resultado:
+            return jsonify({'mensaje': 'Reporte guardado exitosamente'}), 201
+        else:
+            return jsonify({'error': 'No se pudo guardar el reporte'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+#eliminar reporte de cliente 
+@app.route('/reportes/<int:id_reporte>', methods=['DELETE'])
+def eliminar_reporte_cliente(id_reporte):
+    try:
+        resultado = admin_manager.eliminar_reporte_cliente(id_reporte)
+
+        if resultado:
+            return jsonify({'mensaje': 'Reporte eliminado exitosamente'}), 200
+        else:
+            return jsonify({'error': 'No se pudo eliminar el reporte'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+#editar reporte de cliente
+@app.route('/reportes/<int:id_reporte>', methods=['PUT'])
+def editar_reporte_cliente(id_reporte):
+    try:
+        data = request.get_json()
+
+        if 'nueva_descripcion' not in data:
+            return jsonify({'error': 'Nueva descripción es requerida'}), 400
+
+        nueva_descripcion = data['nueva_descripcion']
+
+        resultado = admin_manager.editar_reporte_cliente(id_reporte, nueva_descripcion)
+
+        if resultado:
+            return jsonify({'mensaje': 'Reporte editado exitosamente'}), 200
+        else:
+            return jsonify({'error': 'No se pudo editar el reporte'}), 500
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
