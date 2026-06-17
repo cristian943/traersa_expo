@@ -143,22 +143,21 @@ class AdministradorManager:
             print(f"Error en editar_reporte_cliente: {e}")
             return False
     
-    #ver servicios activos junto con la informacion del cliente que los solicito
-    def ver_servicios_activos(self):
+    #ver Todos los servicios junto con la informacion del cliente que los solicito
+    def ver_servicios_con_informacion_cliente(self):
         try:
             with self.engine.connect() as connection:
                 query = text("""
-                    SELECT s.id_servicio, s.tipo_servicio, s.descripcion, s.fecha_solicitud, s.estado,
-                        c.nombre AS nombre_cliente, c.apellido AS apellido_cliente
+                    SELECT s.id_servicio, s.tipo_servicio, s.descripcion AS descripcion_servicio, s.fecha_solicitud, s.estado,
+                           c.nombre AS nombre_cliente, c.apellido AS apellido_cliente, c.correo AS correo_cliente
                     FROM servicios s
                     JOIN clientes c ON s.id_cliente = c.id_cliente
-                    WHERE s.estado = 'activo'
                 """)
                 result = connection.execute(query)
                 servicios = result.fetchall()
                 return servicios
         except Exception as e:
-            print(f"Error en ver_servicios_activos: {e}")
+            print(f"Error en ver_servicios_con_informacion_cliente: {e}")
             return None
     
     #guardar servicio nuevo
@@ -197,5 +196,5 @@ class AdministradorManager:
             print(f"Error en editar_estado_servicio: {e}")
             return False
     
-    
+
     
