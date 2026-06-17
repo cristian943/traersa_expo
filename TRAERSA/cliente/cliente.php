@@ -730,161 +730,63 @@
 
             <div class="services-grid">
 
-                <article class="service-card">
+               <?php
+include("conexion.php");
 
-                    <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop">
+$resultado = $conexion->query("SELECT * FROM envios");
 
-                    <div class="service-content">
+while($fila = $resultado->fetch_assoc()){
+?>
+<article class="service-card">
 
-                        <h3>Moto Express</h3>
+ <img src="../administrador/uploads/<?php echo $fila['imagen']; ?>" alt="Servicio">
+    <div class="service-content">
 
-                        <div class="service-info">
-                            <p>• Hasta 5 paquetes</p>
-                            <p>• 20kg máximo</p>
-                            <p>• Entrega urbana</p>
-                        </div>
+        <h3><?php echo $fila['titulo']; ?></h3>
 
-                        <div class="price">
-                            Q350
-                        </div>
+        <div class="service-info">
+            <p>• <?php echo $fila['paquetes']; ?> paquetes</p>
+            <p>• <?php echo $fila['kilogramos']; ?> Kg máximo</p>
+            <p>• <?php echo $fila['tipo_entrega']; ?></p>
+        </div>
 
-                        <div class="service-buttons">
+        <div class="price">
+            Q<?php echo number_format($fila['precio'],2); ?>
+        </div>
 
-                            <button class="btn-secondary btn-view"
-                                data-title="Moto Express"
-                                data-image="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200&auto=format&fit=crop"
-                                data-description="Servicio rápido para entregas urbanas y paquetes pequeños."
-                                data-extra="• Entrega rápida<br>• Máximo 20kg<br>• Cobertura urbana">
-                                Ver
-                            </button>
+        <div class="service-buttons">
 
-                            <button class="btn-primary btn-cotizar"
-                                data-servicio="Moto Express">
-                                Cotizar
-                            </button>
+            <button class="btn-secondary btn-view"
+                data-title="<?php echo $fila['titulo']; ?>"
+                data-image="uploads/<?php echo $fila['imagen']; ?>"
+                data-description="<?php echo $fila['descripcion']; ?>"
+                data-extra="
+                • <?php echo $fila['paquetes']; ?> paquetes<br>
+                • <?php echo $fila['kilogramos']; ?> Kg<br>
+                • <?php echo $fila['tipo_entrega']; ?><br>
+                • Precio Q<?php echo number_format($fila['precio'],2); ?>">
+                Ver
+            </button>
 
-                        </div>
+            <button class="btn-primary btn-cotizar"
+                data-servicio="<?php echo $fila['titulo']; ?>">
+                Cotizar
+            </button>
 
-                    </div>
+        </div>
 
-                </article>
+    </div>
 
-                <article class="service-card">
+</article>
+<?php
+}
+?>
 
-                    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200&auto=format&fit=crop">
+                
 
-                    <div class="service-content">
+           
 
-                        <h3>Furgón Mediano</h3>
-
-                        <div class="service-info">
-                            <p>• 80 paquetes</p>
-                            <p>• 1500kg máximo</p>
-                            <p>• Departamentos</p>
-                        </div>
-
-                        <div class="price">
-                            Q450
-                        </div>
-
-                        <div class="service-buttons">
-
-                            <button class="btn-secondary btn-view"
-                                data-title="Furgón Mediano"
-                                data-image="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1200&auto=format&fit=crop"
-                                data-description="Ideal para mercadería y entregas entre departamentos."
-                                data-extra="• Hasta 1500kg<br>• Rastreo GPS<br>• Seguro incluido">
-                                Ver
-                            </button>
-
-                            <button class="btn-primary btn-cotizar"
-                                data-servicio="Furgón Mediano">
-                                Cotizar
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-                <article class="service-card">
-
-                    <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop">
-
-                    <div class="service-content">
-
-                        <h3>Camión de carga</h3>
-
-                        <div class="service-info">
-                            <p>• 300 paquetes</p>
-                            <p>• 10 toneladas</p>
-                            <p>• Nacional</p>
-                        </div>
-
-                        <div class="price">
-                            Q2,500
-                        </div>
-
-                        <div class="service-buttons">
-
-                            <button class="btn-secondary btn-view"
-                                data-title="Camión de carga"
-                                data-image="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=1200&auto=format&fit=crop"
-                                data-description="Servicio pesado para carga empresarial."
-                                data-extra="• 10 toneladas<br>• Cobertura nacional<br>• Ideal para empresas">
-                                Ver
-                            </button>
-
-                            <button class="btn-primary btn-cotizar"
-                                data-servicio="Camión de carga">
-                                Cotizar
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-                <article class="service-card">
-
-                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop">
-
-                    <div class="service-content">
-
-                        <h3>Avión de carga</h3>
-
-                        <div class="service-info">
-                            <p>• Internacional</p>
-                            <p>• Entrega urgente</p>
-                            <p>• Grandes volúmenes</p>
-                        </div>
-
-                        <div class="price">
-                            Variable
-                        </div>
-
-                        <div class="service-buttons">
-
-                            <button class="btn-secondary btn-view"
-                                data-title="Avión de carga"
-                                data-image="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1200&auto=format&fit=crop"
-                                data-description="Servicio internacional urgente y seguro."
-                                data-extra="• Envíos internacionales<br>• Entrega express<br>• Grandes volúmenes">
-                                Ver
-                            </button>
-
-                            <button class="btn-primary btn-cotizar"
-                                data-servicio="Avión de carga">
-                                Cotizar
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </article>
+                
 
             </div>
 
