@@ -10,6 +10,40 @@
 html{
     scroll-behavior:smooth;
 }
+.role-select{
+
+
+padding:8px;
+border-radius:8px;
+border:1px solid #ccc;
+
+
+}
+
+.btn-delete{
+
+
+background:#dc2626;
+color:white;
+
+border:none;
+
+padding:8px 12px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+
+}
+
+.btn-delete:hover{
+
+
+opacity:.85;
+
+
+}
 
 body{
     background:#050505;
@@ -56,7 +90,47 @@ label,
 ::-webkit-scrollbar{
     width:7px;
 }
+.btn-cancelar{
 
+    background:#dc2626;
+    color:white;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.btn-cancelar:hover{
+
+    opacity:.9;
+
+}
+
+.estado-activo{
+
+    color:#22c55e;
+    font-weight:bold;
+
+}
+
+.estado-entregado{
+
+    color:#2563eb;
+    font-weight:bold;
+
+}
+
+.estado-cancelado{
+
+    color:#dc2626;
+    font-weight:bold;
+
+}
 ::-webkit-scrollbar-thumb{
     background:#9b111e;
     border-radius:20px;

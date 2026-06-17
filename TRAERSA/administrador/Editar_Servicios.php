@@ -1,3 +1,16 @@
+<?php
+
+require '../conexion.php';
+
+$sql = "
+SELECT *
+FROM orden
+ORDER BY fecha DESC
+";
+
+$resultado = $conexion->query($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -1197,6 +1210,29 @@ input[type="file"]::-webkit-file-upload-button:hover {
         }
 
     }
+    .btn-cancelar{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-cancelar:hover{
+    opacity:.9;
+}
+
+.estado-activo{
+    color:#22c55e;
+    font-weight:bold;
+}
+
+.estado-cancelado{
+    color:#ef4444;
+    font-weight:bold;
+}
 </style>
 
 
@@ -1385,18 +1421,108 @@ input[type="file"]::-webkit-file-upload-button:hover {
         <h3></h3>
     </div>
 
-    <!-- ENCABEZADOS -->
 
-    <div class="gallery-row gallery-head">
+       <div class="gallery-row gallery-head">
 
-        <span>IMAGEN</span>
-        <span>TÍTULO Y DESCRIPCIÓN</span>
-        <span>ACCIONES</span>
-        <span>FECHA</span>
+    <span>IMAGEN</span>
+    <span>TÍTULO Y DESCRIPCIÓN</span>
+    <span>ESTADO</span>
+    <span>ACCIONES</span>
+    <span>FECHA</span>
 
-    </div>
+</div>
+   
 
     <!-- SIN REGISTROS -->
+
+   <?php if($resultado->num_rows > 0): ?>
+
+    <?php while($envio = $resultado->fetch_assoc()): ?>
+
+        <div class="gallery-row">
+
+            <span>
+                <img
+                    src="imagenes/default.png"
+                    width="80">
+            </span>
+
+            <span>
+
+                <strong>
+                    Envío #<?= $envio['id_envio'] ?>
+                </strong>
+
+                <br>
+
+                <?= htmlspecialchars($envio['origen']) ?>
+
+                →
+
+                <?= htmlspecialchars($envio['destino']) ?>
+
+            </span>
+
+            <span>
+
+                <?php
+
+                if($envio['estado'] == 'Cancelado'){
+
+                    echo '<span class="estado-cancelado">
+                            Cancelado
+                          </span>';
+
+                }elseif($envio['estado'] == 'Entregado'){
+
+                    echo '<span class="estado-entregado">
+                            Entregado
+                          </span>';
+
+                }else{
+
+                    echo '<span class="estado-activo">
+                            '.$envio['estado'].'
+                          </span>';
+
+                }
+
+                ?>
+
+            </span>
+
+            <span>
+
+                <?php if($envio['estado'] != 'Cancelado'): ?>
+
+                    <button
+                        class="btn-cancelar"
+                        onclick="cancelarServicio(<?= $envio['id_envio'] ?>)">
+
+                        Cancelar
+
+                    </button>
+
+                <?php endif; ?>
+
+            </span>
+
+            <span>
+
+                <?= date(
+                    'd/m/Y',
+                    strtotime(
+                        $envio['fecha_solicitud']
+                    )
+                ) ?>
+
+            </span>
+
+        </div>
+
+    <?php endwhile; ?>
+
+<?php else: ?>
 
     <div class="gallery-empty">
 
@@ -1405,6 +1531,8 @@ input[type="file"]::-webkit-file-upload-button:hover {
         <p>NO HAY REGISTROS TODAVÍA</p>
 
     </div>
+
+<?php endif; ?>
 
 </div>
 
@@ -1492,7 +1620,45 @@ input[type="file"]::-webkit-file-upload-button:hover {
     </main>
 
     <script>
+        
+function cancelarServicio(id){
 
+    if(!confirm(
+        "¿Desea cancelar este servicio?"
+    )){
+        return;
+    }
+
+    fetch('cancelarServicio.php',{
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':
+            'application/x-www-form-urlencoded'
+        },
+
+        body:'id=' + id
+
+    })
+
+    .then(res => res.text())
+
+    .then(data => {
+
+        alert("Servicio cancelado");
+
+        location.reload();
+
+    })
+
+    .catch(error => {
+
+        alert("Error al cancelar");
+
+    });
+
+}
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
@@ -1536,7 +1702,57 @@ input[type="file"]::-webkit-file-upload-button:hover {
         });
 
     </script>
+<script>
 
+function cancelarServicio(id){
+
+    if(
+        !confirm(
+            "¿Desea cancelar este servicio?"
+        )
+    ){
+        return;
+    }
+
+    fetch(
+        'cancelarServicio.php',
+        {
+
+            method:'POST',
+
+            headers:{
+                'Content-Type':
+                'application/x-www-form-urlencoded'
+            },
+
+            body:'id=' + id
+
+        }
+    )
+
+    .then(res => res.text())
+
+    .then(data => {
+
+        alert(
+            "Servicio cancelado correctamente"
+        );
+
+        location.reload();
+
+    })
+
+    .catch(error => {
+
+        alert(
+            "Error al cancelar"
+        );
+
+    });
+
+}
+
+</script>
 </body>
 
 </html>

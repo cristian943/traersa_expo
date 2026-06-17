@@ -118,17 +118,36 @@
 
 <div class="table-card completados-card">
 
-    <div class="table-header services-header">
+  <?php
+require '../conexion.php';
 
-        <h3>SERVICIOS COMPLETADOS</h3>
+$sql = "
+SELECT
+u.id,
+u.nombre,
+u.email,
+u.estado,
+u.rol_id,
+r.nombre AS rol
+FROM usuarios u
+INNER JOIN roles r
+ON u.rol_id = r.id
+ORDER BY u.id
+";
 
-        <button class="btn-view">
-            VER TODOS
-        </button>
+$resultado = $conexion->query($sql);
+?>
 
-    </div>
+<div class="table-card completados-card">
 
-   <div class="table-content">
+
+<div class="table-header services-header">
+
+    <h3>GESTIÓN DE USUARIOS</h3>
+
+</div>
+
+<div class="table-content">
 
     <table class="completed-table">
 
@@ -138,41 +157,84 @@
                 <th>ID</th>
                 <th>NOMBRE</th>
                 <th>EMAIL</th>
+                <th>ROL</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
             </tr>
 
         </thead>
 
         <tbody>
 
-            <tr>
-                <td>1</td>
-                <td>Juan Pérez</td>
-                <td>juanperez@gmail.com</td>
-            </tr>
+        <?php while($usuario = $resultado->fetch_assoc()): ?>
 
             <tr>
-                <td>2</td>
-                <td>María López</td>
-                <td>marialopez@gmail.com</td>
+
+                <td><?= $usuario['id'] ?></td>
+
+                <td><?= htmlspecialchars($usuario['nombre']) ?></td>
+
+                <td><?= htmlspecialchars($usuario['email']) ?></td>
+
+                <td>
+
+                    <select
+                        onchange="actualizarRol(this, <?= $usuario['id'] ?>)"
+                        class="role-select">
+
+                        <option value="1"
+                            <?= $usuario['rol_id']==1 ? 'selected' : '' ?>>
+                            Administrador
+                        </option>
+
+                        <option value="2"
+                            <?= $usuario['rol_id']==2 ? 'selected' : '' ?>>
+                            Cliente
+                        </option>
+
+                        <option value="3"
+                            <?= $usuario['rol_id']==3 ? 'selected' : '' ?>>
+                            Empleado
+                        </option>
+
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <?= $usuario['estado']
+                        ? 'Activo'
+                        : 'Inactivo'
+                    ?>
+
+                </td>
+
+                <td>
+
+                    <button
+                        onclick="eliminarUsuario(<?= $usuario['id'] ?>)"
+                        class="btn-delete">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </td>
+
             </tr>
 
-            <tr>
-                <td>3</td>
-                <td>Carlos Méndez</td>
-                <td>carlosmendez@gmail.com</td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>Ana Rodríguez</td>
-                <td>anarodriguez@gmail.com</td>
-            </tr>
+        <?php endwhile; ?>
 
         </tbody>
 
     </table>
 
 </div>
+
+
+</div>
+
         <footer class="footer">
 
             <div class="footer-container">
@@ -296,6 +358,83 @@
             });
 
         });
+function actualizarRol(select,idUsuario){
+
+
+let nuevoRol = select.value;
+
+fetch('actualizarRol.php',{
+
+    method:'POST',
+
+    headers:{
+        'Content-Type':
+        'application/x-www-form-urlencoded'
+    },
+
+    body:
+    'id=' + idUsuario +
+    '&rol=' + nuevoRol
+
+})
+
+.then(res => res.text())
+
+.then(data => {
+
+    alert("Rol actualizado correctamente");
+
+})
+
+.catch(error => {
+
+    alert("Error al actualizar");
+
+});
+
+
+}
+
+function eliminarUsuario(id){
+
+
+if(!confirm(
+    "¿Desea eliminar este usuario?"
+)){
+    return;
+}
+
+fetch('eliminarUsuario.php',{
+
+    method:'POST',
+
+    headers:{
+        'Content-Type':
+        'application/x-www-form-urlencoded'
+    },
+
+    body:'id=' + id
+
+})
+
+.then(res => res.text())
+
+.then(data => {
+
+    alert("Usuario eliminado");
+
+    location.reload();
+
+})
+
+.catch(error => {
+
+    alert("Error al eliminar");
+
+});
+
+
+}
 
     </script>
 
