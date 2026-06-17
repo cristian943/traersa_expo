@@ -8,7 +8,7 @@
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/estilo.css" rel="stylesheet">
+    <link href="css\Estilo.css" rel="stylesheet">
 
 </head>
 
@@ -24,11 +24,11 @@
 
         <div class="logo-container">
 
-            <img src="imagenes\logo2.png"  href="admin.html">
+            <img src="imagenes\logo2.png" href="admin.html">
             <h1>TRAERSA</h1>
         </div>
 
-       
+
 
 
         <div class="menu-section">
@@ -40,7 +40,7 @@
                 <span>Servicios</span>
             </a>
 
-             <a href="Proceso_empleado.html" class="menu-item ">
+            <a href="empleado.html" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Proceso</span>
             </a>
@@ -48,12 +48,12 @@
 
         </div>
 
-       
-     
+
+
 
         <div class="sidebar-bottom">
 
-           <button href="../login/logout.php" class="btn-logout">
+            <button class="btn-logout">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <span>Cerrar sesión</span>
             </button>
@@ -61,61 +61,129 @@
         </div>
 
     </aside>
-
     <main class="main-content fade-up">
 
-        <div class="table-card">
 
-    <div class="table-header">
-        <h3>SERVICIOS - ASIGNACIÓN DE ENVÍOS</h3>
-    </div>
 
-    <div class="gallery-top">
+        <section class="process-section">
 
-        <div class="gallery-input">
-            <label>NOMBRE DEL EMPLEADO</label>
-            <input type="text" placeholder="Empleado asignado">
-        </div>
+            <div class="process-header">
 
-        <div class="gallery-input">
-            <label>ID CLIENTE</label>
-            <input type="text" placeholder="CL-000">
-        </div>
+                <div>
+                    <small>Gestión logística</small>
+                    <h1>PROCESO DE <span>ENVÍOS</span></h1>
+                </div>
 
-        <div class="gallery-input">
-            <label>ID SERVICIO</label>
-            <input type="text" placeholder="SRV-000">
-        </div>
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar guía, cliente o servicio">
+                    <button class="btn-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
 
-        <div class="gallery-input">
-            <label>TOTAL</label>
-            <input type="number" placeholder="Q0.00">
-        </div>
+            </div>
 
-        <div class="gallery-input">
-            <label>NÚMERO DE GUÍA</label>
-            <input type="text" placeholder="TRX-2026-000">
-        </div>
+            <div class="process-table">
 
-        <div class="gallery-input">
-            <label>ESTADO DEL ENVÍO</label>
-            <select>
-                <option>En centro logístico</option>
-                <option>Paquete recibido</option>
-                <option>Preparando despacho</option>
-                <option>En ruta</option>
-                <option>Entrega realizada</option>
-            </select>
-        </div>
+                <!-- FILA -->
 
-        <button class="gallery-btn">REGISTRAR SERVICIO</button>
+                <div class="process-row">
 
-    </div>
+                    <div class="process-id">
+                        TRX-2026-001
+                    </div>
 
-    
-</div>
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-001
+                        <p>Servicio Express</p>
+                    </div>
 
-        <!-- FOOTER -->
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Guatemala → Petén
+                    </div>
+
+                    <div class="process-price">
+                        Q350
+                    </div>
+
+                    <div class="process-status running">
+                        EN RUTA
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+                <!-- FILA -->
+
+                <div class="process-row">
+
+                    <div class="process-id">
+                        TRX-2026-002
+                    </div>
+
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-002
+                        <p>Envío Nacional</p>
+                    </div>
+
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Mixco → Xela
+                    </div>
+
+                    <div class="process-price">
+                        Q450
+                    </div>
+
+                    <div class="process-status completed">
+                        ENTREGADO
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+                <!-- FILA -->
+
+                <div class="process-row">
+
+                    <div class="process-id">
+                        TRX-2026-003
+                    </div>
+
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-003
+                        <p>Carga pesada</p>
+                    </div>
+
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Puerto → Capital
+                    </div>
+
+                    <div class="process-price">
+                        Q2500
+                    </div>
+
+                    <div class="process-status warehouse">
+                        CENTRO LOGÍSTICO
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
 
         <footer class="footer">
 

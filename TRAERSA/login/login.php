@@ -1,11 +1,12 @@
 <?php
 session_start();
 
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', 'error_log');
+/* MOSTRAR ERRORES */
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-require 'conexion1.php';
+require '../conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -13,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = trim($_POST['password'] ?? '');
 
     if ($email === '' || $password === '') {
-        header("Location: login.html?error=Completa todos los campos");
+        header("Location: Inicio_sesion.php?error=Completa todos los campos");
         exit();
     }
 
@@ -33,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->close();
             $conn->close();
 
-            header("Location: login.html?error=Usuario inactivo");
+            header("Location: Inicio_sesion.php?error=Usuario inactivo");
             exit();
         }
 
-        // Verificar contraseña
-        if ($password === $usuario['password']) {
+       
+if (password_verify($password, $usuario['password'])) {
 
             session_regenerate_id(true);
 
@@ -53,19 +54,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             switch ((int)$usuario['rol_id']) {
 
                 case 1:
-                    header("Location: administrador/admin.php");
+                    header("Location: ../administrador/admin.html");
                     break;
 
                 case 2:
-                    header("Location: cliente/cliente.php");
+                    header("Location: ../cliente/cliente.html");
                     break;
 
                 case 3:
-                    header("Location: empleado/empleado.php");
+                    header("Location: ../empleado/empleado.html");
                     break;
 
                 default:
-                    header("Location: login.html?error=Rol no reconocido");
+                    header("Location: Inicio_sesion.php?error=Rol no reconocido");
                     break;
             }
 
@@ -76,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->close();
             $conn->close();
 
-            header("Location: login.html?error=Contraseña incorrecta");
+            header("Location: Inicio_sesion.php?error=Contraseña incorrecta");
             exit();
         }
 
@@ -85,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
         $conn->close();
 
-        header("Location: login.html?error=Usuario no encontrado");
+        header("Location: Inicio_sesion.php?error=Usuario no encontrado");
         exit();
     }
 }
