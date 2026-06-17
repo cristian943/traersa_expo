@@ -93,10 +93,17 @@ if ($_SESSION['rol_id'] != 1) {
 
         <div class="sidebar-bottom">
 
-         <button href="../login/logout.php" class="btn-logout">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span>Cerrar sesión</span>
-            </button>
+        <form action="../login/logout.php" method="POST">
+
+    <button type="submit" class="btn-logout">
+
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+        Cerrar sesión
+
+    </button>
+
+</form>
 
         </div>
 
