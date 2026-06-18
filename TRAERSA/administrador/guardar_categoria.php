@@ -1,6 +1,6 @@
 <?php
 
-include("conexion.php");
+include("../conexion.php");
 
 $titulo = $_POST['titulo'];
 $descripcion = $_POST['descripcion'];
@@ -47,9 +47,9 @@ VALUES
 '$imagen'
 )";
 
-if($conexion->query($sql)){
+if($conn->query($sql)){
     header("Location: Editar_Servicios.php");
 }else{
-    echo "Error: " . $conexion->error;
+    echo "Error: " . $conn->error;
 }
 ?>

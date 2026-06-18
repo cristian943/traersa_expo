@@ -1,5 +1,5 @@
 <?php
-include("conexion.php");
+include("../conexion.php");
 
 $id = $_POST['id'];
 $titulo = $_POST['titulo'];
@@ -20,9 +20,9 @@ tipo_entrega='$tipo_entrega',
 precio='$precio'
 WHERE id='$id'";
 
-if($conexion->query($sql)){
+if($conn->query($sql)){
     header("Location: Editar_Servicios.php");
 }else{
-    echo $conexion->error;
+    echo $conn->error;
 }
 ?>

@@ -8,7 +8,7 @@ FROM orden
 ORDER BY fecha DESC
 ";
 
-$resultado = $conexion->query($sql);
+$resultado = $conn->query($sql);
 
 ?>
 <?php

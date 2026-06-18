@@ -10,7 +10,7 @@ SET estado = 'Cancelado'
 WHERE id_envio = ?
 ";
 
-$stmt = $conexion->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 $stmt->bind_param(
     "i",

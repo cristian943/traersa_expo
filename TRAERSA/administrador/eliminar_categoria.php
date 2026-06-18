@@ -1,13 +1,13 @@
 <?php
 
-include("conexion.php");
+include("../conexion.php");
 
 if(isset($_GET['id'])){
 
     $id = intval($_GET['id']);
 
     // Obtener imagen
-    $consulta = $conexion->query("SELECT imagen FROM envios WHERE id='$id'");
+    $consulta = $conn->query("SELECT imagen FROM envios WHERE id='$id'");
 
     if($consulta->num_rows > 0){
 
@@ -17,7 +17,7 @@ if(isset($_GET['id'])){
             unlink("uploads/".$fila['imagen']);
         }
 
-        $conexion->query("DELETE FROM envios WHERE id='$id'");
+        $conn->query("DELETE FROM envios WHERE id='$id'");
     }
 }
 

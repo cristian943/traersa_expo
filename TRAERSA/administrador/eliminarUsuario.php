@@ -4,7 +4,7 @@ require '../conexion.php';
 
 $id = $_POST['id'];
 
-$stmt = $conexion->prepare(
+$stmt = $conn->prepare(
 "DELETE FROM usuarios
 WHERE id = ?"
 );

@@ -153,7 +153,7 @@ ON u.rol_id = r.id
 ORDER BY u.id
 ";
 
-$resultado = $conexion->query($sql);
+$resultado = $conn->query($sql);
 ?>
 
 <div class="table-card completados-card">

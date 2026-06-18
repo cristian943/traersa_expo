@@ -12,11 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $email = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
+$token = trim($_POST['token'] ?? '');
+   if ($email === '') {
 
-    if ($email === '' || $password === '') {
-        header("Location: Inicio_sesion.php?error=Completa todos los campos");
-        exit();
-    }
+    header("Location: Inicio_sesion.php?error=Ingrese su correo");
+    exit();
+
+}
+
+if ($password === '' && $token === '') {
+
+    header("Location: Inicio_sesion.php?error=Ingrese contraseña o token");
+    exit();
+
+}
 
     $stmt = $conn->prepare("SELECT id, email, password, rol_id, estado FROM usuarios WHERE email = ?");
     $stmt->bind_param("s", $email);

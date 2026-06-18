@@ -47,21 +47,107 @@
 
         <h2>INICIO DE SESIÓN</h2>
 
-        <form action="login.php" method="POST">
+     <form action="login.php" method="POST">
 
-           <div class="input-group"> <label>Correo Electrónico</label> <div class="input-field"> <i class="fa-solid fa-circle-user"></i> <input type="email" name="email" placeholder="Correo Electrónico" required> </div> </div> <div class="input-group"> <label>Contraseña</label> <div class="input-field"> <i class="fa-solid fa-lock"></i> <input type="password" name="password" placeholder="Contraseña" required> <i class="fa-solid fa-eye eye-toggle"></i> </div> </div> <button type="submit" class="btn-submit">INICIAR SESIÓN</button>
+    <div class="input-group">
 
-            <p class="footer-form">
-                ¿No tienes cuenta?
-                <a href="registro.php">Regístrate.</a>
-            </p>
+        <label>Correo Electrónico</label>
 
-            <p class="footer-form">
-                ¿Olvidaste tu contraseña?
-                <a href="recuperar_contra.php">Recupérala.</a>
-            </p>
+        <div class="input-field">
 
-        </form>
+            <i class="fa-solid fa-circle-user"></i>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Correo Electrónico"
+                required>
+
+        </div>
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Contraseña</label>
+
+        <div class="input-field">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Contraseña">
+
+            <i class="fa-solid fa-eye eye-toggle"></i>
+
+        </div>
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Código Temporal</label>
+
+        <div class="input-field">
+
+            <i class="fa-solid fa-key"></i>
+
+            <input
+                type="text"
+                name="token"
+                placeholder="Código recibido por correo">
+
+        </div>
+
+    </div>
+
+    <p class="token-info">
+
+        Ingrese su contraseña o un código temporal enviado por correo.
+
+    </p>
+
+    <?php if(isset($_GET['error'])): ?>
+
+        <div class="alert alert-danger text-center">
+
+            <?= htmlspecialchars($_GET['error']) ?>
+
+        </div>
+
+    <?php endif; ?>
+
+    <button
+        type="submit"
+        class="btn-submit">
+
+        INICIAR SESIÓN
+
+    </button>
+
+    <p class="footer-form">
+
+        ¿No tienes cuenta?
+
+        <a href="registro.php">
+            Regístrate.
+        </a>
+
+    </p>
+
+    <p class="footer-form">
+
+        ¿Olvidaste tu contraseña?
+
+        <a href="recuperar_contra.html">
+            Recupérala.
+        </a>
+
+    </p>
+
+</form>
 
     </main>
 

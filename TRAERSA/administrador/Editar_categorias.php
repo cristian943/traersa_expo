@@ -1296,7 +1296,7 @@
 
         <div class="gallery-container fade-up">
             <?php
-include("conexion.php");
+include("../conexion.php");
 
 $id = $_GET['id'] ?? 0;
 
@@ -1310,7 +1310,7 @@ $imagen_actual = "";
 
 if($id > 0){
 
-    $consulta = $conexion->query("SELECT * FROM envios WHERE id='$id'");
+    $consulta = $conn->query("SELECT * FROM envios WHERE id='$id'");
 
     if($consulta->num_rows > 0){
 
@@ -1475,9 +1475,9 @@ $modo_edicion = isset($_GET['id']);
 
                <?php
 
-include("conexion.php");
+include("../conexion.php");
 
-$resultado = $conexion->query("SELECT * FROM envios ORDER BY fecha DESC");
+$resultado = $conn->query("SELECT * FROM envios ORDER BY fecha DESC");
 
 while($fila = $resultado->fetch_assoc()){
 ?>

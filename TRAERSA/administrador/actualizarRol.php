@@ -11,7 +11,7 @@ SET rol_id = ?
 WHERE id = ?
 ";
 
-$stmt = $conexion->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 $stmt->bind_param(
     "ii",

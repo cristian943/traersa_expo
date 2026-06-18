@@ -18,7 +18,7 @@
     <div class="decoration-line line-left"></div>
     <div class="decoration-line line-right"></div>
 
-    <a href="inicio/index.html" class="btn-volver">VOLVER</a>
+    <a href="../inicio/index.html" class="btn-volver">VOLVER</a>
 
     <main class="login-card">
         <h2>RECUPERAR CONTRASEÑA</h2>
@@ -27,19 +27,43 @@
             Introduce tu correo electrónico para enviarte las instrucciones de restablecimiento.
         </p>
 
-        <form id="recoverForm">
-            <div class="input-group">
-                <label>Correo Electrónico</label>
-                <div class="input-field">
-                    <i class="fa-solid fa-envelope"></i>
-                    <input type="email" id="recoverEmail" placeholder="Correo Electrónico" required>
-                </div>
-            </div>
+       <form action="recuperar.php" method="POST">
 
-            <button type="submit" class="btn-submit">ENVIAR INSTRUCCIONES</button>
+    <div class="input-group">
 
-            <p class="footer-form">¿Recordaste tu clave? <a href="Inicio_sesion.html">Inicia sesión.</a></p>
-        </form>
+        <label>Correo Electrónico</label>
+
+        <div class="input-field">
+
+            <i class="fa-solid fa-envelope"></i>
+
+            <input
+                type="email"
+                id="recoverEmail"
+                name="email"
+                placeholder="Correo Electrónico"
+                required>
+
+        </div>
+
+    </div>
+
+    <button
+        type="submit"
+        class="btn-submit">
+
+        ENVIAR INSTRUCCIONES
+
+    </button>
+
+    <p class="footer-form">
+        ¿Recordaste tu clave?
+        <a href="Inicio_sesion.php">
+            Inicia sesión.
+        </a>
+    </p>
+
+</form>
     </main>
 
     <footer class="main-footer">© TRAERSA</footer>
