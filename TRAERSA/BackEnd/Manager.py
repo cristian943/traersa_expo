@@ -195,6 +195,22 @@ class AdministradorManager:
         except Exception as e:
             print(f"Error en editar_estado_servicio: {e}")
             return False
+        
+    #eliminar servicio
+    def eliminar_servicio(self, id_servicio):
+        try:
+            with self.engine.connect() as connection:
+                query = text("""
+                    DELETE FROM servicios
+                    WHERE id_servicio = :id_servicio
+                """)
+                connection.execute(query, {
+                    "id_servicio": id_servicio
+                })
+                return True
+        except Exception as e:
+            print(f"Error en eliminar_servicio: {e}")
+            return False
     
 
     
