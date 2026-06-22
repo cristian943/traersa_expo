@@ -8,34 +8,80 @@
 
     <title>Cliente | TRAERSA</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <style>
+
+        /* =========================================================
+           TRAERSA — Design tokens
+           ========================================================= */
+        :root{
+            --navy-950: #081021;
+            --navy-900: #0B1B33;
+            --navy-800: #10274A;
+            --blue-600: #1E5AA8;
+            --blue-400: #4D8FE0;
+            --red-600:  #E1251B;
+            --red-700:  #B81C14;
+            --cream:    #F6F4EF;
+            --white:    #FFFFFF;
+            --ink:      #14202E;
+            --gray-500: #677081;
+            --gray-300: #C7CDD6;
+
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --radius: 14px;
+            --radius-lg: 22px;
+            --ease: cubic-bezier(.22,.85,.32,1);
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *, *::before, *::after{
+                animation-duration: .001ms !important;
+                transition-duration: .001ms !important;
+            }
+        }
 
         *{
             margin:0;
             padding:0;
             box-sizing:border-box;
-            font-family:'Segoe UI',sans-serif;
+            font-family: var(--font-body);
         }
 
         body{
-            background:#f5f5f5;
+            background: var(--cream);
+            color: var(--ink);
             overflow-x:hidden;
         }
 
+        img{ max-width:100%; }
+
+        :focus-visible{
+            outline: 3px solid var(--blue-400);
+            outline-offset: 2px;
+        }
+
+        /* =========================================================
+           Top navbar
+           ========================================================= */
         .top-navbar{
             position:fixed;
-            top:0;
-            left:0;
+            top:0; left:0;
             width:100%;
             height:80px;
-            background:white;
+            background:var(--white);
             display:flex;
             align-items:center;
             justify-content:space-between;
             padding:0 25px;
-            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            box-shadow:0 2px 16px rgba(8,16,33,.08);
             z-index:2000;
         }
 
@@ -59,7 +105,7 @@
         }
 
         .navbar-logo{
-            height:60px;
+            height:56px;
             object-fit:contain;
         }
 
@@ -69,61 +115,71 @@
             gap:8px;
             cursor:pointer;
             font-weight:600;
-            transition:.3s;
+            font-size:14px;
+            color: var(--ink);
+            text-decoration:none;
+            transition:.25s var(--ease);
         }
 
-        .nav-icon:hover{
-            color:#c40000;
-        }
-
-        .nav-icon i{
-            font-size:20px;
-        }
+        .nav-icon:hover{ color: var(--red-600); }
+        .nav-icon.active{ color: var(--red-600); }
+        .nav-icon i{ font-size:19px; }
 
         .menu-toggle{
-            width:50px;
-            height:50px;
+            width:48px;
+            height:48px;
             border:none;
             border-radius:50%;
-            background:#c40000;
+            background: var(--red-600);
             color:white;
-            font-size:20px;
+            font-size:19px;
             cursor:pointer;
-            transition:.3s;
+            transition:.25s var(--ease);
         }
 
         .menu-toggle:hover{
-            transform:scale(1.05);
+            background: var(--red-700);
+            transform:scale(1.06);
         }
 
+        /* =========================================================
+           Sidebar
+           ========================================================= */
         .sidebar{
             position:fixed;
-            top:80px;
-            left:0;
+            top:80px; left:0;
             width:280px;
             height:calc(100vh - 80px);
-            background:linear-gradient(180deg,#c40000,#6e0000);
+            background: linear-gradient(180deg, var(--navy-950), var(--navy-900));
             padding:25px;
             color:white;
             overflow-y:auto;
-            transition:.4s ease;
+            transition:.4s var(--ease);
             z-index:1500;
         }
 
-        .sidebar.closed{
-            transform:translateX(-100%);
-        }
+        .sidebar.closed{ transform:translateX(-100%); }
 
-        .menu-section{
-            margin-bottom:35px;
-        }
+        .menu-section{ margin-bottom:35px; }
 
         .menu-title{
             margin-bottom:15px;
-            font-size:14px;
-            font-weight:bold;
-            opacity:.7;
-            letter-spacing:1px;
+            font-family: var(--font-mono);
+            font-size:12px;
+            font-weight:700;
+            letter-spacing:.16em;
+            text-transform:uppercase;
+            color: var(--red-600);
+        }
+
+        .menu-title::after{
+            content:'';
+            display:block;
+            width:28px;
+            height:2px;
+            margin-top:8px;
+            border-radius:2px;
+            background: linear-gradient(90deg, var(--red-600), var(--blue-400));
         }
 
         .menu-item{
@@ -134,10 +190,19 @@
             gap:15px;
             padding:12px 18px;
             margin-bottom:10px;
-            border-radius:14px;
+            border-radius:var(--radius);
             text-decoration:none;
             color:white;
-            transition:.3s;
+            font-size:14px;
+            font-weight:500;
+            transition:.25s var(--ease);
+        }
+
+        .menu-item i{
+            width:18px;
+            text-align:center;
+            color: var(--blue-400);
+            transition: color .25s var(--ease);
         }
 
         .menu-item:hover{
@@ -145,470 +210,637 @@
             transform:translateX(5px);
         }
 
-        .menu-item.active{
-            background:white;
-            color:#c40000;
-        }
-
-        .sidebar-bottom{
-            margin-top:40px;
-        }
+        .menu-item.active{ background:white; color: var(--red-600); }
+        .menu-item.active i{ color: var(--red-600); }
 
         .btn-logout{
             width:100%;
             height:50px;
             border:none;
-            border-radius:14px;
-            background:white;
-            color:#c40000;
-            font-weight:bold;
+            border-radius:var(--radius);
+            background: var(--red-600);
+            color:white;
+            font-weight:700;
+            font-size:14px;
             cursor:pointer;
-            transition:.3s;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            text-decoration:none;
+            transition:.25s var(--ease);
         }
 
         .btn-logout:hover{
-            transform:scale(1.03);
+            background: var(--red-700);
+            transform:translateY(-2px);
         }
 
+        /* =========================================================
+           Main content
+           ========================================================= */
         .main-content{
             margin-top:100px;
             margin-left:280px;
             padding:30px;
-            transition:.4s;
+            transition:.4s var(--ease);
             width:calc(100% - 280px);
         }
 
-        .main-content.full{
-            margin-left:0;
-            width:100%;
-        }
+        .main-content.full{ margin-left:0; width:100%; }
 
         .hero-card{
+            position:relative;
+            overflow:hidden;
             background:white;
-            border-radius:25px;
-            padding:35px;
-            box-shadow:0 4px 18px rgba(0,0,0,.08);
-            margin-bottom:35px;
+            border-radius:var(--radius-lg);
+            padding:40px 35px;
+            box-shadow:0 10px 30px rgba(8,16,33,.08);
+            margin-bottom:30px;
             text-align:center;
         }
 
+        .hero-card::after{
+            content:'\f0d1';
+            font-family:"Font Awesome 6 Free";
+            font-weight:900;
+            position:absolute;
+            right:-18px; bottom:-28px;
+            font-size:150px;
+            line-height:1;
+            color: rgba(225,37,27,.06);
+            pointer-events:none;
+        }
+
+        .hero-card > *{ position:relative; }
+
         .hero-card h1{
-            font-size:45px;
+            font-family: var(--font-display);
+            font-size:clamp(34px, 5vw, 52px);
+            letter-spacing:.01em;
+            color: var(--navy-900);
             margin-bottom:10px;
             word-wrap:break-word;
         }
 
-        .hero-card h1 span{
-            color:#c40000;
-        }
+        .hero-card h1 span{ color: var(--red-600); }
 
         .hero-card p{
-            color:#666;
-            margin-bottom:30px;
+            color: var(--gray-500);
+            font-size:15px;
+        }
+
+        .eyebrow{
+            display:block;
+            text-align:center;
+            font-family: var(--font-mono);
+            font-weight:700;
+            font-size:12px;
+            letter-spacing:.18em;
+            text-transform:uppercase;
+            color: var(--red-600);
+            margin-bottom:10px;
         }
 
         .section-title{
-            font-size:35px;
-            margin-bottom:25px;
+            font-family: var(--font-display);
+            font-size:clamp(30px, 4.4vw, 44px);
+            letter-spacing:.01em;
+            color: var(--navy-900);
             text-align:center;
         }
 
+        .line{
+            width:70px;
+            height:4px;
+            background: linear-gradient(90deg, var(--red-600), var(--blue-600));
+            border-radius:4px;
+            margin:18px auto 30px;
+        }
+
+        [data-reveal]{
+            opacity:0;
+            transform:translateY(24px);
+            transition: opacity .6s var(--ease), transform .6s var(--ease);
+        }
+        [data-reveal].in-view{ opacity:1; transform:translateY(0); }
+
+        /* =========================================================
+           Filtros rápidos (estilo categorías de tienda)
+           ========================================================= */
+        .filter-bar{
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:10px;
+            margin-bottom:34px;
+        }
+
+        .filter-chip{
+            border:1px solid var(--gray-300);
+            background:white;
+            color: var(--navy-900);
+            padding:10px 20px;
+            border-radius:999px;
+            font-size:13px;
+            font-weight:700;
+            cursor:pointer;
+            transition:.22s var(--ease);
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .filter-chip i{ font-size:12px; color: var(--blue-600); }
+
+        .filter-chip:hover{
+            border-color: var(--red-600);
+            transform:translateY(-2px);
+        }
+
+        .filter-chip.active{
+            background: var(--red-600);
+            border-color: var(--red-600);
+            color:white;
+        }
+
+        .filter-chip.active i{ color:white; }
+
+        /* =========================================================
+           Service cards
+           ========================================================= */
         .services-grid{
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            grid-template-columns:repeat(3, minmax(280px, 1fr));
             gap:25px;
             align-items:stretch;
         }
 
         .service-card{
+            position:relative;
             background:white;
-            border-radius:22px;
+            border-radius:var(--radius-lg);
             overflow:hidden;
-            box-shadow:0 5px 18px rgba(0,0,0,.08);
-            transition:.3s;
+            box-shadow:0 8px 24px rgba(8,16,33,.08);
+            transition:.3s var(--ease), opacity .25s var(--ease);
             display:flex;
             flex-direction:column;
         }
 
+        .service-card::before{
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0;
+            height:4px;
+            background: linear-gradient(90deg, var(--red-600), var(--blue-600));
+            transform:scaleX(0);
+            transform-origin:left;
+            transition:transform .35s var(--ease);
+            z-index:2;
+        }
+
+        .service-card:hover::before{ transform:scaleX(1); }
+
         .service-card:hover{
             transform:translateY(-8px);
+            box-shadow:0 20px 36px rgba(8,16,33,.14);
         }
 
-        .service-card img{
-            width:100%;
-            height:220px;
-            object-fit:cover;
+        .service-card.is-hidden{
+            display:none;
         }
+
+        .service-media{
+            position:relative;
+            overflow:hidden;
+            background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+        }
+
+        .service-media img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+            display:block;
+            transition:transform .5s var(--ease);
+        }
+
+        .service-card:hover .service-media img{
+            transform:scale(1.06);
+        }
+
+        .service-tag{
+            position:absolute;
+            top:12px; left:12px;
+            background: rgba(8,16,33,.78);
+            backdrop-filter: blur(2px);
+            color:white;
+            font-family: var(--font-mono);
+            font-size:10.5px;
+            font-weight:700;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+            padding:6px 11px;
+            border-radius:999px;
+            display:flex;
+            align-items:center;
+            gap:6px;
+        }
+
+        .service-tag i{ color: var(--blue-400); font-size:10px; }
 
         .service-content{
-            padding:20px;
+            padding:22px;
             display:flex;
             flex-direction:column;
             flex:1;
         }
 
         .service-content h3{
+            font-family: var(--font-display);
             font-size:24px;
-            margin-bottom:15px;
+            letter-spacing:.01em;
+            margin-bottom:14px;
             text-align:center;
+            color: var(--navy-900);
         }
 
         .service-info{
-            color:#666;
-            line-height:30px;
-            margin-bottom:20px;
+            list-style:none;
+            color: var(--ink);
+            font-size:14px;
+            line-height:1.7;
+            margin-bottom:18px;
             flex:1;
+            padding:12px 0;
+            border-top:1px solid rgba(20,32,46,.08);
+            border-bottom:1px solid rgba(20,32,46,.08);
+            display:flex;
+            flex-direction:column;
+            gap:8px;
         }
 
+        .service-info li{ display:flex; align-items:center; gap:10px; }
+        .service-info i{ width:18px; text-align:center; color: var(--blue-600); font-size:13px; }
+
         .price{
-            font-size:32px;
-            color:#c40000;
-            font-weight:bold;
-            margin-bottom:20px;
+            font-size:30px;
+            font-weight:800;
+            color: var(--red-600);
+            margin:16px 0 18px;
             text-align:center;
+        }
+
+        .price small{
+            display:block;
+            font-size:11px;
+            font-weight:700;
+            letter-spacing:.08em;
+            text-transform:uppercase;
+            color: var(--gray-500);
         }
 
         .service-buttons{
             display:flex;
-            gap:10px;
-            flex-wrap:wrap;
+            gap:12px;
+            margin-top:auto;
         }
 
         .btn-primary,
         .btn-secondary{
             flex:1;
             min-width:120px;
-            height:45px;
+            height:48px;
             border:none;
-            border-radius:12px;
+            border-radius:var(--radius);
             cursor:pointer;
-            font-weight:bold;
-            transition:.3s;
+            font-family: var(--font-body);
+            font-weight:700;
+            font-size:14px;
+            transition:.22s var(--ease);
+            position:relative;
+            overflow:hidden;
         }
 
-        .btn-primary{
-            background:#c40000;
-            color:white;
+        .btn-primary{ background: var(--red-600); color:white; }
+        .btn-secondary{ background: var(--cream); color: var(--navy-900); }
+
+        .btn-primary:hover{ background: var(--red-700); transform:translateY(-2px); }
+        .btn-secondary:hover{ transform:translateY(-2px); }
+
+        .btn-primary:active{ transform:translateY(0) scale(.98); }
+
+        .empty-state{
+            grid-column:1/-1;
+            text-align:center;
+            color: var(--gray-500);
+            padding:50px 20px;
+            background:white;
+            border-radius:var(--radius-lg);
         }
 
-        .btn-secondary{
-            background:#f3f3f3;
+        .empty-state i{
+            font-size:34px;
+            color: var(--blue-400);
+            margin-bottom:14px;
+            display:block;
         }
 
-        .btn-primary:hover,
-        .btn-secondary:hover{
-            transform:scale(1.02);
-        }
+        @media(max-width:1100px){ .services-grid{ grid-template-columns:repeat(2,1fr); } }
+        @media(max-width:700px){ .services-grid{ grid-template-columns:1fr; } }
 
+        /* =========================================================
+           Overlay
+           ========================================================= */
         .overlay{
             position:fixed;
             inset:0;
-            background:rgba(0,0,0,.5);
+            background:rgba(8,16,33,.55);
             z-index:1200;
             opacity:0;
             visibility:hidden;
-            transition:.3s;
+            transition:.3s var(--ease);
         }
+        .overlay.active{ opacity:1; visibility:visible; }
 
-        .overlay.active{
-            opacity:1;
-            visibility:visible;
-        }
-
+        /* =========================================================
+           Footer
+           ========================================================= */
         .footer{
             margin-top:60px;
-            background:#111;
-            color:white;
-            padding:50px 30px 20px;
+            background: var(--navy-950);
+            color:rgba(255,255,255,.85);
+            padding:60px 5% 25px;
         }
 
         .footer-container{
+            max-width:1180px;
+            margin:0 auto;
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
             gap:35px;
             margin-bottom:35px;
+            padding-bottom:35px;
+            border-bottom:1px solid rgba(255,255,255,.1);
         }
 
         .footer-box h4{
-            margin-bottom:20px;
-            color:#ff2b2b;
-            font-size:20px;
+            margin-bottom:18px;
+            font-family: var(--font-display);
+            font-size:19px;
+            letter-spacing:.02em;
+            color:white;
         }
 
-        .footer-box ul{
-            list-style:none;
-        }
+        .footer-box ul{ list-style:none; }
 
         .footer-box ul li{
-            margin-bottom:12px;
-            color:#ccc;
+            margin-bottom:10px;
+            font-size:14px;
+            color:rgba(255,255,255,.6);
+            transition:.25s var(--ease);
         }
 
-        .social{
-            display:flex;
-            gap:15px;
-            margin-top:15px;
-            flex-wrap:wrap;
-        }
+        .footer-box ul li:hover{ color:white; transform:translateX(4px); }
+
+        .social{ display:flex; gap:14px; margin-top:15px; flex-wrap:wrap; }
 
         .social i{
-            width:45px;
-            height:45px;
+            width:38px; height:38px;
             border-radius:50%;
-            background:#222;
+            border:1px solid rgba(255,255,255,.25);
             display:flex;
             align-items:center;
             justify-content:center;
             cursor:pointer;
-            transition:.3s;
-            font-size:18px;
+            transition:.25s var(--ease);
+            font-size:16px;
         }
 
         .social i:hover{
-            background:#c40000;
-            transform:translateY(-5px);
+            background: var(--red-600);
+            border-color: var(--red-600);
+            transform:translateY(-3px);
         }
 
         .contact{
-            border-top:1px solid rgba(255,255,255,.1);
-            padding-top:20px;
+            max-width:1180px;
+            margin:0 auto;
             display:flex;
             flex-wrap:wrap;
             justify-content:center;
-            gap:30px;
-            color:#ccc;
+            gap:28px;
+            font-size:14px;
+            color:rgba(255,255,255,.75);
             text-align:center;
         }
 
-        .contact div{
-            display:flex;
-            align-items:center;
-            gap:10px;
-        }
+        .contact div{ display:flex; align-items:center; gap:10px; }
+        .contact i{ color: var(--red-600); }
 
-        .contact i{
-            color:#ff2b2b;
-        }
-
+        /* =========================================================
+           Modals
+           ========================================================= */
         .modal{
             position:fixed;
             inset:0;
-            background:rgba(0,0,0,.6);
+            background:rgba(8,16,33,.6);
             display:flex;
             align-items:center;
             justify-content:center;
             z-index:3000;
             opacity:0;
             visibility:hidden;
-            transition:.3s;
+            transition:.3s var(--ease);
             padding:20px;
         }
-
-        .modal.active{
-            opacity:1;
-            visibility:visible;
-        }
+        .modal.active{ opacity:1; visibility:visible; }
 
         .modal-content{
             background:white;
             width:100%;
-            max-width:700px;
-            border-radius:25px;
+            max-width:650px;
+            border-radius:var(--radius-lg);
             position:relative;
             overflow:hidden;
             max-height:90vh;
             overflow-y:auto;
-            animation:modalShow .3s ease;
+            animation:modalShow .3s var(--ease);
         }
 
-        .quote-content{
-            max-width:650px;
-        }
-
-        .modal-content img{
-            width:100%;
-            height:300px;
-            object-fit:cover;
-        }
-
-        .modal-body{
-            padding:30px;
-        }
+        .modal-body{ padding:34px; }
 
         .modal-body h2{
+            font-family: var(--font-display);
             font-size:32px;
-            margin-bottom:15px;
-            color:#c40000;
+            letter-spacing:.01em;
+            margin-bottom:14px;
+            color: var(--red-600);
             text-align:center;
         }
 
-        .modal-body p{
-            color:#555;
-            line-height:28px;
-            margin-bottom:20px;
+        .quote-form{ display:flex; flex-direction:column; gap:14px; padding-bottom:6px; }
+
+        .service-field{
+            background: var(--cream);
+            border-left:4px solid var(--red-600);
+            border-radius:var(--radius);
+            padding:12px 16px;
         }
 
-        .modal-extra{
-            background:#f5f5f5;
-            padding:20px;
-            border-radius:15px;
-            line-height:30px;
+        .service-field-label{
+            display:block;
+            font-family: var(--font-mono);
+            font-size:11px;
+            font-weight:700;
+            letter-spacing:.1em;
+            text-transform:uppercase;
+            color: var(--gray-500);
+            margin-bottom:4px;
         }
 
-        .quote-form{
-            display:flex;
-            flex-direction:column;
-            gap:15px;
-            padding-bottom:20px;
-        }
-
-        .quote-form input{
-            min-height:55px;
-            border-radius:12px;
-            border:1px solid #ddd;
-            padding:15px;
-            outline:none;
+        .service-field input{
+            border:none;
+            background:transparent;
+            padding:0;
+            min-height:auto;
+            font-weight:700;
             font-size:15px;
-            width:100%;
+            color: var(--navy-900);
+        }
+        .service-field input:focus{ box-shadow:none; }
+
+        .quote-form fieldset{
+            border:none; padding:0; margin:0;
+            display:flex; flex-direction:column; gap:14px;
         }
 
-        .quote-form h3{
-            margin-top:10px;
-            color:#c40000;
+        .quote-form legend{
+            padding:0;
+            margin-bottom:2px;
+            font-family: var(--font-mono);
+            font-size:12px;
+            font-weight:700;
+            letter-spacing:.12em;
+            text-transform:uppercase;
+            color: var(--red-600);
         }
+
+        .field{ display:flex; flex-direction:column; gap:6px; }
+        .field label{ font-size:13px; font-weight:600; color: var(--navy-900); }
+
+        .field input{
+            min-height:50px;
+            border-radius:var(--radius);
+            border:1px solid var(--gray-300);
+            padding:13px 15px;
+            outline:none;
+            font-family: var(--font-body);
+            font-size:14px;
+            color: var(--ink);
+            width:100%;
+            transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+        }
+
+        .field input:focus{
+            border-color: var(--blue-400);
+            box-shadow:0 0 0 3px rgba(77,143,224,.18);
+        }
+
+        .field input.is-invalid{
+            border-color: var(--red-600);
+            box-shadow:0 0 0 3px rgba(225,37,27,.14);
+        }
+
+        .form-feedback{
+            display:none;
+            padding:13px 16px;
+            border-radius:var(--radius);
+            font-size:13.5px;
+            font-weight:600;
+            line-height:1.5;
+        }
+        .form-feedback.show{ display:block; }
+        .form-feedback.error{ background: rgba(225,37,27,.08); color: var(--red-700); border:1px solid rgba(225,37,27,.25); }
+        .form-feedback.success{ background: rgba(30,90,168,.1); color: var(--blue-600); border:1px solid rgba(30,90,168,.25); }
 
         .btn-send{
-            min-height:55px;
+            min-height:52px;
             border:none;
-            border-radius:14px;
-            background:#c40000;
+            border-radius:var(--radius);
+            background: var(--red-600);
             color:white;
-            font-weight:bold;
-            font-size:16px;
+            font-family: var(--font-body);
+            font-weight:700;
+            font-size:15px;
             cursor:pointer;
-            transition:.3s;
+            transition:.25s var(--ease);
         }
-
-        .btn-send:hover{
-            transform:scale(1.02);
-        }
+        .btn-send:hover{ background: var(--red-700); transform:translateY(-2px); }
+        .btn-send[disabled]{ opacity:.7; cursor:not-allowed; transform:none; }
 
         .close-modal{
             position:absolute;
-            top:15px;
-            right:15px;
-            width:45px;
-            height:45px;
+            top:15px; right:15px;
+            width:42px; height:42px;
             border:none;
             border-radius:50%;
-            background:#c40000;
+            background: var(--red-600);
             color:white;
             cursor:pointer;
-            font-size:18px;
+            font-size:17px;
             z-index:10;
+            transition:.25s var(--ease);
         }
+        .close-modal:hover{ background: var(--red-700); transform:rotate(90deg); }
 
         @keyframes modalShow{
-
-            from{
-                transform:translateY(30px);
-                opacity:0;
-            }
-
-            to{
-                transform:translateY(0);
-                opacity:1;
-            }
-
+            from{ transform:translateY(30px); opacity:0; }
+            to{ transform:translateY(0); opacity:1; }
         }
 
+        /* Confirmación animada al cotizar (momento "Walmart": check + mensaje) */
+        .success-check{
+            display:none;
+            width:64px; height:64px;
+            margin:0 auto 16px;
+            border-radius:50%;
+            background: rgba(30,90,168,.12);
+            align-items:center;
+            justify-content:center;
+            font-size:28px;
+            color: var(--blue-600);
+            animation: popIn .45s var(--ease);
+        }
+        .success-check.show{ display:flex; }
+
+        @keyframes popIn{
+            0%{ transform:scale(0); opacity:0; }
+            70%{ transform:scale(1.12); opacity:1; }
+            100%{ transform:scale(1); }
+        }
+
+        /* =========================================================
+           Responsive
+           ========================================================= */
         @media(max-width:900px){
-
-            .sidebar{
-                transform:translateX(-100%);
-            }
-
-            .sidebar.mobile-active{
-                transform:translateX(0);
-            }
-
-            .main-content{
-                margin-left:0;
-                width:100%;
-                padding:20px;
-            }
-
-            .hero-card{
-                padding:25px;
-            }
-
-            .hero-card h1{
-                font-size:32px;
-            }
-
-            .section-title{
-                font-size:28px;
-            }
-
-            .nav-right{
-                width:auto;
-                gap:15px;
-            }
-
-            .nav-icon span{
-                display:none;
-            }
-
-            .modal-content{
-                max-height:95vh;
-            }
-
-            .modal-body{
-                padding:20px;
-            }
-
-            .modal-body h2{
-                font-size:25px;
-            }
-
+            .sidebar{ transform:translateX(-100%); }
+            .sidebar.mobile-active{ transform:translateX(0); }
+            .main-content{ margin-left:0; width:100%; padding:20px; }
+            .hero-card{ padding:28px 22px; }
+            .nav-right{ width:auto; gap:15px; }
+            .nav-icon span{ display:none; }
+            .modal-content{ max-height:95vh; }
+            .modal-body{ padding:22px; }
+            .modal-body h2{ font-size:26px; }
         }
 
         @media(max-width:600px){
-
-            .top-navbar{
-                padding:0 15px;
-            }
-
-            .nav-left{
-                width:auto;
-            }
-
-            .navbar-logo{
-                height:45px;
-            }
-
-            .hero-card h1{
-                font-size:26px;
-            }
-
-            .service-buttons{
-                flex-direction:column;
-            }
-
-            .btn-primary,
-            .btn-secondary{
-                width:100%;
-            }
-
-            .contact{
-                flex-direction:column;
-                gap:15px;
-            }
-
-            .contact div{
-                justify-content:center;
-            }
-
+            .top-navbar{ padding:0 15px; }
+            .nav-left{ width:auto; }
+            .navbar-logo{ height:42px; }
+            .service-buttons{ flex-direction:column; }
+            .contact{ flex-direction:column; gap:14px; }
+            .contact div{ justify-content:center; }
         }
 
     </style>
@@ -620,32 +852,25 @@
     <header class="top-navbar">
 
         <nav class="nav-left">
-
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir u ocultar menú" aria-controls="sidebar">
                 <i class="fa-solid fa-bars"></i>
             </button>
-
         </nav>
 
         <div class="nav-center">
-
-            <a href="cliente.html">
+            <a href="cliente.php">
                 <img src="imagenes/logo.png" class="navbar-logo" alt="Logo TRAERSA">
             </a>
-
         </div>
 
         <nav class="nav-right">
 
-            <div class="nav-icon">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>Carrito</span>
-            </div>
+          
 
-            <div class="nav-icon">
+            <a href="mi_cuenta.php" class="nav-icon">
                 <i class="fa-regular fa-user"></i>
                 <span>Mi cuenta</span>
-            </div>
+            </a>
 
         </nav>
 
@@ -655,62 +880,54 @@
 
     <aside class="sidebar" id="sidebar">
 
-        <section class="menu-section">
+        <div class="menu-section">
 
-            <div class="menu-title">ENVÍOS</div>
+            <div class="menu-title">Envíos</div>
 
-            <a href="internacional_cliente.html" class="menu-item">
-                <i class="fa-solid fa-plane"></i>
-                <span>Internacional</span>
-            </a>
-
-            <a href="nacional_cliente.html" class="menu-item active">
+            <a href="ciudad_cliente.php" class="menu-item">
                 <i class="fa-solid fa-truck"></i>
-                <span>Nacional</span>
+                <span>Ciudad</span>
             </a>
 
-            <a href="departamento_cliente.html" class="menu-item">
+            <a href="departamento_cliente.php" class="menu-item">
                 <i class="fa-solid fa-map-location-dot"></i>
                 <span>Departamentos</span>
             </a>
 
-            <a href="ciudad_cliente.html" class="menu-item">
+            <a href="Urbana_cliente.php" class="menu-item">
                 <i class="fa-solid fa-city"></i>
-                <span>Ciudad</span>
+                <span>Urbana</span>
             </a>
 
-        </section>
+        </div>
 
         <section class="menu-section">
 
-            <div class="menu-title">GESTIÓN</div>
+            <div class="menu-title">Gestión</div>
 
-            <a href="cotizaciones_cliente.html" class="menu-item">
-                <i class="fa-solid fa-map-marker-alt"></i>
+            <a href="cotizaciones_cliente.php" class="menu-item">
+                <i class="fa-solid fa-file-lines"></i>
                 <span>Rastrear</span>
             </a>
-
-            <a href="#" class="menu-item">
+            <a href="completados_cliente.php" class="menu-item">
                 <i class="fa-solid fa-circle-check"></i>
                 <span>Completados</span>
             </a>
 
         </section>
 
-        <div class="sidebar-bottom">
-
-            <button href="../login/logout.php" class="btn-logout">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                Cerrar sesión
-            </button>
-
-        </div>
+        <button class="btn-logout" onclick="window.location.href='../login/logout.php'">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            Cerrar sesión
+        </button>
 
     </aside>
 
     <main class="main-content" id="mainContent">
 
-        <section class="hero-card">
+        <section class="hero-card" data-reveal>
+
+            <p class="eyebrow">TRAERSA LOGÍSTICA</p>
 
             <h1>
                 Cotiza tu <span>envío</span>
@@ -724,101 +941,72 @@
 
         <section>
 
-            <h2 class="section-title">
-                Servicios disponibles
-            </h2>
+            <p class="eyebrow" id="servicesCount" data-reveal>Catálogo TRAERSA</p>
+            <h2 class="section-title" data-reveal>Servicios disponibles</h2>
+           <div class="line" data-reveal></div>
 
-            <div class="services-grid">
+           
+
+            <div class="services-grid" id="servicesGrid">
 
                <?php
-include("conexion.php");
+include("../conexion.php");
 
-$resultado = $conexion->query("SELECT * FROM envios");
+$resultado = $conn->query("SELECT * FROM categoria");
 
-while($fila = $resultado->fetch_assoc()){
+if ($resultado->num_rows === 0) {
 ?>
-<article class="service-card">
+<div class="empty-state">
+    <i class="fa-solid fa-box-open"></i>
+    Por el momento no hay servicios disponibles. Vuelve a intentarlo más tarde.
+</div>
+<?php
+} else {
+    while($fila = $resultado->fetch_assoc()){
+?>
+<article class="service-card" data-reveal data-tipo="<?php echo htmlspecialchars($fila['tipo_entrega']); ?>">
 
- <img src="../administrador/uploads/<?php echo $fila['imagen']; ?>" alt="Servicio">
+    <div class="service-media">
+        <span class="service-tag"><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($fila['tipo_entrega']); ?></span>
+        <img src="../uploads/<?php echo trim($fila['imagen']); ?>"
+             alt="<?php echo htmlspecialchars($fila['titulo']); ?>"
+             onerror="this.onerror=null;this.removeAttribute('src');">
+    </div>
+
     <div class="service-content">
 
         <h3><?php echo $fila['titulo']; ?></h3>
 
-        <div class="service-info">
-            <p>• <?php echo $fila['paquetes']; ?> paquetes</p>
-            <p>• <?php echo $fila['kilogramos']; ?> Kg máximo</p>
-            <p>• <?php echo $fila['tipo_entrega']; ?></p>
-        </div>
+        <ul class="service-info">
+            <li><i class="fa-solid fa-box"></i> <?php echo $fila['paquetes']; ?> paquetes</li>
+            <li><i class="fa-solid fa-weight-hanging"></i> <?php echo $fila['kilogramos']; ?> Kg máximo</li>
+            <li><i class="fa-solid fa-truck-fast"></i> <?php echo $fila['tipo_entrega']; ?></li>
+        </ul>
 
         <div class="price">
             Q<?php echo number_format($fila['precio'],2); ?>
+            <small>precio por envío</small>
         </div>
 
         <div class="service-buttons">
-
-            <button class="btn-secondary btn-view"
-                data-title="<?php echo $fila['titulo']; ?>"
-                data-image="uploads/<?php echo $fila['imagen']; ?>"
-                data-description="<?php echo $fila['descripcion']; ?>"
-                data-extra="
-                • <?php echo $fila['paquetes']; ?> paquetes<br>
-                • <?php echo $fila['kilogramos']; ?> Kg<br>
-                • <?php echo $fila['tipo_entrega']; ?><br>
-                • Precio Q<?php echo number_format($fila['precio'],2); ?>">
-                Ver
-            </button>
-
-            <button class="btn-primary btn-cotizar"
-                data-servicio="<?php echo $fila['titulo']; ?>">
+            <button class="btn-primary btn-cotizar" data-servicio="<?php echo htmlspecialchars($fila['titulo']); ?>">
                 Cotizar
             </button>
-
         </div>
 
     </div>
 
 </article>
 <?php
+    }
 }
 ?>
-
-                
-
-           
-
-                
 
             </div>
 
         </section>
 
     </main>
-
-    <!-- MODAL SERVICIO -->
-
-    <div class="modal" id="serviceModal">
-
-        <div class="modal-content">
-
-            <button class="close-modal" id="closeModal">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-
-            <img id="modalImage" src="" alt="Servicio">
-
-            <div class="modal-body">
-
-                <h2 id="modalTitle"></h2>
-
-                <p id="modalDescription"></p>
-
-                <div class="modal-extra" id="modalExtra"></div>
-
-            </div>
-
-        </div>
-
-    </div>
 
     <!-- MODAL COTIZAR -->
 
@@ -832,39 +1020,84 @@ while($fila = $resultado->fetch_assoc()){
 
             <div class="modal-body">
 
-                <h2 id="quoteTitle">
-                    Cotizar servicio
-                </h2>
+                <div class="success-check" id="successCheck">
+                    <i class="fa-solid fa-check"></i>
+                </div>
 
-                <form id="quoteForm" class="quote-form">
+                <h2 id="quoteTitle">Cotizar servicio</h2>
 
-                    <input type="text" placeholder="Nombre completo" required>
+                <form id="quoteForm" class="quote-form" novalidate>
 
-                    <input type="tel" placeholder="Teléfono" required>
+                    <div class="form-feedback" id="formFeedback" role="status" aria-live="polite"></div>
 
-                    <input type="text" id="serviceSubject" readonly>
+                    <div class="service-field">
+                        <span class="service-field-label">Servicio seleccionado</span>
+                        <input type="text" id="serviceSubject" name="asunto" readonly>
+                    </div>
 
-                    <input type="number" placeholder="Número de paquetes" required>
+                    <fieldset>
+                        <legend>Datos de contacto</legend>
 
-                    <input type="number" placeholder="Kilogramos" required>
+                        <div class="field">
+                            <label for="campoNombre">Nombre completo</label>
+                            <input type="text" id="campoNombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+                        </div>
 
-                    <h3>Dirección de origen</h3>
+                        <div class="field">
+                            <label for="campoTelefono">Teléfono</label>
+                            <input type="tel" id="campoTelefono" name="telefono" placeholder="Ej. 5555 5555" required>
+                        </div>
 
-                    <input type="text" placeholder="Dirección origen" required>
+                        <div class="field">
+                            <label for="campoPaquetes">Número de paquetes</label>
+                            <input type="number" id="campoPaquetes" name="paquetes" min="1" placeholder="Ej. 3" required>
+                        </div>
 
-                    <input type="text" placeholder="Departamento origen" required>
+                        <div class="field">
+                            <label for="campoKilos">Kilogramos</label>
+                            <input type="number" id="campoKilos" name="kilogramos" min="1" placeholder="Ej. 12" required>
+                        </div>
+                    </fieldset>
 
-                    <input type="text" placeholder="Zona origen" required>
+                    <fieldset>
+                        <legend>Dirección de origen</legend>
 
-                    <h3>Dirección de entrega</h3>
+                        <div class="field">
+                            <label for="origenDireccion">Dirección</label>
+                            <input type="text" id="origenDireccion" name="origen_direccion" placeholder="Calle, avenida, número" required>
+                        </div>
 
-                    <input type="text" placeholder="Dirección entrega" required>
+                        <div class="field">
+                            <label for="origenDepto">Departamento</label>
+                            <input type="text" id="origenDepto" name="origen_departamento" placeholder="Ej. Guatemala" required>
+                        </div>
 
-                    <input type="text" placeholder="Departamento entrega" required>
+                        <div class="field">
+                            <label for="origenZona">Zona</label>
+                            <input type="text" id="origenZona" name="origen_zona" placeholder="Ej. Zona 6" required>
+                        </div>
+                    </fieldset>
 
-                    <input type="text" placeholder="Zona entrega" required>
+                    <fieldset>
+                        <legend>Dirección de entrega</legend>
 
-                    <button type="submit" class="btn-send">
+                        <div class="field">
+                            <label for="entregaDireccion">Dirección</label>
+                            <input type="text" id="entregaDireccion" name="entrega_direccion" placeholder="Calle, avenida, número" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="entregaDepto">Departamento</label>
+                            <input type="text" id="entregaDepto" name="entrega_departamento" placeholder="Ej. Quetzaltenango" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="entregaZona">Zona</label>
+                            <input type="text" id="entregaZona" name="entrega_zona" placeholder="Ej. Zona 2" required>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn-send" id="btnEnviarCotizacion">
                         Enviar correo
                     </button>
 
@@ -881,254 +1114,255 @@ while($fila = $resultado->fetch_assoc()){
         <div class="footer-container">
 
             <section class="footer-box">
-
                 <h4>Síguenos en redes sociales</h4>
-
                 <div class="social">
                     <i class="fa-brands fa-facebook"></i>
                     <i class="fa-brands fa-x-twitter"></i>
                     <i class="fa-brands fa-instagram"></i>
                     <i class="fa-brands fa-linkedin"></i>
                 </div>
-
             </section>
 
             <section class="footer-box">
-
                 <h4>Servicios</h4>
-
                 <ul>
-                    <li>Gestión Aduanal</li>
+       
                     <li>Transporte Terrestre</li>
-                    <li>Transporte Marítimo</li>
+                  
                     <li>Almacenaje</li>
                 </ul>
-
             </section>
 
             <section class="footer-box">
-
                 <h4>Grupo TRAERSA</h4>
-
                 <ul>
                     <li>Únete a nuestro equipo</li>
                     <li>Sobre nosotros</li>
                     <li>Deseas ser proveedor</li>
                 </ul>
-
             </section>
 
             <section class="footer-box">
-
                 <h4>Nuestros valores</h4>
-
                 <ul>
                     <li>Sostenibilidad</li>
                     <li>Garantía total</li>
                     <li>Responsabilidad</li>
                 </ul>
-
             </section>
 
         </div>
 
         <div class="contact">
-
             <div>
                 <i class="fa-brands fa-whatsapp"></i>
                 <span>+502 78562384</span>
             </div>
-
             <div>
                 <i class="fa-solid fa-envelope"></i>
                 <span>traersa2026@gmail.com</span>
             </div>
-
             <div>
                 <i class="fa-solid fa-location-dot"></i>
                 <span>31 av 2-48 zona 6 de mixco</span>
             </div>
-
         </div>
 
     </footer>
 
     <script>
 
+        /* =====================================================
+           Scroll-reveal
+           ===================================================== */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add("in-view");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("[data-reveal]").forEach(el => revealObserver.observe(el));
+
+        /* =====================================================
+           Contador de servicios
+           ===================================================== */
+        const servicesCountEl = document.getElementById("servicesCount");
+        if(servicesCountEl){
+            const total = document.querySelectorAll(".service-card").length;
+            if(total > 0){
+                servicesCountEl.textContent = total + (total === 1 ? " servicio disponible" : " servicios disponibles");
+            }
+        }
+
+        /* =====================================================
+           Filtro rápido por tipo de entrega
+           ===================================================== */
+        const filterChips = document.querySelectorAll(".filter-chip");
+        const serviceCards = document.querySelectorAll(".service-card[data-tipo]");
+
+        filterChips.forEach(chip => {
+            chip.addEventListener("click", () => {
+                filterChips.forEach(c => c.classList.remove("active"));
+                chip.classList.add("active");
+
+                const valor = chip.dataset.filter;
+
+                serviceCards.forEach(card => {
+                    const coincide = (valor === "Todos") || (card.dataset.tipo === valor);
+                    card.classList.toggle("is-hidden", !coincide);
+                });
+            });
+        });
+
+        /* =====================================================
+           Sidebar
+           ===================================================== */
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
         const mainContent = document.getElementById("mainContent");
 
         window.addEventListener("load", () => {
-
             if(window.innerWidth > 900){
-
                 sidebar.classList.add("closed");
                 mainContent.classList.add("full");
-
             }
-
         });
 
         menuToggle.addEventListener("click", () => {
-
             if(window.innerWidth <= 900){
-
                 sidebar.classList.toggle("mobile-active");
                 overlay.classList.toggle("active");
-
             }else{
-
                 sidebar.classList.toggle("closed");
                 mainContent.classList.toggle("full");
-
             }
-
         });
 
         overlay.addEventListener("click", () => {
-
             sidebar.classList.remove("mobile-active");
             overlay.classList.remove("active");
-
         });
 
-        const menuItems = document.querySelectorAll(".menu-item");
-
-        menuItems.forEach(item => {
-
-            item.addEventListener("click", () => {
-
-                menuItems.forEach(el => {
-                    el.classList.remove("active");
-                });
-
+        /* Resaltar el ítem del menú correspondiente a la página actual */
+        const currentPage = location.pathname.split("/").pop() || "cliente.php";
+        document.querySelectorAll(".menu-item, .nav-icon[href]").forEach(item => {
+            if(item.getAttribute("href") === currentPage){
                 item.classList.add("active");
-
-            });
-
-        });
-
-        const modal = document.getElementById("serviceModal");
-        const closeModal = document.getElementById("closeModal");
-
-        const modalTitle = document.getElementById("modalTitle");
-        const modalImage = document.getElementById("modalImage");
-        const modalDescription = document.getElementById("modalDescription");
-        const modalExtra = document.getElementById("modalExtra");
-
-        const viewButtons = document.querySelectorAll(".btn-view");
-
-        viewButtons.forEach(button => {
-
-            button.addEventListener("click", () => {
-
-                modalTitle.textContent = button.dataset.title;
-                modalImage.src = button.dataset.image;
-                modalDescription.textContent = button.dataset.description;
-                modalExtra.innerHTML = button.dataset.extra;
-
-                modal.classList.add("active");
-
-            });
-
-        });
-
-        closeModal.addEventListener("click", () => {
-
-            modal.classList.remove("active");
-
-        });
-
-        modal.addEventListener("click", (e) => {
-
-            if(e.target === modal){
-
-                modal.classList.remove("active");
-
             }
-
         });
 
+        /* =====================================================
+           Modal de cotización
+           ===================================================== */
         const quoteModal = document.getElementById("quoteModal");
         const closeQuoteModal = document.getElementById("closeQuoteModal");
         const serviceSubject = document.getElementById("serviceSubject");
+        const successCheck = document.getElementById("successCheck");
+        const quoteForm = document.getElementById("quoteForm");
 
-        const quoteButtons = document.querySelectorAll(".btn-cotizar");
-
-        quoteButtons.forEach(button => {
-
+        document.querySelectorAll(".btn-cotizar").forEach(button => {
             button.addEventListener("click", () => {
 
-                const servicio = button.dataset.servicio;
+                const servicio = button.dataset.servicio || "Servicio TRAERSA";
+
+                quoteForm.reset();
+                quoteForm.style.display = "flex";
+                successCheck.classList.remove("show");
+                document.querySelectorAll(".quote-form input").forEach(i => i.classList.remove("is-invalid"));
+
+                const feedback = document.getElementById("formFeedback");
+                feedback.className = "form-feedback";
+                feedback.textContent = "";
 
                 serviceSubject.value = "Cotización - " + servicio;
 
                 quoteModal.classList.add("active");
 
             });
-
         });
 
-        closeQuoteModal.addEventListener("click", () => {
-
-            quoteModal.classList.remove("active");
-
-        });
+        closeQuoteModal.addEventListener("click", () => quoteModal.classList.remove("active"));
 
         quoteModal.addEventListener("click", (e) => {
-
-            if(e.target === quoteModal){
-
-                quoteModal.classList.remove("active");
-
-            }
-
+            if(e.target === quoteModal) quoteModal.classList.remove("active");
         });
 
-        document.getElementById("quoteForm").addEventListener("submit", function(e){
+        document.addEventListener("keydown", (e) => {
+            if(e.key === "Escape" && quoteModal.classList.contains("active")){
+                quoteModal.classList.remove("active");
+            }
+        });
+
+        document.querySelectorAll(".quote-form input").forEach(input => {
+            input.addEventListener("input", () => input.classList.remove("is-invalid"));
+        });
+
+        quoteForm.addEventListener("submit", function(e){
 
             e.preventDefault();
 
-            const inputs = this.querySelectorAll("input");
+            const form = this;
+            const feedback = document.getElementById("formFeedback");
 
-            let mensaje = `
-Nombre: ${inputs[0].value}
+            let formValido = true;
+            form.querySelectorAll("input[required]").forEach(input => {
+                if(!input.value.trim()){
+                    input.classList.add("is-invalid");
+                    formValido = false;
+                }else{
+                    input.classList.remove("is-invalid");
+                }
+            });
 
-Telefono: ${inputs[1].value}
+            feedback.className = "form-feedback";
+            feedback.textContent = "";
 
-Asunto: ${inputs[2].value}
+            if(!formValido){
+                feedback.textContent = "Por favor completa todos los campos marcados antes de enviar.";
+                feedback.classList.add("show", "error");
+                return;
+            }
 
-Paquetes: ${inputs[3].value}
+            // Arma el correo igual que antes (mailto), solo que ahora con los datos por nombre de campo
+            const datos = new FormData(form);
+            const valor = (campo) => (datos.get(campo) || "").toString().trim();
 
-Kilogramos: ${inputs[4].value}
+            const mensaje =
+`Nombre: ${valor("nombre")}
+Telefono: ${valor("telefono")}
+Asunto: ${valor("asunto")}
+Paquetes: ${valor("paquetes")}
+Kilogramos: ${valor("kilogramos")}
 
 --- ORIGEN ---
-
-Direccion: ${inputs[5].value}
-
-Departamento: ${inputs[6].value}
-
-Zona: ${inputs[7].value}
+Direccion: ${valor("origen_direccion")}
+Departamento: ${valor("origen_departamento")}
+Zona: ${valor("origen_zona")}
 
 --- ENTREGA ---
-
-Direccion: ${inputs[8].value}
-
-Departamento: ${inputs[9].value}
-
-Zona: ${inputs[10].value}
-            `;
+Direccion: ${valor("entrega_direccion")}
+Departamento: ${valor("entrega_departamento")}
+Zona: ${valor("entrega_zona")}`;
 
             const correo = "traersa2026@gmail.com";
-
-            const asunto = encodeURIComponent(inputs[2].value);
-
+            const asunto = encodeURIComponent(valor("asunto"));
             const body = encodeURIComponent(mensaje);
 
-            window.location.href =
-            `mailto:${correo}?subject=${asunto}&body=${body}`;
+            feedback.className = "form-feedback show success";
+            feedback.textContent = "Abriendo tu cliente de correo para enviar la cotización...";
+
+            form.style.display = "none";
+            successCheck.classList.add("show");
+
+            window.location.href = `mailto:${correo}?subject=${asunto}&body=${body}`;
+
+            setTimeout(() => {
+                quoteModal.classList.remove("active");
+            }, 2200);
 
         });
 

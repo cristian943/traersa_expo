@@ -1,6 +1,5 @@
 <?php
-
-require '../backend/auth.php';
+require '../BackEnd/auth.php';
 
 if ($_SESSION['rol_id'] != 1) {
 
@@ -19,7 +18,7 @@ if ($_SESSION['rol_id'] != 1) {
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css\AEstilo.css" rel="stylesheet">
+    <link href="css/AEstilo.css" rel="stylesheet">
 
 </head>
 
@@ -31,6 +30,7 @@ if ($_SESSION['rol_id'] != 1) {
 
     <div class="overlay" id="overlay"></div>
 
+ 
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
@@ -66,21 +66,23 @@ if ($_SESSION['rol_id'] != 1) {
 
 
 
-        </div>
+          </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.php" class="menu-item">
+          
+                        <a href="Editar_categorias.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Servicios</span>
+                <span>Catalogo</span>
             </a>
+            
 
-        </div>
+         </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
@@ -93,7 +95,7 @@ if ($_SESSION['rol_id'] != 1) {
 
         <div class="sidebar-bottom">
 
-        <form action="../login/logout.php" method="POST">
+           <form action="../login/logout.php" method="POST">
 
     <button type="submit" class="btn-logout">
 
@@ -108,7 +110,6 @@ if ($_SESSION['rol_id'] != 1) {
         </div>
 
     </aside>
-
     <main class="main-content fade-up">
 
         <header class="header">
@@ -146,6 +147,7 @@ u.nombre,
 u.email,
 u.estado,
 u.rol_id,
+u.tipo_empleado,
 r.nombre AS rol
 FROM usuarios u
 INNER JOIN roles r
@@ -176,6 +178,7 @@ $resultado = $conn->query($sql);
                 <th>NOMBRE</th>
                 <th>EMAIL</th>
                 <th>ROL</th>
+                <th>TIPO</th>
                 <th>ESTADO</th>
                 <th>ACCIONES</th>
             </tr>
@@ -213,6 +216,32 @@ $resultado = $conn->query($sql);
                         <option value="3"
                             <?= $usuario['rol_id']==3 ? 'selected' : '' ?>>
                             Empleado
+                        </option>
+
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <select
+                        onchange="actualizarTipoEmpleado(this, <?= $usuario['id'] ?>)"
+                        class="role-select tipo-empleado-select"
+                        <?= $usuario['rol_id']==3 ? '' : 'disabled' ?>>
+
+                        <option value=""
+                            <?= empty($usuario['tipo_empleado']) ? 'selected' : '' ?>>
+                            -- Sin asignar --
+                        </option>
+
+                        <option value="oficinista"
+                            <?= $usuario['tipo_empleado']=='oficinista' ? 'selected' : '' ?>>
+                            Oficinista
+                        </option>
+
+                        <option value="transportista"
+                            <?= $usuario['tipo_empleado']=='transportista' ? 'selected' : '' ?>>
+                            Transportista
                         </option>
 
                     </select>
@@ -381,6 +410,12 @@ function actualizarRol(select,idUsuario){
 
 let nuevoRol = select.value;
 
+const filaTipo = select.closest("tr").querySelector(".tipo-empleado-select");
+if(filaTipo){
+    filaTipo.disabled = (nuevoRol !== "3");
+    if(nuevoRol !== "3") filaTipo.value = "";
+}
+
 fetch('actualizarRol.php',{
 
     method:'POST',
@@ -410,6 +445,31 @@ fetch('actualizarRol.php',{
 
 });
 
+
+}
+
+function actualizarTipoEmpleado(select, idUsuario){
+
+    const nuevoTipo = select.value;
+
+    fetch('actualizarTipoEmpleado.php', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+
+        body: 'id=' + idUsuario + '&tipo=' + encodeURIComponent(nuevoTipo)
+
+    })
+    .then(res => res.text())
+    .then(() => {
+        alert("Tipo de empleado actualizado correctamente");
+    })
+    .catch(() => {
+        alert("Error al actualizar el tipo de empleado");
+    });
 
 }
 

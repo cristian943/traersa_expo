@@ -7,21 +7,27 @@ if(isset($_GET['id'])){
     $id = intval($_GET['id']);
 
     // Obtener imagen
-    $consulta = $conn->query("SELECT imagen FROM envios WHERE id='$id'");
+    $consulta = $conn->query("SELECT imagen FROM categoria WHERE id='$id'");
 
     if($consulta->num_rows > 0){
 
         $fila = $consulta->fetch_assoc();
 
-        if(!empty($fila['imagen']) && file_exists("uploads/".$fila['imagen'])){
-            unlink("uploads/".$fila['imagen']);
+        // No borrar imagen por defecto
+        if(
+            !empty($fila['imagen']) &&
+            $fila['imagen'] != "default-package.png" &&
+            file_exists("../uploads/".$fila['imagen'])
+        ){
+            unlink("../uploads/".$fila['imagen']);
         }
 
-        $conn->query("DELETE FROM envios WHERE id='$id'");
+        // Eliminar registro
+        $conn->query("DELETE FROM categoria WHERE id='$id'");
     }
 }
 
-header("Location: Editar_Servicios.php");
+header("Location: Editar_categorias.php");
 exit;
 
 ?>

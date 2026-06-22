@@ -11,7 +11,7 @@ $precio_sin_iva = $_POST['precio'];
 $iva = $precio_sin_iva * 0.12;
 $precio = $precio_sin_iva + $iva;
 
-$sql = "UPDATE envios SET
+$sql = "UPDATE categoria SET
 titulo='$titulo',
 descripcion='$descripcion',
 paquetes='$paquetes',
@@ -21,7 +21,7 @@ precio='$precio'
 WHERE id='$id'";
 
 if($conn->query($sql)){
-    header("Location: Editar_Servicios.php");
+    header("Location: Editar_categorias.php");
 }else{
     echo $conn->error;
 }

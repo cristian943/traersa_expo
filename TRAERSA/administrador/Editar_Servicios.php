@@ -13,7 +13,7 @@ $resultado = $conn->query($sql);
 ?>
 <?php
 
-    require '../backend/auth.php';
+   require '../BackEnd/auth.php';
 
 if ($_SESSION['rol_id'] != 1) {
 
@@ -1248,7 +1248,6 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
 
 <body>
-
     <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -1297,10 +1296,16 @@ input[type="file"]::-webkit-file-upload-button:hover {
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.php" class="menu-item active">
+            <a href="Editar_Servicios.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
                 <span>Servicios</span>
             </a>
+            
+                        <a href="Editar_categorias.php" class="menu-item">
+                <i class="fa-solid fa-border-all"></i>
+                <span>Catalogo</span>
+            </a>
+            
 
         </div>
 
@@ -1308,7 +1313,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.php" class="menu-item ">
+            <a href="Editar_Usuario.php" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -1317,7 +1322,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
         <div class="sidebar-bottom">
 
-          <form action="../login/logout.php" method="POST">
+           <form action="../login/logout.php" method="POST">
 
     <button type="submit" class="btn-logout">
 
