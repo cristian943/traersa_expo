@@ -1,12 +1,17 @@
 <?php
-$servername = "localhost";
-$username = "u561983941_cristian123";
-$password = "Valoug456";
-$database = "u561983941_ga1_csgp";
+// Configuracion de los datos para conectar con la base de datos
+$servername = "localhost"; // Nombre del servidor, en este caso local
+$username = "u561983941_cristian123"; // Usuario de la base de datos
+$password = "Valoug456"; // Contrasena del usuario
+$database = "u561983941_ga1_csgp"; // Nombre de la base de datos a usar
 
-$conn = new mysqli($servername,$username,$password,$database);
+// Crear una nueva conexion usando la extension mysqli
+$conn = new mysqli($servername, $username, $password, $database);
 
-if ($conn->connect_error){
+// Verificar si la conexion fallo y mostrar un mensaje claro
+if ($conn->connect_error) {
     die("Error en la conexion a la base de datos: " . $conn->connect_error);
 }
+
+// Si llegamos aqui, la conexion se realizo correctamente
 ?>
