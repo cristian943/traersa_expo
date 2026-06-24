@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cliente | TRAERSA</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            background:#f5f5f5;
+            overflow-x:hidden;
+        }
+
+        .top-navbar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:80px;
+            background:white;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 25px;
+            box-shadow:0 2px 10px rgba(0,0,0,.08);
+            z-index:2000;
+        }
+
+        .nav-left,
+        .nav-right{
+            width:250px;
+            display:flex;
+            align-items:center;
+        }
+
+        .nav-right{
+            justify-content:flex-end;
+            gap:25px;
+        }
+
+        .nav-center{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .navbar-logo{
+            height:60px;
+            object-fit:contain;
+        }
+
+        .nav-icon{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            cursor:pointer;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .nav-icon:hover{
+            color:#c40000;
+        }
+
+        .nav-icon i{
+            font-size:20px;
+        }
+
+        .menu-toggle{
+            width:50px;
+            height:50px;
+            border:none;
+            border-radius:50%;
+            background:#c40000;
+            color:white;
+            font-size:20px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .menu-toggle:hover{
+            transform:scale(1.05);
+        }
+
+        .sidebar{
+            position:fixed;
+            top:80px;
+            left:0;
+            width:280px;
+            height:calc(100vh - 80px);
+            background:linear-gradient(180deg,#c40000,#6e0000);
+            padding:25px;
+            color:white;
+            overflow-y:auto;
+            transition:.4s ease;
+            z-index:1500;
+        }
+
+        .sidebar.closed{
+            transform:translateX(-100%);
+        }
+
+        .menu-section{
+            margin-bottom:35px;
+        }
+
+        .menu-title{
+            margin-bottom:15px;
+            font-size:14px;
+            font-weight:bold;
+            opacity:.7;
+            letter-spacing:1px;
+        }
+
+        .menu-item{
+            width:100%;
+            min-height:50px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            padding:12px 18px;
+            margin-bottom:10px;
+            border-radius:14px;
+            text-decoration:none;
+            color:white;
+            transition:.3s;
+        }
+
+        .menu-item:hover{
+            background:rgba(255,255,255,.12);
+            transform:translateX(5px);
+        }
+
+        .menu-item.active{
+            background:white;
+            color:#c40000;
+        }
+
+        .sidebar-bottom{
+            margin-top:40px;
+        }
+
+        .btn-logout{
+            width:100%;
+            height:50px;
+            border:none;
+            border-radius:14px;
+            background:white;
+            color:#c40000;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-logout:hover{
+            transform:scale(1.03);
+        }
+
+        .main-content{
+            margin-top:100px;
+            margin-left:280px;
+            padding:30px;
+            transition:.4s;
+            width:calc(100% - 280px);
+        }
+
+        .main-content.full{
+            margin-left:0;
+            width:100%;
+        }
+
+        .hero-card{
+            background:white;
+            border-radius:25px;
+            padding:35px;
+            box-shadow:0 4px 18px rgba(0,0,0,.08);
+            margin-bottom:35px;
+            text-align:center;
+        }
+
+        .hero-card h1{
+            font-size:45px;
+            margin-bottom:10px;
+            word-wrap:break-word;
+        }
+
+        .hero-card h1 span{
+            color:#c40000;
+        }
+
+        .hero-card p{
+            color:#666;
+            margin-bottom:30px;
+        }
+
+        .section-title{
+            font-size:35px;
+            margin-bottom:25px;
+            text-align:center;
+        }
+
+        .services-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:25px;
+            align-items:stretch;
+        }
+
+        .service-card{
+            background:white;
+            border-radius:22px;
+            overflow:hidden;
+            box-shadow:0 5px 18px rgba(0,0,0,.08);
+            transition:.3s;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .service-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .service-card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .service-content{
+            padding:20px;
+            display:flex;
+            flex-direction:column;
+            flex:1;
+        }
+
+        .service-content h3{
+            font-size:24px;
+            margin-bottom:15px;
+            text-align:center;
+        }
+
+        .service-info{
+            color:#666;
+            line-height:30px;
+            margin-bottom:20px;
+            flex:1;
+        }
+
+        .price{
+            font-size:32px;
+            color:#c40000;
+            font-weight:bold;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        .service-buttons{
+            display:flex;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary{
+            flex:1;
+            min-width:120px;
+            height:45px;
+            border:none;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:.3s;
+        }
+
+        .btn-primary{
+            background:#c40000;
+            color:white;
+        }
+
+        .btn-secondary{
+            background:#f3f3f3;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover{
+            transform:scale(1.02);
+        }
+
+        .overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.5);
+            z-index:1200;
+            opacity:0;
+            visibility:hidden;
+            transition:.3s;
+        }
+
+        .overlay.active{
+            opacity:1;
+            visibility:visible;
+        }
+
+        .footer{
+            margin-top:60px;
+            background:#111;
+            color:white;
+            padding:50px 30px 20px;
+        }
+
+        .footer-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:35px;
+            margin-bottom:35px;
+        }
+
+        .footer-box h4{
+            margin-bottom:20px;
+            color:#ff2b2b;
+            font-size:20px;
+        }
+
+        .footer-box ul{
+            list-style:none;
+        }
+
+        .footer-box ul li{
+            margin-bottom:12px;
+            color:#ccc;
+        }
+
+        .social{
+            display:flex;
+            gap:15px;
+            margin-top:15px;
+            flex-wrap:wrap;
+        }
+
+        .social i{
+            width:45px;
+            height:45px;
+            border-radius:50%;
+            background:#222;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+            transition:.3s;
+            font-size:18px;
+        }
+
+        .social i:hover{
+            background:#c40000;
+            transform:translateY(-5px);
+        }
+
+        .contact{
+            border-top:1px solid rgba(255,255,255,.1);
+            padding-top:20px;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:center;
+            gap:30px;
+            color:#ccc;
+            text-align:center;
+        }
+
+        .contact div{
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+
+        .contact i{
+            color:#ff2b2b;
+        }
+
+        .modal{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.6);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:3000;
+            opacity:0;
+            visibility:hidden;
+            transition:.3s;
+            padding:20px;
+        }
+
+        .modal.active{
+            opacity:1;
+            visibility:visible;
+        }
+
+        .modal-content{
+            background:white;
+            width:100%;
+            max-width:700px;
+            border-radius:25px;
+            position:relative;
+            overflow:hidden;
+            max-height:90vh;
+            overflow-y:auto;
+            animation:modalShow .3s ease;
+        }
+
+        .quote-content{
+            max-width:650px;
+        }
+
+        .modal-content img{
+            width:100%;
+            height:300px;
+            object-fit:cover;
+        }
+
+        .modal-body{
+            padding:30px;
+        }
+
+        .modal-body h2{
+            font-size:32px;
+            margin-bottom:15px;
+            color:#c40000;
+            text-align:center;
+        }
+
+        .modal-body p{
+            color:#555;
+            line-height:28px;
+            margin-bottom:20px;
+        }
+
+        .modal-extra{
+            background:#f5f5f5;
+            padding:20px;
+            border-radius:15px;
+            line-height:30px;
+        }
+
+        .quote-form{
+            display:flex;
+            flex-direction:column;
+            gap:15px;
+            padding-bottom:20px;
+        }
+
+        .quote-form input{
+            min-height:55px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            padding:15px;
+            outline:none;
+            font-size:15px;
+            width:100%;
+        }
+
+        .quote-form h3{
+            margin-top:10px;
+            color:#c40000;
+        }
+
+        .btn-send{
+            min-height:55px;
+            border:none;
+            border-radius:14px;
+            background:#c40000;
+            color:white;
+            font-weight:bold;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-send:hover{
+            transform:scale(1.02);
+        }
+
+        .close-modal{
+            position:absolute;
+            top:15px;
+            right:15px;
+            width:45px;
+            height:45px;
+            border:none;
+            border-radius:50%;
+            background:#c40000;
+            color:white;
+            cursor:pointer;
+            font-size:18px;
+            z-index:10;
+        }
+
+        @keyframes modalShow{
+
+            from{
+                transform:translateY(30px);
+                opacity:0;
+            }
+
+            to{
+                transform:translateY(0);
+                opacity:1;
+            }
+
+        }
+
+        @media(max-width:900px){
+
+            .sidebar{
+                transform:translateX(-100%);
+            }
+
+            .sidebar.mobile-active{
+                transform:translateX(0);
+            }
+
+            .main-content{
+                margin-left:0;
+                width:100%;
+                padding:20px;
+            }
+
+            .hero-card{
+                padding:25px;
+            }
+
+            .hero-card h1{
+                font-size:32px;
+            }
+
+            .section-title{
+                font-size:28px;
+            }
+
+            .nav-right{
+                width:auto;
+                gap:15px;
+            }
+
+            .nav-icon span{
+                display:none;
+            }
+
+            .modal-content{
+                max-height:95vh;
+            }
+
+            .modal-body{
+                padding:20px;
+            }
+
+            .modal-body h2{
+                font-size:25px;
+            }
+
+        }
+
+        @media(max-width:600px){
+
+            .top-navbar{
+                padding:0 15px;
+            }
+
+            .nav-left{
+                width:auto;
+            }
+
+            .navbar-logo{
+                height:45px;
+            }
+
+            .hero-card h1{
+                font-size:26px;
+            }
+
+            .service-buttons{
+                flex-direction:column;
+            }
+
+            .btn-primary,
+            .btn-secondary{
+                width:100%;
+            }
+
+            .contact{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .contact div{
+                justify-content:center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="top-navbar">
+
+        <nav class="nav-left">
+
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </nav>
+
+        <div class="nav-center">
+
+            <a href="cliente.html">
+                <img src="imagenes/logo.png" class="navbar-logo" alt="Logo TRAERSA">
+            </a>
+
+        </div>
+
+        <nav class="nav-right">
+
+            <div class="nav-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Carrito</span>
+            </div>
+
+            <div class="nav-icon">
+                <i class="fa-regular fa-user"></i>
+                <span>Mi cuenta</span>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+
+        <section class="menu-section">
+
+            <div class="menu-title">ENVÍOS</div>
+
+            <a href="internacional_cliente.html" class="menu-item">
+                <i class="fa-solid fa-plane"></i>
+                <span>Internacional</span>
+            </a>
+
+            <a href="nacional_cliente.html" class="menu-item active">
+                <i class="fa-solid fa-truck"></i>
+                <span>Nacional</span>
+            </a>
+
+            <a href="departamento_cliente.html" class="menu-item">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>Departamentos</span>
+            </a>
+
+            <a href="ciudad_cliente.html" class="menu-item">
+                <i class="fa-solid fa-city"></i>
+                <span>Ciudad</span>
+            </a>
+
+        </section>
+
+        <section class="menu-section">
+
+            <div class="menu-title">GESTIÓN</div>
+
+            <a href="cotizaciones_cliente.html" class="menu-item">
+                <i class="fa-solid fa-map-marker-alt"></i>
+                <span>Rastrear</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Completados</span>
+            </a>
+
+        </section>
+
+        <div class="sidebar-bottom">
+
+            <button href="../login/logout.php" class="btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                Cerrar sesión
+            </button>
+
+        </div>
+
+    </aside>
+
+    <main class="main-content" id="mainContent">
+
+        <section class="hero-card">
+
+            <h1>
+                Cotiza tu <span>envío</span>
+            </h1>
+
+            <p>
+                Encuentra el mejor transporte para tus paquetes.
+            </p>
+
+        </section>
+
+        <section>
+
+            <h2 class="section-title">
+                Servicios disponibles
+            </h2>
+
+            <div class="services-grid">
+
+               <?php
+include("conexion.php");
+
+$resultado = $conexion->query("SELECT * FROM envios");
+
+while($fila = $resultado->fetch_assoc()){
+?>
+<article class="service-card">
+
+ <img src="../administrador/uploads/<?php echo $fila['imagen']; ?>" alt="Servicio">
+    <div class="service-content">
+
+        <h3><?php echo $fila['titulo']; ?></h3>
+
+        <div class="service-info">
+            <p>• <?php echo $fila['paquetes']; ?> paquetes</p>
+            <p>• <?php echo $fila['kilogramos']; ?> Kg máximo</p>
+            <p>• <?php echo $fila['tipo_entrega']; ?></p>
+        </div>
+
+        <div class="price">
+            Q<?php echo number_format($fila['precio'],2); ?>
+        </div>
+
+        <div class="service-buttons">
+
+            <button class="btn-secondary btn-view"
+                data-title="<?php echo $fila['titulo']; ?>"
+                data-image="uploads/<?php echo $fila['imagen']; ?>"
+                data-description="<?php echo $fila['descripcion']; ?>"
+                data-extra="
+                • <?php echo $fila['paquetes']; ?> paquetes<br>
+                • <?php echo $fila['kilogramos']; ?> Kg<br>
+                • <?php echo $fila['tipo_entrega']; ?><br>
+                • Precio Q<?php echo number_format($fila['precio'],2); ?>">
+                Ver
+            </button>
+
+            <button class="btn-primary btn-cotizar"
+                data-servicio="<?php echo $fila['titulo']; ?>">
+                Cotizar
+            </button>
+
+        </div>
+
+    </div>
+
+</article>
+<?php
+}
+?>
+
+                
+
+           
+
+                
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL SERVICIO -->
+
+    <div class="modal" id="serviceModal">
+
+        <div class="modal-content">
+
+            <button class="close-modal" id="closeModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <img id="modalImage" src="" alt="Servicio">
+
+            <div class="modal-body">
+
+                <h2 id="modalTitle"></h2>
+
+                <p id="modalDescription"></p>
+
+                <div class="modal-extra" id="modalExtra"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL COTIZAR -->
+
+    <div class="modal" id="quoteModal">
+
+        <div class="modal-content quote-content">
+
+            <button class="close-modal" id="closeQuoteModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-body">
+
+                <h2 id="quoteTitle">
+                    Cotizar servicio
+                </h2>
+
+                <form id="quoteForm" class="quote-form">
+
+                    <input type="text" placeholder="Nombre completo" required>
+
+                    <input type="tel" placeholder="Teléfono" required>
+
+                    <input type="text" id="serviceSubject" readonly>
+
+                    <input type="number" placeholder="Número de paquetes" required>
+
+                    <input type="number" placeholder="Kilogramos" required>
+
+                    <h3>Dirección de origen</h3>
+
+                    <input type="text" placeholder="Dirección origen" required>
+
+                    <input type="text" placeholder="Departamento origen" required>
+
+                    <input type="text" placeholder="Zona origen" required>
+
+                    <h3>Dirección de entrega</h3>
+
+                    <input type="text" placeholder="Dirección entrega" required>
+
+                    <input type="text" placeholder="Departamento entrega" required>
+
+                    <input type="text" placeholder="Zona entrega" required>
+
+                    <button type="submit" class="btn-send">
+                        Enviar correo
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <section class="footer-box">
+
+                <h4>Síguenos en redes sociales</h4>
+
+                <div class="social">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-linkedin"></i>
+                </div>
+
+            </section>
+
+            <section class="footer-box">
+
+                <h4>Servicios</h4>
+
+                <ul>
+                    <li>Gestión Aduanal</li>
+                    <li>Transporte Terrestre</li>
+                    <li>Transporte Marítimo</li>
+                    <li>Almacenaje</li>
+                </ul>
+
+            </section>
+
+            <section class="footer-box">
+
+                <h4>Grupo TRAERSA</h4>
+
+                <ul>
+                    <li>Únete a nuestro equipo</li>
+                    <li>Sobre nosotros</li>
+                    <li>Deseas ser proveedor</li>
+                </ul>
+
+            </section>
+
+            <section class="footer-box">
+
+                <h4>Nuestros valores</h4>
+
+                <ul>
+                    <li>Sostenibilidad</li>
+                    <li>Garantía total</li>
+                    <li>Responsabilidad</li>
+                </ul>
+
+            </section>
+
+        </div>
+
+        <div class="contact">
+
+            <div>
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>+502 78562384</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-envelope"></i>
+                <span>traersa2026@gmail.com</span>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>31 av 2-48 zona 6 de mixco</span>
+            </div>
+
+        </div>
+
+    </footer>
+
+    <script>
+
+        const sidebar = document.getElementById("sidebar");
+        const menuToggle = document.getElementById("menuToggle");
+        const overlay = document.getElementById("overlay");
+        const mainContent = document.getElementById("mainContent");
+
+        window.addEventListener("load", () => {
+
+            if(window.innerWidth > 900){
+
+                sidebar.classList.add("closed");
+                mainContent.classList.add("full");
+
+            }
+
+        });
+
+        menuToggle.addEventListener("click", () => {
+
+            if(window.innerWidth <= 900){
+
+                sidebar.classList.toggle("mobile-active");
+                overlay.classList.toggle("active");
+
+            }else{
+
+                sidebar.classList.toggle("closed");
+                mainContent.classList.toggle("full");
+
+            }
+
+        });
+
+        overlay.addEventListener("click", () => {
+
+            sidebar.classList.remove("mobile-active");
+            overlay.classList.remove("active");
+
+        });
+
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+
+            item.addEventListener("click", () => {
+
+                menuItems.forEach(el => {
+                    el.classList.remove("active");
+                });
+
+                item.classList.add("active");
+
+            });
+
+        });
+
+        const modal = document.getElementById("serviceModal");
+        const closeModal = document.getElementById("closeModal");
+
+        const modalTitle = document.getElementById("modalTitle");
+        const modalImage = document.getElementById("modalImage");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalExtra = document.getElementById("modalExtra");
+
+        const viewButtons = document.querySelectorAll(".btn-view");
+
+        viewButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                modalTitle.textContent = button.dataset.title;
+                modalImage.src = button.dataset.image;
+                modalDescription.textContent = button.dataset.description;
+                modalExtra.innerHTML = button.dataset.extra;
+
+                modal.classList.add("active");
+
+            });
+
+        });
+
+        closeModal.addEventListener("click", () => {
+
+            modal.classList.remove("active");
+
+        });
+
+        modal.addEventListener("click", (e) => {
+
+            if(e.target === modal){
+
+                modal.classList.remove("active");
+
+            }
+
+        });
+
+        const quoteModal = document.getElementById("quoteModal");
+        const closeQuoteModal = document.getElementById("closeQuoteModal");
+        const serviceSubject = document.getElementById("serviceSubject");
+
+        const quoteButtons = document.querySelectorAll(".btn-cotizar");
+
+        quoteButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const servicio = button.dataset.servicio;
+
+                serviceSubject.value = "Cotización - " + servicio;
+
+                quoteModal.classList.add("active");
+
+            });
+
+        });
+
+        closeQuoteModal.addEventListener("click", () => {
+
+            quoteModal.classList.remove("active");
+
+        });
+
+        quoteModal.addEventListener("click", (e) => {
+
+            if(e.target === quoteModal){
+
+                quoteModal.classList.remove("active");
+
+            }
+
+        });
+
+        document.getElementById("quoteForm").addEventListener("submit", function(e){
+
+            e.preventDefault();
+
+            const inputs = this.querySelectorAll("input");
+
+            let mensaje = `
+Nombre: ${inputs[0].value}
+
+Telefono: ${inputs[1].value}
+
+Asunto: ${inputs[2].value}
+
+Paquetes: ${inputs[3].value}
+
+Kilogramos: ${inputs[4].value}
+
+--- ORIGEN ---
+
+Direccion: ${inputs[5].value}
+
+Departamento: ${inputs[6].value}
+
+Zona: ${inputs[7].value}
+
+--- ENTREGA ---
+
+Direccion: ${inputs[8].value}
+
+Departamento: ${inputs[9].value}
+
+Zona: ${inputs[10].value}
+            `;
+
+            const correo = "traersa2026@gmail.com";
+
+            const asunto = encodeURIComponent(inputs[2].value);
+
+            const body = encodeURIComponent(mensaje);
+
+            window.location.href =
+            `mailto:${correo}?subject=${asunto}&body=${body}`;
+
+        });
+
+    </script>
+
+</body>
+
+</html>

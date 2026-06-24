@@ -1,6 +1,6 @@
 <?php
 
-require '../backend/auth.php';
+require '../BackEnd/auth.php';
 
 if ($_SESSION['rol_id'] != 1) {
 
@@ -8,6 +8,22 @@ if ($_SESSION['rol_id'] != 1) {
     exit();
 
 }
+
+require '../conexion.php';
+
+// Envíos entregados (historial de servicios completados)
+$sql = "SELECT e.*, c.titulo AS servicio_titulo, c.tipo_entrega,
+               (SELECT s.foto_evidencia FROM seguimiento_envio s
+                WHERE s.envio_id = e.id_envio AND s.estado = 'Entregado'
+                ORDER BY s.fecha DESC LIMIT 1) AS foto_evidencia,
+               (SELECT s.fecha FROM seguimiento_envio s
+                WHERE s.envio_id = e.id_envio AND s.estado = 'Entregado'
+                ORDER BY s.fecha DESC LIMIT 1) AS fecha_entrega
+        FROM envios e
+        LEFT JOIN categoria c ON c.id = e.servicio_id
+        WHERE e.estado = 'Entregado'
+        ORDER BY e.fecha_solicitud DESC";
+$resultado = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +35,7 @@ if ($_SESSION['rol_id'] != 1) {
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css\AEstilo.css" rel="stylesheet">
+    <link href="css/AEstilo.css" rel="stylesheet">
 
 </head>
 
@@ -31,6 +47,7 @@ if ($_SESSION['rol_id'] != 1) {
 
     <div class="overlay" id="overlay"></div>
 
+  
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
@@ -49,7 +66,7 @@ if ($_SESSION['rol_id'] != 1) {
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.php" class="menu-item ">
+            <a href="Cotizaciones_admin.php" class="menu-item">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
@@ -66,25 +83,27 @@ if ($_SESSION['rol_id'] != 1) {
 
 
 
-        </div>
+          </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.php" class="menu-item">
+          
+                        <a href="Editar_categorias.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Servicios</span>
+                <span>Catalogo</span>
             </a>
+            
 
-        </div>
+         </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.php" class="menu-item ">
+            <a href="Editar_Usuario.php" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -104,6 +123,7 @@ if ($_SESSION['rol_id'] != 1) {
     </button>
 
 </form>
+
         </div>
 
     </aside>
@@ -114,7 +134,7 @@ if ($_SESSION['rol_id'] != 1) {
 
             <div class="header-title">
                 <h2>Bienvenido Administrador</h2>
-
+                <p>Historial de envíos entregados correctamente.</p>
             </div>
 
             <div class="user-profile">
@@ -131,22 +151,26 @@ if ($_SESSION['rol_id'] != 1) {
 
         </header>
 
-       
-
-
 <div class="table-card completados-card">
 
     <div class="table-header services-header">
 
         <h3>SERVICIOS COMPLETADOS</h3>
 
-        <button class="btn-view">
-            VER TODOS
-        </button>
+        <span class="unassigned-pill"><?php echo $resultado->num_rows; ?> entregado<?php echo $resultado->num_rows == 1 ? '' : 's'; ?></span>
 
     </div>
 
     <div class="table-content">
+
+        <?php if ($resultado->num_rows === 0): ?>
+
+            <div class="empty-row">
+                <i class="fa-solid fa-box-open"></i><br>
+                Todavía no hay envíos marcados como entregados. Aparecerán aquí en cuanto se completen desde "En ejecución".
+            </div>
+
+        <?php else: ?>
 
         <table class="completed-table">
 
@@ -155,75 +179,59 @@ if ($_SESSION['rol_id'] != 1) {
                 <tr>
                     <th>GUÍA</th>
                     <th>CLIENTE</th>
-                    <th>DESTINO</th>
+                    <th>ORIGEN → DESTINO</th>
                     <th>TIPO</th>
-                    <th>FECHA</th>
+                    <th>COSTO</th>
+                    <th>FECHA SOLICITUD</th>
                     <th>ESTADO</th>
+                    <th>ACCIONES</th>
                 </tr>
 
             </thead>
 
             <tbody>
 
+                <?php while ($fila = $resultado->fetch_assoc()): ?>
+
                 <tr>
-                    <td>TR001</td>
-                    <td>Juan Pérez</td>
-                    <td>Ciudad de Guatemala</td>
-                    <td>Express</td>
-                    <td>18/05/2026</td>
+                    <td>#<?php echo htmlspecialchars($fila['numero_guia'] ?: $fila['id_envio']); ?></td>
+                    <td><?php echo htmlspecialchars($fila['nombre_cliente'] ?: 'Sin nombre'); ?></td>
+                    <td><?php echo htmlspecialchars(($fila['origen'] ?: '—') . ' → ' . ($fila['destino'] ?: '—')); ?></td>
+                    <td><?php echo htmlspecialchars($fila['tipo_entrega'] ?: '—'); ?></td>
+                    <td>Q<?php echo number_format((float) $fila['costo'], 2); ?></td>
+                    <td><?php echo $fila['fecha_solicitud'] ? date('d/m/Y', strtotime($fila['fecha_solicitud'])) : '—'; ?></td>
                     <td>
                         <span class="table-status completed">
                             COMPLETADO
                         </span>
+                    </td>
+                    <td>
+                        <button class="row-icon-btn" title="Ver evidencia de entrega" onclick='verEvidencia(<?php echo json_encode([
+                            "guia" => $fila["numero_guia"] ?: $fila["id_envio"],
+                            "cliente" => $fila["nombre_cliente"] ?: "Sin nombre",
+                            "foto" => $fila["foto_evidencia"] ? "../uploads/" . $fila["foto_evidencia"] : null,
+                            "fecha_entrega" => $fila["fecha_entrega"] ? date("d/m/Y H:i", strtotime($fila["fecha_entrega"])) : null,
+                            "comentario" => $fila["comentario_cliente"] ?? null,
+                        ], JSON_UNESCAPED_UNICODE | JSON_HEX_APOS); ?>)'>
+                            <i class="fa-solid fa-image"></i>
+                        </button>
                     </td>
                 </tr>
 
-                <tr>
-                    <td>TR002</td>
-                    <td>María López</td>
-                    <td>Quetzaltenango</td>
-                    <td>Terrestre</td>
-                    <td>17/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
-                            COMPLETADO
-                        </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>TR003</td>
-                    <td>Carlos Méndez</td>
-                    <td>Puerto Barrios</td>
-                    <td>Marítimo</td>
-                    <td>15/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
-                            COMPLETADO
-                        </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>TR004</td>
-                    <td>Ana Rodríguez</td>
-                    <td>Escuintla</td>
-                    <td>Aéreo</td>
-                    <td>14/05/2026</td>
-                    <td>
-                        <span class="table-status completed">
-                            COMPLETADO
-                        </span>
-                    </td>
-                </tr>
+                <?php endwhile; ?>
 
             </tbody>
 
         </table>
 
+        <?php endif; ?>
+
     </div>
 
 </div>
+
+<!-- FOOTER -->
+
         <footer class="footer">
 
             <div class="footer-container">
@@ -346,6 +354,52 @@ if ($_SESSION['rol_id'] != 1) {
 
             });
 
+        });
+
+    </script>
+
+    <div class="modal" id="evidenciaModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeEvidenciaModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-body" id="evidenciaModalBody"></div>
+        </div>
+    </div>
+
+    <script>
+
+        const evidenciaModal = document.getElementById("evidenciaModal");
+        const evidenciaModalBody = document.getElementById("evidenciaModalBody");
+        const closeEvidenciaModal = document.getElementById("closeEvidenciaModal");
+
+        function verEvidencia(envio){
+
+            let fotoHtml = '<p class="modal-sub">Este envío no tiene foto de evidencia registrada.</p>';
+            if(envio.foto){
+                fotoHtml = `<img src="${envio.foto}" class="proof-photo" alt="Evidencia de entrega">`;
+            }
+
+            const comentarioHtml = envio.comentario
+                ? `<div class="envio-detail-item full" style="margin-top:14px;">
+                       <span>Comentario del cliente</span>
+                       <strong>${envio.comentario}</strong>
+                   </div>`
+                : `<p class="modal-sub" style="margin-top:14px;">El cliente todavía no dejó ningún comentario.</p>`;
+
+            evidenciaModalBody.innerHTML = `
+                <h2>#${envio.guia}</h2>
+                <p class="modal-sub">${envio.cliente}${envio.fecha_entrega ? ' · Entregado el ' + envio.fecha_entrega : ''}</p>
+                ${fotoHtml}
+                ${comentarioHtml}
+            `;
+
+            evidenciaModal.classList.add("active");
+        }
+
+        closeEvidenciaModal.addEventListener("click", () => evidenciaModal.classList.remove("active"));
+        evidenciaModal.addEventListener("click", (e) => {
+            if(e.target === evidenciaModal) evidenciaModal.classList.remove("active");
         });
 
     </script>

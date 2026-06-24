@@ -1,6 +1,6 @@
 <?php
 
-require '../backend/auth.php';
+require '../BackEnd/auth.php';
 
 if ($_SESSION['rol_id'] != 1) {
 
@@ -8,6 +8,16 @@ if ($_SESSION['rol_id'] != 1) {
     exit();
 
 }
+
+require '../conexion.php';
+
+// Envíos entregados (historial de servicios completados)
+$sql = "SELECT e.*, c.titulo AS servicio_titulo, c.tipo_entrega
+        FROM envios e
+        LEFT JOIN categoria c ON c.id = e.servicio_id
+        WHERE e.estado = 'Entregado'
+        ORDER BY e.fecha_solicitud DESC";
+$resultado = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +29,7 @@ if ($_SESSION['rol_id'] != 1) {
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css\AEstilo.css" rel="stylesheet">
+    <link href="css/AEstilo.css" rel="stylesheet">
 
 </head>
 
@@ -31,6 +41,7 @@ if ($_SESSION['rol_id'] != 1) {
 
     <div class="overlay" id="overlay"></div>
 
+  
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
@@ -49,7 +60,7 @@ if ($_SESSION['rol_id'] != 1) {
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.php" class="menu-item ">
+            <a href="Cotizaciones_admin.php" class="menu-item">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
@@ -59,28 +70,30 @@ if ($_SESSION['rol_id'] != 1) {
                 <span>En ejecución</span>
             </a>
 
-            <a href="Completados_admin.php" class="menu-item">
+            <a href="Completados_admin.php" class="menu-item active">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
 
 
 
-        </div>
+          </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.php" class="menu-item">
+          
+                        <a href="Editar_categorias.php" class="menu-item">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Servicios</span>
+                <span>Catalogo</span>
             </a>
+            
 
-        </div>
+         </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
@@ -115,7 +128,7 @@ if ($_SESSION['rol_id'] != 1) {
 
             <div class="header-title">
                 <h2>Bienvenido Administrador</h2>
-
+                <p>Historial de envíos entregados correctamente.</p>
             </div>
 
             <div class="user-profile">
@@ -132,134 +145,75 @@ if ($_SESSION['rol_id'] != 1) {
 
         </header>
 
-      
+<div class="table-card completados-card">
 
+    <div class="table-header services-header">
 
-        <!-- STATS -->
+        <h3>SERVICIOS COMPLETADOS</h3>
 
-        <div class="stats-grid">
+        <span class="unassigned-pill"><?php echo $resultado->num_rows; ?> entregado<?php echo $resultado->num_rows == 1 ? '' : 's'; ?></span>
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-tag"></i>
-                </div>
+    </div>
 
-                <div class="stat-info">
-                    <small>Servicios</small>
-                    <h3>0</h3>
-                    <p>Total registrados</p>
-                </div>
+    <div class="table-content">
+
+        <?php if ($resultado->num_rows === 0): ?>
+
+            <div class="empty-row">
+                <i class="fa-solid fa-box-open"></i><br>
+                Todavía no hay envíos marcados como entregados. Aparecerán aquí en cuanto se completen desde "En ejecución".
             </div>
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-truck"></i>
-                </div>
+        <?php else: ?>
 
-                <div class="stat-info">
-                    <small>En ejecución</small>
-                    <h3>0</h3>
-                    <p>Actualmente activos</p>
-                </div>
-            </div>
+        <table class="completed-table">
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-shield"></i>
-                </div>
+            <thead>
 
-                <div class="stat-info">
-                    <small>Completados</small>
-                    <h3>0</h3>
-                    <p>Servicios finalizados</p>
-                </div>
-            </div>
+                <tr>
+                    <th>GUÍA</th>
+                    <th>CLIENTE</th>
+                    <th>ORIGEN → DESTINO</th>
+                    <th>TIPO</th>
+                    <th>COSTO</th>
+                    <th>FECHA SOLICITUD</th>
+                    <th>ESTADO</th>
+                </tr>
 
-            <div class="stat-card">
-                <div class="stat-icon">
-                    <i class="fa-solid fa-users"></i>
-                </div>
+            </thead>
 
-                <div class="stat-info">
-                    <small>Clientes</small>
-                    <h3>0</h3>
-                    <p>Total registrados</p>
-                </div>
-            </div>
+            <tbody>
 
-        </div>
+                <?php while ($fila = $resultado->fetch_assoc()): ?>
 
-        
-            <div class="table-card">
-
-                <div class="table-header services-header">
-
-                    <h3>SERVICIOS RECIENTES</h3>
-
-                    <button class="btn-view">
-                        VER TODOS
-                    </button>
-
-                </div>
-
-                <div class="table-content">
-
-                    <div class="table-row">
-
-                        <span>ID</span>
-
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
-
-                        <button class="status-btn running">
-                            EJECUCIÓN
-                        </button>
-
-                        <small>XX/XX/XXXX</small>
-
-                    </div>
-
-                    <div class="table-row">
-
-                        <span>ID</span>
-
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
-
-                        <button class="status-btn completed">
+                <tr>
+                    <td>#<?php echo htmlspecialchars($fila['numero_guia'] ?: $fila['id_envio']); ?></td>
+                    <td><?php echo htmlspecialchars($fila['nombre_cliente'] ?: 'Sin nombre'); ?></td>
+                    <td><?php echo htmlspecialchars(($fila['origen'] ?: '—') . ' → ' . ($fila['destino'] ?: '—')); ?></td>
+                    <td><?php echo htmlspecialchars($fila['tipo_entrega'] ?: '—'); ?></td>
+                    <td>Q<?php echo number_format((float) $fila['costo'], 2); ?></td>
+                    <td><?php echo $fila['fecha_solicitud'] ? date('d/m/Y', strtotime($fila['fecha_solicitud'])) : '—'; ?></td>
+                    <td>
+                        <span class="table-status completed">
                             COMPLETADO
-                        </button>
+                        </span>
+                    </td>
+                </tr>
 
-                        <small>XX/XX/XXXX</small>
+                <?php endwhile; ?>
 
-                    </div>
+            </tbody>
 
-                    <div class="table-row">
+        </table>
 
-                        <span>ID</span>
+        <?php endif; ?>
 
-                        <div>
-                            <strong>SERVICIO</strong>
-                            <p>CLIENTE XXXXXXXX</p>
-                        </div>
+    </div>
 
-                        <button class="status-btn completed">
-                            COMPLETADO
-                        </button>
+</div>
 
-                        <small>XX/XX/XXXX</small>
+<!-- FOOTER -->
 
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
         <footer class="footer">
 
             <div class="footer-container">

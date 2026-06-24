@@ -3,413 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRAERSA · Transporte y Logística</title>
+<meta name="description" content="TRAERSA — Transporte seguro y confiable., transporte terrestre, almacenaje y proyectos especiales en Guatemala.">
 
-<title>TRAERSA</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-
-
-
-
+<!-- Fuentes y estilos principales -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@500;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<link rel="stylesheet" href="css\styles.css">
-<style>
-    
-
-.modal-img{
-    width:100%;
-    height:250px;
-    object-fit:cover;
-    border-radius:15px 15px 0 0;
-}
-   
-.card-text {
-    font-size: 16px;
-    margin: 15px 0;
-    color: #555;
-    line-height: 1.4;
-}
-
-.btn-ver-mas {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 5px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-ver-mas:hover {
-    background: #b30000;
-}
-
-
-.modal {
-    display: none; 
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 450px;
-    text-align: center;
-    position: relative;
-    animation: fadeIn 0.4s;
-}
-
-.close-modal {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-    color: #999;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-</style>
+<link rel="stylesheet" href="css/styless.css">
 
 </head>
 
 <body>
 
+<a class="skip-link" href="#info">Saltar al contenido</a>
 
-
-<header>
+<!-- Encabezado principal con logo, menu y boton de acceso -->
+<header class="site-header" id="siteHeader">
 
     <div class="logo">
-             <img src="imagenes/logo.png" alt="TRAERSA">
+        <img src="css/imagenes/TRAERSA.png" alt="TRAERSA">
     </div>
 
-    <nav>
+    <nav class="main-nav" id="mainNav">
         <ul>
             <li><a href="index.html">Inicio</a></li>
-           
+            <li><a href="#info">Servicios</a></li>
             <li><a href="mision.html">Misión</a></li>
             <li><a href="vision.html">Visión</a></li>
-            
         </ul>
     </nav>
 
-<div class="login">
-    <i class="fa-solid fa-circle-user"></i>
-    <a href="../login/Inicio_sesion.php" class="btn-login">Iniciar Sesión</a>
-</div>
+    <div class="header-actions">
+        <div class="login">
+            <i class="fa-solid fa-circle-user"></i>
+            <a href="../login/Inicio_sesion.php" class="btn-login">Iniciar Sesión</a>
+        </div>
 
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mainNav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 
 </header>
 
 
+<!-- Seccion del slider principal con imagenes y mensaje de bienvenida -->
+<section class="hero" id="hero">
 
-<section class="slider">
+    <div class="hero-track" id="heroTrack">
 
-    <div class="slides">
+        <div class="hero-slide is-active" style="--bg:url('imagenes/carru2.png')">
+            <div class="hero-content">
+                <small class="eyebrow" data-reveal>TRAERSA LOGÍSTICA</small>
+                <h1 data-reveal>
+                    TRANSPORTE <br>
+                    <span class="red">SEGURO</span> Y
+                    <span class="blue">CONFIABLE</span>
+                </h1>
+                <p data-reveal>Soluciones logísticas integrales para impulsar tu negocio.</p>
+                <a href="#info" class="btn-hero" data-reveal>VER MÁS</a>
+            </div>
+        </div>
+
+        <div class="hero-slide" style="--bg:url('imagenes/carru.png')">
+            <div class="hero-content">
+                <small class="eyebrow" data-reveal>COBERTURA NACIONAL</small>
+                <h1 data-reveal>
+                    LLEGAMOS A <br>
+                    <span class="blue">CADA RUTA</span> <br>
+                    DEL PAÍS
+                </h1>
+                <p data-reveal>Flota propia y monitoreo constante, sin importar el destino.</p>
+                <a href="#info" class="btn-hero" data-reveal>VER MÁS</a>
+            </div>
+        </div>
 
       
-        <div class="slide">
-            <img src="imagenes\carru2.png">
-        </div>
-
-       
-        <div class="slide">
-            <img src="imagenes\carru.png">
-        </div>
-
-       
-        <div class="slide">
-           <img src="imagenes\carru2.png">
-        </div>
 
     </div>
 
+    <button class="hero-arrow prev" id="heroPrev" aria-label="Diapositiva anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="hero-arrow next" id="heroNext" aria-label="Siguiente diapositiva">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
 
-    <div class="overlay">
-
-        <h1>
-            TRANSPORTE <br>
-            <span class="red">SEGURO</span> Y <br>
-            <span class="blue">CONFIABLE</span>
-        </h1>
-
-        <p>
-            Soluciones logísticas integrales
-            para impulsar tu negocio.
-        </p>
-
-        <button>VER MÁS</button>
-
-    </div>
-
-
-    <div class="dots">
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    </div>
+    <div class="hero-dots" id="heroDots"></div>
 
 </section>
 
 
+<!-- Separador grafico para transicion entre secciones -->
+<div class="route-divider" aria-hidden="true">
+    <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+        <path id="routePath" d="M0,40 C150,90 250,-10 400,40 C550,90 650,-10 800,40 C950,90 1050,-10 1200,40" />
+        <circle r="6" class="route-dot">
+            <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+                <mpath href="#routePath"></mpath>
+            </animateMotion>
+        </circle>
+    </svg>
+</div>
 
-<section class="info">
 
-    <small>Soluciones logísticas</small>
+<!-- Seccion de informacion con los servicios disponibles -->
+<section class="info" id="info">
 
-    <h2>EXPERTOS EN SOLUCIONES PARA TU NEGOCIO</h2>
+    <small class="eyebrow center" data-reveal>Soluciones logísticas</small>
 
-    <div class="line"></div>
+    <h2 data-reveal>EXPERTOS EN SOLUCIONES PARA TU NEGOCIO</h2>
 
-    <p>
-        Expertos en soluciones logísticas, entendemos los desafíos de su negocio.
-        Por eso, diseñamos servicios a medida que se adaptan a sus necesidades específicas.
-        Contamos con la experiencia y la infraestructura para brindarte resultados excepcionales.
+    <div class="line" data-reveal></div>
+
+    <p class="lead" data-reveal>
+        Entendemos los desafíos de su negocio y por eso diseñamos servicios a medida que se
+        adaptan a sus necesidades específicas. Contamos con la experiencia y la infraestructura
+        para brindarle resultados excepcionales en cada envío.
     </p>
 
-<div class="cards">
-    <div class="card">
-        <i class="fa-solid fa-file-signature"></i>
-        <h3>Gestión Aduanal</h3>
-        <p class="card-text">Optimizamos sus procesos de importación y exportación.</p>
-        <button class="btn-ver-mas" onclick="abrirModal('gestión aduanal')">Ver más</button>
-    </div>
+    <div class="cards">
 
-    <div class="card">
-        <i class="fa-solid fa-truck"></i>
-        <h3>Transporte Terrestre</h3>
-        <p class="card-text">Flota moderna para entregas locales y regionales.</p>
-        <button class="btn-ver-mas" onclick="abrirModal('transporte terrestre')">Ver más</button>
-    </div>
+    
 
-    <div class="card">
-        <i class="fa-solid fa-warehouse"></i>
-        <h3>Almacenaje</h3>
-        <p class="card-text">Bodegas equipadas para el control de su inventario.</p>
-        <button class="btn-ver-mas" onclick="abrirModal('almacenaje')">Ver más</button>
-    </div>
+        <div class="card" data-reveal>
+           
+            <i class="fa-solid fa-truck"></i>
+            <h3>Transporte Terrestre</h3>
+            <p class="card-text">Flota moderna para entregas locales y regionales.</p>
+            <button class="btn-ver-mas" data-modal="terrestre">Ver más</button>
+        </div>
 
-    <div class="card">
-        <i class="fa-solid fa-handshake"></i>
-        <h3>Proyectos Especiales</h3>
-        <p class="card-text">Logística personalizada para cargas complejas.</p>
-        <button class="btn-ver-mas" onclick="abrirModal('proyectos especiales')">Ver más</button>
-    </div>
-</div>
+        <div class="card" data-reveal>
+         
+            <i class="fa-solid fa-warehouse"></i>
+            <h3>Almacenaje</h3>
+            <p class="card-text">Bodegas equipadas para el control de su inventario.</p>
+            <button class="btn-ver-mas" data-modal="almacenaje">Ver más</button>
+        </div>
 
-<div id="miModal" class="modal">
-
-    <div class="modal-content">
-
-        <span class="close-modal" onclick="cerrarModal()">
-            &times;
-        </span>
-
-        <!-- IMAGEN -->
-        <img id="imagenModal" src="" alt="" class="modal-img">
-
-        <h2 id="tituloModal"
-            style="font-family:'Bebas Neue';
-            color:red;
-            font-size:40px;
-            margin-top:20px;">
-        </h2>
-
-        <div class="line"></div>
-
-        <p id="textoModal"
-           style="font-size:18px;
-           color:#333;
-           margin-top:20px;
-           font-family: Arial;
-           padding:0 20px 25px;">
-        </p>
+        <div class="card" data-reveal>
+          
+            <i class="fa-solid fa-handshake"></i>
+            <h3>Proyectos Especiales</h3>
+            <p class="card-text">Logística personalizada para cargas complejas.</p>
+            <button class="btn-ver-mas" data-modal="proyectos">Ver más</button>
+        </div>
 
     </div>
 
-</div>
+    <!-- Modal oculto que se muestra cuando se hace clic en Ver mas -->
+    <div id="miModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img id="imagenModal" src="" alt="" class="modal-img">
+            <h2 id="tituloModal"></h2>
+            <div class="line small"></div>
+            <p id="textoModal"></p>
+        </div>
+    </div>
+
 </section>
 
 
 
+
+
+<!-- Pie de pagina con enlaces utiles y datos de contacto -->
 <footer>
 
     <div class="footer-container">
 
-        <div class="footer-box">
-
+        <div class="footer-box" data-reveal>
             <h4>Síguenos en redes sociales</h4>
-
             <div class="social">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-x-twitter"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-linkedin"></i>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
             </div>
-
         </div>
 
-        <div class="footer-box">
-
+        <div class="footer-box" data-reveal>
             <h4>Servicios</h4>
-
             <ul>
-                <li>Gestión Aduanal</li>
+              
                 <li>Transporte Terrestre</li>
-                <li>Transporte Marítimo</li>
                 <li>Almacenaje</li>
                 <li>Proyectos Especiales</li>
             </ul>
-
         </div>
 
-        <div class="footer-box">
-
+        <div class="footer-box" data-reveal>
             <h4>Grupo TRAERSA</h4>
-
             <ul>
                 <li>Únete a nuestro equipo</li>
                 <li>Sobre nosotros</li>
                 <li>Deseas ser proveedor</li>
             </ul>
-
         </div>
 
-        <div class="footer-box">
-
+        <div class="footer-box" data-reveal>
             <h4>Nuestros valores</h4>
-
             <ul>
                 <li>Sostenibilidad</li>
                 <li>Garantía total</li>
                 <li>Responsabilidad</li>
             </ul>
-
         </div>
 
     </div>
 
     <div class="contact">
-
-        <div>
+        <a href="https://wa.me/50278562384" target="_blank" rel="noopener">
             <i class="fa-brands fa-whatsapp"></i>
-            <span>+502 78562384</span>
-        </div>
-
-        <div>
+            <span>+502 7856 2384</span>
+        </a>
+        <a href="mailto:traersa2026@gmail.com">
             <i class="fa-solid fa-envelope"></i>
             <span>traersa2026@gmail.com</span>
-        </div>
-
-        <div>
+        </a>
+        <span class="contact-static">
             <i class="fa-solid fa-location-dot"></i>
-            <span>31 av 2-48 zona 6 de mixco</span>
-        </div>
-
+            <span>31 av 2-48 zona 6 de Mixco</span>
+        </span>
     </div>
 
-</footer><script>
+    <p class="copyright">&copy; <span id="year"></span> TRAERSA. Todos los derechos reservados.</p>
 
-const modal = document.getElementById("miModal");
-const titulo = document.getElementById("tituloModal");
-const texto = document.getElementById("textoModal");
-const imagen = document.getElementById("imagenModal");
+</footer>
 
-
-function abrirModal(tipo){
-
-    modal.style.display = "flex";
-
-
-
-    if(tipo === 'gestión aduanal'){
-
-        titulo.innerText = "GESTIÓN ADUANAL";
-
-        texto.innerText =
-        "Ofrecemos asesoría completa en trámites de aduana y cumplimiento legal.";
-
-        imagen.src = "imagenes/aduana.jpg";
-
-    }
-
-
-    else if(tipo === 'transporte terrestre'){
-
-        titulo.innerText = "TRANSPORTE TERRESTRE";
-
-        texto.innerText =
-        "Servicio de transporte con monitoreo constante y seguridad garantizada.";
-
-        imagen.src = "imagenes/transporte.jpg";
-
-    }
-
-
-    else if(tipo === 'almacenaje'){
-
-        titulo.innerText = "ALMACENAJE";
-
-        texto.innerText =
-        "Contamos con amplias bodegas y control estricto de inventarios.";
-
-        imagen.src = "imagenes/almacen.jpg";
-
-    }
-
-
-    else if(tipo === 'proyectos especiales'){
-
-        titulo.innerText = "PROYECTOS ESPECIALES";
-
-        texto.innerText =
-        "Soluciones logísticas para cargas sobredimensionadas o delicadas.";
-
-        imagen.src = "imagenes/proyecto.jpg";
-
-    }
-
-}
-
-
-
-function cerrarModal(){
-
-    modal.style.display = "none";
-
-}
-
-
-
-window.onclick = function(event){
-
-    if(event.target == modal){
-
-        cerrarModal();
-
-    }
-
-}
-
-</script>
+<!-- Script principal de la pagina -->
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 
     <title>Dashboard TRAERSA</title>
 
+    <!-- Iconos y estilos para la pagina -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="css\Estilo.css" rel="stylesheet">
 
@@ -14,12 +15,14 @@
 
 <body>
 
+    <!-- Boton para abrir/cerrar el menu lateral en pantallas pequenas -->
     <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
     </div>
 
     <div class="overlay" id="overlay"></div>
 
+    <!-- Sidebar con las opciones de navegacion del empleado -->
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
@@ -85,7 +88,7 @@
 
             <div class="process-table">
 
-                <!-- FILA -->
+                <!-- Cada fila representa un envio o guia en el proceso -->
 
                 <div class="process-row">
 
@@ -185,6 +188,7 @@
 
         </section>
 
+        <!-- Pie de pagina con informacion de contacto y enlaces -->
         <footer class="footer">
 
             <div class="footer-container">
@@ -265,6 +269,7 @@
 
     </main>
 
+    <!-- Script para controlar el menu lateral y el estado activo de los items -->
     <script>
 
         const sidebar = document.getElementById("sidebar");

@@ -8,7 +8,7 @@
     <title>Dashboard TRAERSA</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="..css\ECA.css" rel="stylesheet">
+    <link href="..css/ECA.css" rel="stylesheet">
 
 </head>
 <style>
@@ -1194,17 +1194,18 @@
 
 <body>
 
-    <div class="menu-toggle" id="menuToggle">
+       <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
     </div>
 
     <div class="overlay" id="overlay"></div>
 
+   
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
 
-            <a href="admin.html">
+            <a href="admin.php">
                 <img src="imagenes/logo2.png" alt="Logo">
             </a>
 
@@ -1218,42 +1219,44 @@
 
             <div class="menu-title">OPERACIONES</div>
 
-            <a href="Cotizaciones_admin.html" class="menu-item ">
+            <a href="Cotizaciones_admin.php" class="menu-item ">
                 <i class="fa-solid fa-tags"></i>
                 <span>Cotizaciones</span>
             </a>
 
-            <a href="Ejecucion_admin.html" class="menu-item">
+            <a href="Ejecucion_admin.php" class="menu-item">
                 <i class="fa-regular fa-clock"></i>
                 <span>En ejecución</span>
             </a>
 
-            <a href="Completados_admin.html" class="menu-item">
+            <a href="Completados_admin.php" class="menu-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Completados</span>
             </a>
 
 
 
-        </div>
+          </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">CONTENIDOS</div>
 
 
-            <a href="Editar_Servicios.html" class="menu-item active">
+          
+                        <a href="Editar_categorias.php" class="menu-item active">
                 <i class="fa-solid fa-border-all"></i>
-                <span>Servicios</span>
+                <span>Catalogo</span>
             </a>
+            
 
-        </div>
+         </div>
 
-        <div class="menu-section">
+         <div class="menu-section">
 
             <div class="menu-title">ADMINISTRACIÓN</div>
 
-            <a href="Editar_Usuario.html" class="menu-item ">
+            <a href="Editar_Usuario.php" class="menu-item">
                 <i class="fa-solid fa-users"></i>
                 <span>Usuarios</span>
             </a>
@@ -1262,10 +1265,17 @@
 
         <div class="sidebar-bottom">
 
-            <button href="../login/logout.php" class="btn-logout">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                <span>Cerrar sesión</span>
-            </button>
+           <form action="../login/logout.php" method="POST">
+
+    <button type="submit" class="btn-logout">
+
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+        Cerrar sesión
+
+    </button>
+
+</form>
 
         </div>
 
@@ -1310,7 +1320,7 @@ $imagen_actual = "";
 
 if($id > 0){
 
-    $consulta = $conn->query("SELECT * FROM envios WHERE id='$id'");
+    $consulta = $conn->query("SELECT * FROM categoria WHERE id='$id'");
 
     if($consulta->num_rows > 0){
 
@@ -1329,7 +1339,7 @@ if($id > 0){
 <?php
 $modo_edicion = isset($_GET['id']);
 ?>
-           <form action="<?= isset($_GET['editar']) ? 'actualizar_envio.php' : 'guardar_envio.php' ?>" 
+           <form action="<?= isset($_GET['editar']) ? 'actualizar_categoria.php' : 'guardar_categoria.php' ?>" 
       method="POST" 
       enctype="multipart/form-data">
 
@@ -1339,12 +1349,14 @@ $modo_edicion = isset($_GET['id']);
     <!-- ARCHIVO -->
     <div class="gallery-input">
         <label>ARCHIVO / FOTO DEL PAQUETE:</label>
-        <input type="file" name="imagen">
+       <input type="file" name="imagen" accept=".png,.jpg,.jpeg">
 
-        <?php if($imagen_actual!=""){ ?>
-            <br>
-            <img src="../uploads/<?= $imagen_actual ?>" width="100">
-        <?php } ?>
+       <?php
+$mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png";
+?>
+
+<br>
+<img src="../uploads/<?= $mostrar_imagen ?>" width="100">
     </div>
 
     <!-- TITULO -->
@@ -1431,7 +1443,7 @@ $modo_edicion = isset($_GET['id']);
 <?php if($modo_edicion){ ?>
 
     <button type="submit"
-            formaction="actualizar_envio.php"
+            formaction="actualizar_categoria.php"
             class="gallery-btn">
         ACTUALIZAR SERVICIO
     </button>
@@ -1439,7 +1451,7 @@ $modo_edicion = isset($_GET['id']);
 <?php } ?>
 
     <button type="submit"
-            formaction="guardar_envio.php"
+            formaction="guardar_categoria.php"
             class="gallery-btn">
         AGREGAR SERVICIO
     </button>
@@ -1477,7 +1489,7 @@ $modo_edicion = isset($_GET['id']);
 
 include("../conexion.php");
 
-$resultado = $conn->query("SELECT * FROM envios ORDER BY fecha DESC");
+$resultado = $conn->query("SELECT * FROM categoria ORDER BY fecha DESC");
 
 while($fila = $resultado->fetch_assoc()){
 ?>
@@ -1485,7 +1497,11 @@ while($fila = $resultado->fetch_assoc()){
 <div class="gallery-row">
 
     <div class="gallery-img">
-       <img src="uploads/<?php echo $fila['imagen']; ?>" width="120">
+<?php
+$imagen = !empty($fila['imagen']) ? trim($fila['imagen']) : "default-package.png";
+?>
+
+<img src="../uploads/<?php echo $imagen; ?>" width="120">
     
     </div>
 
@@ -1517,7 +1533,7 @@ while($fila = $resultado->fetch_assoc()){
     <button type="button">EDITAR</button>
 </a>
 
-      <a href="eliminar_categorias.php?id=<?php echo $fila['id']; ?>"
+      <a href="eliminar_categoria.php?id=<?php echo $fila['id']; ?>"
 onclick="return confirm('¿Desea eliminar este servicio?');">
     <button type="button" class="delete-btn">
         ELIMINAR
