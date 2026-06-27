@@ -2,6 +2,7 @@
 
 require '../BackEnd/auth.php';
 
+// Se valida que el usuario que entra a esta página sea administrador.
 if ($_SESSION['rol_id'] != 1) {
 
     header("Location: ../login/login.php");
@@ -11,7 +12,7 @@ if ($_SESSION['rol_id'] != 1) {
 
 require '../conexion.php';
 
-// Cotizaciones activas: todo lo que aún no pasó a ejecución ni se completó
+// Se obtienen las cotizaciones que aún están activas y no han sido finalizadas.
 $sql = "SELECT e.*, c.titulo AS servicio_titulo, c.tipo_entrega
         FROM envios e
         LEFT JOIN categoria c ON c.id = e.servicio_id
@@ -19,14 +20,14 @@ $sql = "SELECT e.*, c.titulo AS servicio_titulo, c.tipo_entrega
         ORDER BY e.fecha_solicitud DESC";
 $resultado = $conn->query($sql);
 
-// Clientes registrados, para el buscador del formulario
+// Se cargan los clientes registrados para habilitar la búsqueda en el formulario.
 $clientesRes = $conn->query("SELECT id_cliente, nombre_empresa FROM clientes WHERE estado = 1 ORDER BY nombre_empresa ASC");
 $clientesData = [];
 while ($cli = $clientesRes->fetch_assoc()) {
     $clientesData[] = ['id' => (int) $cli['id_cliente'], 'label' => $cli['nombre_empresa']];
 }
 
-// Servicios/categorías disponibles para cotizar
+// Se cargan los servicios disponibles para que puedan seleccionarse al crear una cotización.
 $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categoria ORDER BY titulo ASC");
 ?>
 <!DOCTYPE html>
@@ -157,7 +158,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
 <div class="gallery-container fade-up">
 
-    <!-- FORMULARIO -->
+    <!-- Formulario para crear o editar una cotización. -->
 
     <div class="gallery-top">
 
@@ -253,7 +254,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
     </div>
 
-    <!-- TABLA -->
+    <!-- Tabla con las cotizaciones activas y sus acciones. -->
 
     <div class="table-card">
 
@@ -432,6 +433,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
     <script>
 
+        // Se controla el comportamiento del menú lateral en pantallas pequeñas y grandes.
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
@@ -479,11 +481,12 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
     <script>
 
+        // Se convierten los clientes cargados desde PHP a un formato usable en JavaScript.
         const clientesData = <?php echo json_encode($clientesData, JSON_UNESCAPED_UNICODE); ?>;
 
         /**
-         * Componente genérico de "escribe y aparece" (combobox con búsqueda).
-         * Se reutiliza para clientes (aquí) y empleados (Ejecución).
+         * Componente genérico de búsqueda que permite seleccionar un cliente desde una lista.
+         * Se reutiliza para clientes y otras entidades en otras pantallas.
          */
         function crearBuscador({ inputEl, hiddenEl, resultsEl, pillEl, datos, vacioTexto, maxResultados }) {
 
@@ -564,17 +567,20 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
             vacioTexto: "No se encontró ningún cliente con cuenta registrada con ese nombre."
         });
 
+        // Referencias al formulario y a sus elementos principales.
         const formCotizacion = document.getElementById("formCotizacion");
         const formTitulo = document.getElementById("formTitulo");
         const formMsg = document.getElementById("formMsg");
         const btnGuardar = document.getElementById("btnGuardarCotizacion");
         const btnCancelarEdicion = document.getElementById("btnCancelarEdicion");
 
+        // Muestra mensajes de éxito o error en el formulario.
         function mostrarMensaje(ok, texto){
             formMsg.className = "form-msg show " + (ok ? "ok" : "err");
             formMsg.textContent = texto;
         }
 
+        // Reinicia el formulario para crear una nueva cotización.
         function limpiarFormulario(){
             document.getElementById("idEnvio").value = "";
             document.getElementById("clienteId").value = "";
@@ -596,6 +602,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
             formMsg.className = "form-msg";
         }
 
+        // Carga los datos de una cotización en el formulario para editarla.
         function editarCotizacion(boton){
 
             const fila = boton.closest(".table-row");
@@ -635,6 +642,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
         btnCancelarEdicion.addEventListener("click", limpiarFormulario);
 
+        // Envía los datos del formulario para crear o actualizar una cotización.
         formCotizacion.addEventListener("submit", function(e){
 
             e.preventDefault();
@@ -676,6 +684,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
         });
 
+        // Cambia el estado de una cotización desde la tabla.
         function actualizarEstadoCotizacion(id, boton){
 
             const select = boton.previousElementSibling;
@@ -698,6 +707,7 @@ $serviciosRes = $conn->query("SELECT id, titulo, tipo_entrega, precio FROM categ
 
         }
 
+        // Elimina una cotización activa después de confirmar la acción.
         function eliminarCotizacion(id){
 
             if(!confirm("¿Eliminar esta cotización? Esta acción no se puede deshacer.")) return;
