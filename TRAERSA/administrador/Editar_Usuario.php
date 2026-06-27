@@ -1,6 +1,7 @@
 <?php
 require '../BackEnd/auth.php';
 
+// valida que el usuario sea administrador
 if ($_SESSION['rol_id'] != 1) {
 
     header("Location: ../login/login.php");
@@ -24,6 +25,7 @@ if ($_SESSION['rol_id'] != 1) {
 
 <body>
 
+    <!-- cuerpo principal de la pagina -->
     <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
     </div>
@@ -110,6 +112,7 @@ if ($_SESSION['rol_id'] != 1) {
         </div>
 
     </aside>
+    <!-- contenido principal del panel administrativo -->
     <main class="main-content fade-up">
 
         <header class="header">
@@ -140,6 +143,7 @@ if ($_SESSION['rol_id'] != 1) {
   <?php
 require '../conexion.php';
 
+// carga los usuarios y sus roles para mostrar en la tabla de administracion
 $sql = "
 SELECT
 u.id,
@@ -158,6 +162,11 @@ ORDER BY u.id
 $resultado = $conn->query($sql);
 ?>
 
+
+<!-- empieza la seccion de usuarios -->
+
+<!-- tabla de gestion de usuarios -->
+
 <div class="table-card completados-card">
 
 
@@ -167,12 +176,14 @@ $resultado = $conn->query($sql);
 
 </div>
 
+<!-- lista de usuarios con opciones de rol y estado -->
 <div class="table-content">
 
     <table class="completed-table">
 
         <thead>
 
+            <!-- encabezados de la tabla de usuarios -->
             <tr>
                 <th>ID</th>
                 <th>NOMBRE</th>
@@ -189,8 +200,10 @@ $resultado = $conn->query($sql);
 
         <?php while($usuario = $resultado->fetch_assoc()): ?>
 
+            <!-- fila de usuario -->
             <tr>
 
+                <!-- id del usuario -->
                 <td><?= $usuario['id'] ?></td>
 
                 <td><?= htmlspecialchars($usuario['nombre']) ?></td>
@@ -199,6 +212,7 @@ $resultado = $conn->query($sql);
 
                 <td>
 
+                    <!-- seleccion de rol del usuario -->
                     <select
                         onchange="actualizarRol(this, <?= $usuario['id'] ?>)"
                         class="role-select">
@@ -224,6 +238,7 @@ $resultado = $conn->query($sql);
 
                 <td>
 
+                    <!-- tipo de empleado solo disponible si el usuario es empleado -->
                     <select
                         onchange="actualizarTipoEmpleado(this, <?= $usuario['id'] ?>)"
                         class="role-select tipo-empleado-select"
@@ -250,6 +265,7 @@ $resultado = $conn->query($sql);
 
                 <td>
 
+                    <!-- estado activo o inactivo del usuario -->
                     <?= $usuario['estado']
                         ? 'Activo'
                         : 'Inactivo'
@@ -259,6 +275,7 @@ $resultado = $conn->query($sql);
 
                 <td>
 
+                    <!-- boton para eliminar usuario -->
                     <button
                         onclick="eliminarUsuario(<?= $usuario['id'] ?>)"
                         class="btn-delete">
@@ -364,6 +381,7 @@ $resultado = $conn->query($sql);
 
     <script>
 
+        // scripts de interaccion de la pagina
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
@@ -390,6 +408,7 @@ $resultado = $conn->query($sql);
 
         });
 
+        // resalta el item activo del menu
         const menuItems = document.querySelectorAll(".menu-item");
 
         menuItems.forEach(item => {
@@ -405,20 +424,22 @@ $resultado = $conn->query($sql);
             });
 
         });
+
+        // actualiza el rol del usuario cuando cambia el select
 function actualizarRol(select,idUsuario){
 
+    let nuevoRol = select.value;
 
-let nuevoRol = select.value;
+    const filaTipo = select.closest("tr").querySelector(".tipo-empleado-select");
+    if(filaTipo){
+        filaTipo.disabled = (nuevoRol !== "3");
+        if(nuevoRol !== "3") filaTipo.value = "";
+    }
 
-const filaTipo = select.closest("tr").querySelector(".tipo-empleado-select");
-if(filaTipo){
-    filaTipo.disabled = (nuevoRol !== "3");
-    if(nuevoRol !== "3") filaTipo.value = "";
-}
+    // envia la actualizacion del rol al servidor
+    fetch('actualizarRol.php',{
 
-fetch('actualizarRol.php',{
-
-    method:'POST',
+        method:'POST',
 
     headers:{
         'Content-Type':
@@ -448,10 +469,12 @@ fetch('actualizarRol.php',{
 
 }
 
+// actualiza el tipo de empleado para usuarios con rol empleado
 function actualizarTipoEmpleado(select, idUsuario){
 
     const nuevoTipo = select.value;
 
+    // envia la actualizacion del tipo de empleado
     fetch('actualizarTipoEmpleado.php', {
 
         method: 'POST',
@@ -473,18 +496,19 @@ function actualizarTipoEmpleado(select, idUsuario){
 
 }
 
+// elimina usuario luego de confirmar la accion
 function eliminarUsuario(id){
 
+    if(!confirm(
+        "¿Desea eliminar este usuario?"
+    )){
+        return;
+    }
 
-if(!confirm(
-    "¿Desea eliminar este usuario?"
-)){
-    return;
-}
+    // solicita eliminacion al servidor
+    fetch('eliminarUsuario.php',{
 
-fetch('eliminarUsuario.php',{
-
-    method:'POST',
+        method:'POST',
 
     headers:{
         'Content-Type':
