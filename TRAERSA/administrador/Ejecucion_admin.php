@@ -35,7 +35,7 @@ while ($emp = $empleadosRes->fetch_assoc()) {
     $empleadosData[] = ['id' => (int) $emp['id'], 'label' => $emp['nombre']];
 }
 
-// Vehículos disponibles
+// Vehículos disponibles para asignar a envíos
 $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehiculos ORDER BY placa ASC");
 ?>
 <!DOCTYPE html>
@@ -166,8 +166,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
 <div class="gallery-container fade-up">
 
-    <!-- FORMULARIO -->
-
+    <!-- formulario de asignacion de envio -->
     <div class="gallery-top">
 
         <h2 id="formTitulo">ASIGNAR ENVÍO</h2>
@@ -178,6 +177,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
             <div class="gallery-input">
                 <label>ENVÍO:</label>
+                <!-- lista los envíos aprobados o en curso para asignar -->
                 <select id="envioId" required>
                     <option value="">-- Selecciona un envío --</option>
                     <?php
@@ -198,6 +198,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
             <div class="gallery-input combo-field">
                 <label>EMPLEADO QUE TRANSPORTA:</label>
+                <!-- buscador de empleado con autocompletado y seleccion oculta -->
                 <input type="text" id="empleadoBuscador" class="combo-input" placeholder="Escribe el nombre del empleado..." autocomplete="off">
                 <input type="hidden" id="conductorUsuarioId" required>
                 <div class="combo-results" id="empleadoResultados"></div>
@@ -229,6 +230,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
             </div>
 
             <div class="gallery-input" id="panelNuevoVehiculo" style="display:none;">
+                <!-- panel de alta rapida para crear un vehiculo nuevo sin salir de la pagina -->
                 <label>PLACA DEL VEHÍCULO NUEVO:</label>
                 <input type="text" id="nuevaPlaca" placeholder="Ej. P-123ABC">
                 <label>TIPO:</label>
@@ -266,8 +268,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
     </div>
 
-    <!-- TABLA -->
-
+    <!-- tabla de envios en ejecucion -->
     <div class="gallery-table">
 
         <div class="gallery-header">
@@ -471,6 +472,8 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
     <script>
 
+        // datos de empleados usados por el buscador de combobox
+
         const empleadosData = <?php echo json_encode($empleadosData, JSON_UNESCAPED_UNICODE); ?>;
 
         /**
@@ -576,7 +579,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
             formMsg.textContent = texto;
         }
 
-        // Al elegir un envío en el selector, si ya tenía asignación, precarga los campos
+        // al elegir un envio en el selector, si ya tenia asignacion, precarga los campos
         envioSelect.addEventListener("change", function(){
             const opt = this.options[this.selectedIndex];
             if(!opt || !opt.value) return;
@@ -595,7 +598,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
         });
 
         function editarAsignacion(boton){
-
+            // carga datos desde la fila seleccionada en el formulario
             const fila = boton.closest(".gallery-row");
             const id = fila.dataset.id;
 
@@ -614,7 +617,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
         }
 
         formEjecucion.addEventListener("submit", function(e){
-
+            // procesa la asignacion / actualizacion de envio
             e.preventDefault();
 
             const envioId = envioSelect.value;
@@ -653,7 +656,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
 
         });
 
-        // Alta rápida de vehículo
+        // Alta rápida de vehículo: muestra/oculta el panel de registro rápido
         const btnNuevoVehiculo = document.getElementById("btnNuevoVehiculo");
         const panelNuevoVehiculo = document.getElementById("panelNuevoVehiculo");
 
@@ -664,7 +667,7 @@ $vehiculosRes = $conn->query("SELECT id_vehiculo, placa, tipo, estado FROM vehic
         });
 
         document.getElementById("btnGuardarVehiculo").addEventListener("click", () => {
-
+            // guarda el nuevo vehículo y lo añade al selector principal
             const placa = document.getElementById("nuevaPlaca").value.trim();
             const tipo = document.getElementById("nuevoTipo").value.trim();
             const capacidad = document.getElementById("nuevaCapacidad").value;
