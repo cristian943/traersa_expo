@@ -32,13 +32,13 @@
         overflow: hidden;
     }
 
-    /* TITULOS H1 */
+    /* Estilo general para los títulos principales de la interfaz. */
     h1 {
         font-family: 'Bebas Neue', sans-serif;
         letter-spacing: 2px;
     }
 
-    /* SUBTITULOS */
+    /* Estilo compartido para subtítulos y encabezados secundarios. */
     h2,
     h3,
     h4,
@@ -50,7 +50,7 @@
         font-weight: 700;
     }
 
-    /* CONTENIDO GENERAL */
+    /* Formato general para textos y elementos de formulario. */
     p,
     span,
     small,
@@ -65,7 +65,7 @@
         font-family: 'Arial Nova', Arial, sans-serif;
     }
 
-    /* SCROLL */
+    /* Estilo del scroll para una apariencia más limpia en la página. */
 
     ::-webkit-scrollbar {
         width: 7px;
@@ -76,7 +76,7 @@
         border-radius: 20px;
     }
 
-    /* BOTON MENU */
+    /* Estilo del botón que muestra u oculta el menú lateral. */
 
     .menu-toggle {
         position: fixed;
@@ -105,7 +105,7 @@
     }
 
     /* =========================
-   FORMULARIO PAQUETERIA
+   Estilos del formulario para gestionar servicios o paquetes.
 ========================= */
 
     .gallery-top {
@@ -120,7 +120,7 @@
         box-shadow: 0 0 30px rgba(0, 0, 0, .45);
     }
 
-    /* TITULO */
+    /* Estilo del título del formulario. */
 
     .gallery-top h2 {
         grid-column: 1/-1;
@@ -130,7 +130,7 @@
         margin-bottom: 10px;
     }
 
-    /* INPUTS */
+    /* Estilo general para campos de entrada. */
 
     .gallery-input {
         display: flex;
@@ -145,7 +145,7 @@
         letter-spacing: 1.5px;
     }
 
-    /* INPUTS / SELECT / TEXTAREA */
+    /* Diseño de inputs, selects y áreas de texto del formulario. */
 
     .gallery-input input,
     .gallery-input select,
@@ -168,7 +168,7 @@
         resize: none;
     }
 
-    /* FOCUS */
+    /* Efecto visual al enfocar los campos del formulario. */
 
     .gallery-input input:focus,
     .gallery-input select:focus,
@@ -178,14 +178,14 @@
         background: #131313;
     }
 
-    /* PLACEHOLDER */
+    /* Color y apariencia del texto de ejemplo en los campos. */
 
     .gallery-input input::placeholder,
     .gallery-input textarea::placeholder {
         color: #777;
     }
 
-    /* RADIO BUTTONS */
+    /* Estilo para las opciones tipo radio del tipo de entrega. */
 
     .radio-group {
         display: flex;
@@ -218,7 +218,7 @@
         cursor: pointer;
     }
 
-    /* PRECIO */
+    /* Estilo destacado del campo de precio del servicio. */
 
     .price-box input {
         background: linear-gradient(135deg, #7b1111, #d32f2f);
@@ -230,7 +230,7 @@
         box-shadow: 0 0 20px rgba(211, 47, 47, .25);
     }
 
-    /* BOTON */
+    /* Diseño del botón principal para guardar o actualizar el servicio. */
 
     .gallery-btn {
         height: 52px;
@@ -250,7 +250,7 @@
         box-shadow: 0 12px 28px rgba(211, 47, 47, .35);
     }
 
-    /* FECHA */
+    /* Estilo para la información de fecha mostrada en el formulario. */
 
     .gallery-date {
         grid-column: 1/-1;
@@ -261,7 +261,7 @@
         margin-top: 10px;
     }
 
-    /* FILE */
+    /* Estilo del input para subir archivos e imágenes. */
 
     input[type="file"] {
         padding: 10px;
@@ -306,7 +306,7 @@
         }
     }
 
-    /* OVERLAY */
+    /* Capa oscura que se muestra cuando el menú está abierto en móviles. */
 
     .overlay {
         position: fixed;
@@ -324,7 +324,7 @@
         visibility: visible;
     }
 
-    /* SIDEBAR */
+    /* Estilo del menú lateral de navegación principal. */
 
     .sidebar {
         width: 270px;
@@ -361,7 +361,7 @@
         background: transparent;
     }
 
-    /* SIDEBAR RETRAIDO */
+    /* Comportamiento del menú cuando se contrae en pantallas grandes. */
 
     .sidebar.closed {
         width: 90px;
@@ -379,7 +379,7 @@
         padding: 0 10px;
     }
 
-    /* LOGO */
+    /* Estilo del bloque superior con el logo y el nombre de la empresa. */
 
     .logo-container {
         display: flex;
@@ -404,7 +404,7 @@
         transition: .3s;
     }
 
-    /* MENU */
+    /* Diseño de las secciones y enlaces del menú lateral. */
 
     .menu-section {
         padding: 0 15px;
@@ -476,7 +476,7 @@
         font-size: 15px;
     }
 
-    /* SIDEBAR CLOSED */
+    /* Ajustes visuales cuando el sidebar está colapsado. */
 
     .sidebar.closed .logo-container h1,
     .sidebar.closed .menu-title,
@@ -499,7 +499,7 @@
         width: 50px;
     }
 
-    /* LOGOUT */
+    /* Estilo del botón para cerrar sesión desde el panel. */
 
     .sidebar-bottom {
         margin-top: auto;
@@ -527,7 +527,7 @@
         box-shadow: 0 10px 25px rgba(211, 47, 47, .35);
     }
 
-    /* MAIN */
+    /* Área principal donde se muestra el contenido del panel. */
 
     .main-content {
         flex: 1;
@@ -537,7 +537,7 @@
         transition: .4s;
     }
 
-    /* HEADER */
+    /* Encabezado superior con el saludo y el perfil de administrador. */
 
     .header {
         display: flex;
@@ -591,7 +591,7 @@
         letter-spacing: 1px;
     }
 
-    /* STATS */
+    /* Estilos de los bloques de información rápida o estadísticas. */
 
     .stats-grid {
         display: grid;
@@ -662,7 +662,7 @@
     }
 
 
-    /* FOOTER */
+    /* Pie de página con información institucional y redes sociales. */
     footer {
         background: black;
         color: white;
@@ -736,7 +736,6 @@
     }
 
 
-    /* TABLAS */
 
     .tables-grid {
         margin-top: 28px;
@@ -871,7 +870,7 @@
     box-shadow:0 0 15px rgba(211,47,47,.15);
 }
 
-/* IMAGEN */
+/* Estilo de la imagen mostrada en cada servicio o paquete. */
 
 .gallery-img{
     width:120px;
@@ -889,7 +888,7 @@
     border:2px solid #252525;
 }
 
-/* INFORMACION */
+/* Contenido textual de cada elemento mostrado en la lista. */
 
 .gallery-info{
     flex:1;
@@ -918,7 +917,7 @@
     margin-top:8px;
 }
 
-/* BOTONES */
+/* Diseño de los botones de acción para editar o eliminar servicios. */
 
 .gallery-actions{
     display:flex;
@@ -946,7 +945,7 @@
     background:linear-gradient(135deg,#7b1111,#d32f2f);
 }
 
-/* QUITAR ENCABEZADO */
+/* Oculta el encabezado visual de la lista para dar un diseño más limpio. */
 
 .gallery-head{
     display:none;
@@ -1081,7 +1080,7 @@
 
     }
 
-    /* ANIMACIONES */
+    /* Animaciones suaves para mostrar los elementos al cargar la página. */
 
     .fade-up {
         animation: fadeUp .8s ease;
@@ -1194,7 +1193,8 @@
 
 <body>
 
-       <div class="menu-toggle" id="menuToggle">
+    <!-- Menú lateral de navegación para el panel de administración. -->
+    <div class="menu-toggle" id="menuToggle">
         <i class="fa-solid fa-bars"></i>
     </div>
 
@@ -1306,10 +1306,13 @@
 
         <div class="gallery-container fade-up">
             <?php
+// Se conecta a la base de datos y se preparan los datos para crear o editar un servicio.
 include("../conexion.php");
 
+// Se obtiene el identificador del servicio desde la URL, si existe.
 $id = $_GET['id'] ?? 0;
 
+// Variables que almacenarán la información del servicio a mostrar en el formulario.
 $titulo = "";
 $descripcion = "";
 $paquetes = "";
@@ -1337,8 +1340,10 @@ if($id > 0){
 }
 ?>
 <?php
+// Determina si la página está en modo edición según si existe un ID en la URL.
 $modo_edicion = isset($_GET['id']);
 ?>
+           <!-- Formulario para agregar un nuevo servicio o actualizar uno existente. -->
            <form action="<?= isset($_GET['editar']) ? 'actualizar_categoria.php' : 'guardar_categoria.php' ?>" 
       method="POST" 
       enctype="multipart/form-data">
@@ -1346,7 +1351,7 @@ $modo_edicion = isset($_GET['id']);
     <input type="hidden" name="id" value="<?= $id ?>">
     <input type="hidden" name="imagen_actual" value="<?= $imagen_actual ?>">
 
-    <!-- ARCHIVO -->
+    <!-- Campo para seleccionar una imagen representativa del servicio. -->
     <div class="gallery-input">
         <label>ARCHIVO / FOTO DEL PAQUETE:</label>
        <input type="file" name="imagen" accept=".png,.jpg,.jpeg">
@@ -1359,7 +1364,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
 <img src="../uploads/<?= $mostrar_imagen ?>" width="100">
     </div>
 
-    <!-- TITULO -->
+    <!-- Campo obligatorio para el nombre del servicio. -->
     <div class="gallery-input">
         <label>TÍTULO:</label>
         <input type="text"
@@ -1369,13 +1374,13 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
                required>
     </div>
 
-    <!-- DESCRIPCION -->
+    <!-- Espacio para explicar en qué consiste el servicio. -->
     <div class="gallery-input">
         <label>DESCRIPCIÓN:</label>
         <textarea name="descripcion"><?= $descripcion ?></textarea>
     </div>
 
-    <!-- PAQUETES -->
+    <!-- Número de paquetes que puede incluir el servicio. -->
     <div class="gallery-input">
         <label>NÚMERO DE PAQUETES:</label>
         <input type="number"
@@ -1383,7 +1388,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
                value="<?= $paquetes ?>">
     </div>
 
-    <!-- PESO -->
+    <!-- Peso estimado del envío o servicio en kilogramos. -->
     <div class="gallery-input">
         <label>KILOGRAMOS:</label>
         <input type="number"
@@ -1392,7 +1397,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
                value="<?= $kilogramos ?>">
     </div>
 
-    <!-- TIPO DE ENTREGA -->
+    <!-- Se selecciona el tipo de entrega que aplica al servicio. -->
     <div class="gallery-input">
         <label>TIPO DE ENTREGA:</label>
 
@@ -1420,7 +1425,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
     </div>
 
    
-    <!-- PRECIO -->
+    <!-- Precio del servicio y cálculo aproximado con IVA. -->
 <div class="gallery-input">
     <label>PRECIO DEL SERVICIO (SIN IVA):</label>
 
@@ -1462,6 +1467,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
 
         </div>
 
+        <!-- Sección donde se muestran los servicios registrados en la tabla. -->
         <div class="gallery-table">
 
             <div class="gallery-header">
@@ -1486,7 +1492,7 @@ $mostrar_imagen = !empty($imagen_actual) ? $imagen_actual : "default-package.png
               
 
                <?php
-
+// Se consultan los servicios registrados para mostrarlos en la lista administrativa.
 include("../conexion.php");
 
 $resultado = $conn->query("SELECT * FROM categoria ORDER BY fecha DESC");
@@ -1494,6 +1500,7 @@ $resultado = $conn->query("SELECT * FROM categoria ORDER BY fecha DESC");
 while($fila = $resultado->fetch_assoc()){
 ?>
 
+<!-- Cada elemento representa un servicio registrado y sus acciones disponibles. -->
 <div class="gallery-row">
 
     <div class="gallery-img">
@@ -1639,6 +1646,7 @@ onclick="return confirm('¿Desea eliminar este servicio?');">
 
     <script>
 
+        // Se controla el menú lateral para abrirlo o cerrarlo en pantallas pequeñas y grandes.
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
