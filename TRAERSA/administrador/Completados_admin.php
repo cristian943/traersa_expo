@@ -11,7 +11,7 @@ if ($_SESSION['rol_id'] != 1) {
 
 require '../conexion.php';
 
-// Envíos entregados (historial de servicios completados)
+// Consulta principal para obtener el historial de envíos ya entregados.
 $sql = "SELECT e.*, c.titulo AS servicio_titulo, c.tipo_entrega,
                (SELECT s.foto_evidencia FROM seguimiento_envio s
                 WHERE s.envio_id = e.id_envio AND s.estado = 'Entregado'
@@ -151,6 +151,7 @@ $resultado = $conn->query($sql);
 
         </header>
 
+<!-- Contenedor principal del historial de servicios completados. -->
 <div class="table-card completados-card">
 
     <div class="table-header services-header">
@@ -163,6 +164,7 @@ $resultado = $conn->query($sql);
 
     <div class="table-content">
 
+        <!-- Muestra un estado vacío cuando no existen envíos entregados. -->
         <?php if ($resultado->num_rows === 0): ?>
 
             <div class="empty-row">
@@ -172,6 +174,7 @@ $resultado = $conn->query($sql);
 
         <?php else: ?>
 
+        <!-- Tabla con los envíos completados y sus datos principales. -->
         <table class="completed-table">
 
             <thead>
@@ -314,6 +317,7 @@ $resultado = $conn->query($sql);
 
     <script>
 
+        // Control del menú lateral para pantallas pequeñas y grandes.
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
@@ -369,6 +373,7 @@ $resultado = $conn->query($sql);
 
     <script>
 
+        // Lógica para abrir el modal de evidencia de entrega al hacer clic en una fila.
         const evidenciaModal = document.getElementById("evidenciaModal");
         const evidenciaModalBody = document.getElementById("evidenciaModalBody");
         const closeEvidenciaModal = document.getElementById("closeEvidenciaModal");
