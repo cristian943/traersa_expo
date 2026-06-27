@@ -1,7 +1,9 @@
 <?php
 
+// Conexion a la BD
 require '../conexion.php';
 
+// Consulta de ordenes para la tabla
 $sql = "
 SELECT *
 FROM orden
@@ -13,7 +15,8 @@ $resultado = $conn->query($sql);
 ?>
 <?php
 
-   require '../BackEnd/auth.php';
+// Validacion de acceso de administrador
+require '../BackEnd/auth.php';
 
 if ($_SESSION['rol_id'] != 1) {
 
@@ -56,13 +59,13 @@ if ($_SESSION['rol_id'] != 1) {
         overflow: hidden;
     }
 
-    /* TITULOS H1 */
+    /* Titulos */
     h1 {
         font-family: 'Bebas Neue', sans-serif;
         letter-spacing: 2px;
     }
 
-    /* SUBTITULOS */
+    /* Subtitulos */
     h2,
     h3,
     h4,
@@ -74,7 +77,7 @@ if ($_SESSION['rol_id'] != 1) {
         font-weight: 700;
     }
 
-    /* CONTENIDO GENERAL */
+    /* Texto general */
     p,
     span,
     small,
@@ -89,7 +92,7 @@ if ($_SESSION['rol_id'] != 1) {
         font-family: 'Arial Nova', Arial, sans-serif;
     }
 
-    /* SCROLL */
+    /* Scroll */
 
     ::-webkit-scrollbar {
         width: 7px;
@@ -100,7 +103,7 @@ if ($_SESSION['rol_id'] != 1) {
         border-radius: 20px;
     }
 
-    /* BOTON MENU */
+    /* Boton del menu */
 
     .menu-toggle {
         position: fixed;
@@ -128,7 +131,7 @@ if ($_SESSION['rol_id'] != 1) {
         font-size: 18px;
     }
     /* =========================
-   FORMULARIO PAQUETERIA
+   Formulario de servicios
 ========================= */
 
 .gallery-top {
@@ -143,7 +146,7 @@ if ($_SESSION['rol_id'] != 1) {
     box-shadow: 0 0 30px rgba(0, 0, 0, .45);
 }
 
-/* TITULO */
+/* Titulo */
 
 .gallery-top h2 {
     grid-column: 1/-1;
@@ -153,7 +156,7 @@ if ($_SESSION['rol_id'] != 1) {
     margin-bottom: 10px;
 }
 
-/* INPUTS */
+/* Inputs */
 
 .gallery-input {
     display: flex;
@@ -168,7 +171,7 @@ if ($_SESSION['rol_id'] != 1) {
     letter-spacing: 1.5px;
 }
 
-/* INPUTS / SELECT / TEXTAREA */
+/* Inputs y texto */
 
 .gallery-input input,
 .gallery-input select,
@@ -191,7 +194,7 @@ if ($_SESSION['rol_id'] != 1) {
     resize: none;
 }
 
-/* FOCUS */
+/* Focus */
 
 .gallery-input input:focus,
 .gallery-input select:focus,
@@ -201,14 +204,14 @@ if ($_SESSION['rol_id'] != 1) {
     background: #131313;
 }
 
-/* PLACEHOLDER */
+/* Placeholder */
 
 .gallery-input input::placeholder,
 .gallery-input textarea::placeholder {
     color: #777;
 }
 
-/* RADIO BUTTONS */
+/* Opciones tipo radio */
 
 .radio-group {
     display: flex;
@@ -241,7 +244,7 @@ if ($_SESSION['rol_id'] != 1) {
     cursor: pointer;
 }
 
-/* PRECIO */
+/* Precio */
 
 .price-box input {
     background: linear-gradient(135deg, #7b1111, #d32f2f);
@@ -253,7 +256,7 @@ if ($_SESSION['rol_id'] != 1) {
     box-shadow: 0 0 20px rgba(211, 47, 47, .25);
 }
 
-/* BOTON */
+/* Boton */
 
 .gallery-btn {
     height: 52px;
@@ -273,7 +276,7 @@ if ($_SESSION['rol_id'] != 1) {
     box-shadow: 0 12px 28px rgba(211, 47, 47, .35);
 }
 
-/* FECHA */
+/* Fecha */
 
 .gallery-date {
     grid-column: 1/-1;
@@ -284,7 +287,7 @@ if ($_SESSION['rol_id'] != 1) {
     margin-top: 10px;
 }
 
-/* FILE */
+/* Archivo */
 
 input[type="file"] {
     padding: 10px;
@@ -329,7 +332,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
     }
 }
 
-    /* OVERLAY */
+    /* Overlay */
 
     .overlay {
         position: fixed;
@@ -347,7 +350,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         visibility: visible;
     }
 
-    /* SIDEBAR */
+    /* Sidebar */
 
     .sidebar {
         width: 270px;
@@ -384,7 +387,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         background: transparent;
     }
 
-    /* SIDEBAR RETRAIDO */
+    /* Sidebar cerrado */
 
     .sidebar.closed {
         width: 90px;
@@ -402,7 +405,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         padding: 0 10px;
     }
 
-    /* LOGO */
+    /* Logo */
 
     .logo-container {
         display: flex;
@@ -427,7 +430,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         transition: .3s;
     }
 
-    /* MENU */
+    /* Menu */
 
     .menu-section {
         padding: 0 15px;
@@ -499,7 +502,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         font-size: 15px;
     }
 
-    /* SIDEBAR CLOSED */
+    /* Sidebar cerrado */
 
     .sidebar.closed .logo-container h1,
     .sidebar.closed .menu-title,
@@ -522,7 +525,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         width: 50px;
     }
 
-    /* LOGOUT */
+    /* Logout */
 
     .sidebar-bottom {
         margin-top: auto;
@@ -550,7 +553,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         box-shadow: 0 10px 25px rgba(211, 47, 47, .35);
     }
 
-    /* MAIN */
+    /* Main */
 
     .main-content {
         flex: 1;
@@ -560,7 +563,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         transition: .4s;
     }
 
-    /* HEADER */
+    /* Header */
 
     .header {
         display: flex;
@@ -614,7 +617,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         letter-spacing: 1px;
     }
 
-    /* STATS */
+    /* Stats */
 
     .stats-grid {
         display: grid;
@@ -685,7 +688,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
     }
 
 
-    /* FOOTER */
+    /* Footer */
     footer {
         background: black;
         color: white;
@@ -759,7 +762,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
     }
 
 
-    /* TABLAS */
+    /* Tablas */
 
     .tables-grid {
         margin-top: 28px;
@@ -1113,7 +1116,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
     }
 
-    /* ANIMACIONES */
+    /* Animaciones */
 
     .fade-up {
         animation: fadeUp .8s ease;
@@ -1359,7 +1362,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
             </div>
 
         </header>
-        <!-- CONTENIDO GALERIA -->
+        <!-- Contenido */
 
         <div class="gallery-container fade-up">
 
@@ -1367,37 +1370,37 @@ input[type="file"]::-webkit-file-upload-button:hover {
 
     <h2>REGISTRO DE ENVÍO</h2>
 
-    <!-- ARCHIVO -->
+    <!-- Archivo -->
     <div class="gallery-input">
         <label>ARCHIVO / FOTO DEL PAQUETE:</label>
         <input type="file" required>
     </div>
 
-    <!-- TITULO -->
+    <!-- Titulo -->
     <div class="gallery-input">
         <label>TÍTULO:</label>
         <input type="text" placeholder="Ejemplo: Envío de documentos" required>
     </div>
 
-    <!-- DESCRIPCION -->
+    <!-- Descripcion -->
     <div class="gallery-input">
         <label>DESCRIPCIÓN:</label>
         <textarea placeholder="Descripción del paquete"></textarea>
     </div>
 
-    <!-- PAQUETES -->
+    <!-- Paquetes -->
     <div class="gallery-input">
         <label>NÚMERO DE PAQUETES:</label>
         <input type="number" placeholder="Cantidad de paquetes">
     </div>
 
-    <!-- PESO -->
+    <!-- Peso -->
     <div class="gallery-input">
         <label>KILOGRAMOS:</label>
         <input type="number" placeholder="Peso en KG">
     </div>
 
-    <!-- TIPO DE ENTREGA -->
+    <!-- Tipo de entrega -->
     <div class="gallery-input">
         <label>TIPO DE ENTREGA:</label>
 
@@ -1420,18 +1423,18 @@ input[type="file"]::-webkit-file-upload-button:hover {
     </div>
 
   
-    <!-- PRECIO -->
+    <!-- Precio -->
     <div class="gallery-input">
         <label>PRECIO DEL SERVICIO:</label>
         <input type="text" value="Q350.00" readonly>
     </div>
 
-    <!-- BOTON -->
+    <!-- Boton -->
     <button class="gallery-btn">
         AGREGAR SERVICIO
     </button>
 
-    <!-- FECHA -->
+    <!-- Fecha -->
     <div class="gallery-date">
         FECHA ACTUAL
     </div>
@@ -1456,7 +1459,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
 </div>
    
 
-    <!-- SIN REGISTROS -->
+    <!-- Sin registros -->
 
    <?php if($resultado->num_rows > 0): ?>
 
@@ -1727,6 +1730,7 @@ function cancelarServicio(id){
     </script>
 <script>
 
+// Cancelar servicio desde la tabla
 function cancelarServicio(id){
 
     if(
