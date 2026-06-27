@@ -11,13 +11,16 @@
 
 require '../BackEnd/auth.php';
 
+// Verifica que el usuario tenga el rol de empleado antes de continuar.
 if (($_SESSION['rol_id'] ?? null) != 3) {
     header("Location: ../login/login.php");
     exit();
 }
 
+// Carga la conexión a la base de datos para consultar el tipo de empleado.
 require '../conexion.php';
 
+// Consulta los datos básicos del empleado para determinar su tipo y mostrar su nombre.
 $stmt = $conn->prepare("SELECT tipo_empleado, nombre FROM usuarios WHERE id = ?");
 if (!$stmt) {
     die('Falta ejecutar cambios_base_datos_empleado.sql en la base de datos.');
@@ -27,6 +30,7 @@ $stmt->execute();
 $fila = $stmt->get_result()->fetch_assoc();
 $tipoEmpleado = $fila['tipo_empleado'] ?? null;
 
+// Redirige a la vista correspondiente según el tipo de empleado.
 if ($tipoEmpleado === 'transportista') {
     header("Location: proceso_empleado.php");
     exit();
@@ -50,6 +54,7 @@ if ($tipoEmpleado === 'oficinista') {
 
 <body>
 
+    <!-- Vista de espera para usuarios que aún no tienen un tipo de empleado asignado. -->
     <div class="pending-wrap">
         <div class="pending-card">
             <i class="fa-solid fa-user-clock"></i>
@@ -59,6 +64,7 @@ if ($tipoEmpleado === 'oficinista') {
                 (oficinista o transportista). Pide a un administrador que
                 te lo asigne desde Usuarios para poder continuar.
             </p>
+            <!-- Formulario para cerrar la sesión desde esta pantalla de advertencia. -->
             <form action="../login/logout.php" method="POST">
                 <button type="submit">Cerrar sesión</button>
             </form>

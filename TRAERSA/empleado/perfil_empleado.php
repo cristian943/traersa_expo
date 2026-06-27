@@ -10,15 +10,18 @@
 
 require '../BackEnd/auth.php';
 
+// Asegura que solo los usuarios con rol de empleado puedan abrir esta página.
 if (($_SESSION['rol_id'] ?? null) != 3) {
     header("Location: ../login/login.php");
     exit();
 }
 
+// Incluye la conexión a la base de datos para consultar el perfil del usuario.
 require '../conexion.php';
 
 $usuarioId = (int) $_SESSION['usuario_id'];
 
+// Obtiene los datos básicos del empleado desde la tabla de usuarios.
 $stmt = $conn->prepare("SELECT nombre, email, tipo_empleado, estado FROM usuarios WHERE id = ?");
 if (!$stmt) {
     die('Falta ejecutar cambios_base_datos_empleado.sql en la base de datos.');
@@ -33,6 +36,7 @@ $vehiculoActual = null;
 $totalEntregas = 0;
 $totalAsignados = 0;
 
+// Si el empleado es transportista, se consultan sus datos adicionales de asignación y desempeño.
 if ($tipoEmpleado === 'transportista') {
 
     // Vehículo de la asignación más reciente (la que esté usando ahora mismo)
@@ -88,6 +92,7 @@ if ($tipoEmpleado === 'transportista') {
 
     <div class="overlay" id="overlay"></div>
 
+    <!-- Menú lateral con las opciones disponibles según el tipo de empleado. -->
     <aside class="sidebar fade-up" id="sidebar">
 
         <div class="logo-container">
@@ -155,6 +160,7 @@ if ($tipoEmpleado === 'transportista') {
 
     </aside>
 
+    <!-- Contenido principal del perfil del empleado. -->
     <main class="main-content fade-up">
 
         <header class="header">
@@ -257,6 +263,7 @@ if ($tipoEmpleado === 'transportista') {
 
     <script>
 
+        // Maneja la apertura y cierre del menú lateral en pantallas pequeñas.
         const sidebar = document.getElementById("sidebar");
         const menuToggle = document.getElementById("menuToggle");
         const overlay = document.getElementById("overlay");
