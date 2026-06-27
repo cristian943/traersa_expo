@@ -26,6 +26,7 @@ if (($_SESSION['rol_id'] ?? null) != 1) {
 }
 
 require '../conexion.php';
+// conexion lista, responder usa JSON en todos los casos
 
 function responder(bool $success, string $message, array $extra = []): void {
     echo json_encode(array_merge(['success' => $success, 'message' => $message], $extra));
@@ -33,6 +34,7 @@ function responder(bool $success, string $message, array $extra = []): void {
 }
 
 $accion = $_POST['accion'] ?? '';
+// accion enviada por el formulario de administracion
 
 // Estados válidos en la etapa de cotización (la ejecución usa su propio set de estados)
 $estadosCotizacion = ['Pendiente', 'En revisión', 'Aprobada', 'Rechazada', 'Cancelado'];
@@ -41,6 +43,7 @@ $estadosCotizacion = ['Pendiente', 'En revisión', 'Aprobada', 'Rechazada', 'Can
 // Crear cotización
 // =========================================================
 if ($accion === 'crear') {
+    // crear nueva cotizacion en estado Pendiente
 
     $clienteId   = (int) ($_POST['cliente_id'] ?? 0);
     $nombreManual = trim($_POST['nombre_cliente'] ?? '');
@@ -62,7 +65,7 @@ if ($accion === 'crear') {
         responder(false, 'Selecciona un cliente registrado o escribe el nombre del cliente.');
     }
 
-    // Si seleccionaron un cliente registrado, tomamos su nombre/teléfono de la tabla `clientes`
+    // si hay cliente registrado, usar sus datos guardados
     if ($clienteId > 0) {
         $stmtCliente = $conn->prepare("SELECT nombre_empresa, telefono FROM clientes WHERE id_cliente = ?");
         $stmtCliente->bind_param("i", $clienteId);
@@ -103,7 +106,7 @@ if ($accion === 'crear') {
     $update->bind_param("si", $numeroGuia, $nuevoId);
     $update->execute();
 
-    // Primer registro en la bitácora de seguimiento
+    // guardar primer registro en la bitacora de seguimiento
     $log = $conn->prepare("INSERT INTO seguimiento_envio (envio_id, estado, observaciones, fecha) VALUES (?, 'Pendiente', 'Cotización creada', NOW())");
     $log->bind_param("i", $nuevoId);
     $log->execute();
@@ -115,6 +118,7 @@ if ($accion === 'crear') {
 // Editar cotización
 // =========================================================
 if ($accion === 'editar') {
+    // editar datos de una cotizacion existente
 
     $id          = (int) ($_POST['id_envio'] ?? 0);
     $clienteId   = (int) ($_POST['cliente_id'] ?? 0);
@@ -176,6 +180,7 @@ if ($accion === 'editar') {
 // Eliminar cotización
 // =========================================================
 if ($accion === 'eliminar') {
+    // eliminar cotizacion solo si no esta en ejecucion
 
     $id = (int) ($_POST['id_envio'] ?? 0);
 
@@ -196,6 +201,7 @@ if ($accion === 'eliminar') {
         responder(false, 'No se puede eliminar: este envío ya está en ejecución o entregado.');
     }
 
+    // borrar registro de envios
     $delete = $conn->prepare("DELETE FROM envios WHERE id_envio = ?");
     $delete->bind_param("i", $id);
 
@@ -210,6 +216,7 @@ if ($accion === 'eliminar') {
 // Cambiar estado (cotización)
 // =========================================================
 if ($accion === 'estado') {
+    // cambiar solo el estado de la cotizacion
 
     $id     = (int) ($_POST['id_envio'] ?? 0);
     $nuevo  = trim($_POST['estado'] ?? '');
@@ -225,6 +232,7 @@ if ($accion === 'estado') {
         responder(false, 'No se pudo actualizar el estado.');
     }
 
+    // registrar cambio de estado en seguimiento_envio
     $log = $conn->prepare("INSERT INTO seguimiento_envio (envio_id, estado, observaciones, fecha) VALUES (?, ?, 'Cambio de estado desde Cotizaciones', NOW())");
     $log->bind_param("is", $id, $nuevo);
     $log->execute();
