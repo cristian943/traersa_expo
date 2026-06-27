@@ -25,6 +25,7 @@ if (($_SESSION['rol_id'] ?? null) != 1) {
 }
 
 require '../conexion.php';
+// conexion a la base de datos
 
 function responder(bool $success, string $message, array $extra = []): void {
     echo json_encode(array_merge(['success' => $success, 'message' => $message], $extra));
@@ -32,6 +33,7 @@ function responder(bool $success, string $message, array $extra = []): void {
 }
 
 $accion = $_POST['accion'] ?? '';
+// accion enviada desde el formulario de ejecucion
 
 $estadosEjecucion = ['Asignado', 'En ruta', 'Entregado'];
 
@@ -39,6 +41,7 @@ $estadosEjecucion = ['Asignado', 'En ruta', 'Entregado'];
 // Asignar conductor + vehículo a un envío aprobado
 // =========================================================
 if ($accion === 'asignar') {
+    // asignar conductor y vehiculo a un envio aprobado
 
     $envioId     = (int) ($_POST['envio_id'] ?? 0);
     $usuarioConductorId = (int) ($_POST['conductor_usuario_id'] ?? 0);
@@ -50,6 +53,7 @@ if ($accion === 'asignar') {
         $estadoDeseado = 'Asignado';
     }
 
+    // validar que se tenga envio, conductor y vehiculo seleccionados
     if ($envioId <= 0 || $usuarioConductorId <= 0 || $vehiculoId <= 0) {
         responder(false, 'Selecciona el envío, el empleado y el vehículo.');
     }
@@ -120,6 +124,7 @@ if ($accion === 'asignar') {
 // Avanzar / actualizar estado de ejecución
 // =========================================================
 if ($accion === 'estado') {
+    // cambiar estado de ejecucion del envio
 
     $envioId = (int) ($_POST['envio_id'] ?? 0);
     $nuevo   = trim($_POST['estado'] ?? '');
@@ -152,6 +157,7 @@ if ($accion === 'estado') {
 // Alta rápida de un vehículo
 // =========================================================
 if ($accion === 'agregar_vehiculo') {
+    // registrar vehiculo nuevo desde la pantalla de ejecucion
 
     $placa = trim($_POST['placa'] ?? '');
     $tipo  = trim($_POST['tipo'] ?? '');
