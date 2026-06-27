@@ -1,12 +1,15 @@
 <?php
 
+// mostrar errores para depuracion en desarrollo
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// conexion a la base de datos
 include("../conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // recibir datos del formulario
     $titulo = $_POST['titulo'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
     $paquetes = $_POST['paquetes'] ?? '';
@@ -14,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipo = $_POST['tipo_entrega'] ?? '';
     $precio_sin_iva = $_POST['precio'] ?? 0;
 
-    // Validar campos vacíos
+    // validar que no falten campos obligatorios
     if (
         empty($titulo) ||
         empty($descripcion) ||
@@ -26,12 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Todos los campos son obligatorios.");
     }
 
-    // Calcular IVA
+    // calcular precio final con IVA incluido
     $iva = $precio_sin_iva * 0.12;
     $precio = $precio_sin_iva + $iva;
 
    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
 
+    // validar extension de imagen
     $permitidos = ['png', 'jpg', 'jpeg'];
     $extension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
 
@@ -39,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Solo se permiten imágenes PNG, JPG o JPEG.");
     }
 
+    // generar nombre unico y guardar imagen en uploads
     $imagen = uniqid() . "." . $extension;
     $ruta = "../uploads/" . $imagen;
 
@@ -55,10 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     imagedestroy($img);
 
 } else {
+    // usar imagen por defecto cuando no hay archivo subido
     $imagen = "default-package.png";
 }
 
-    // Insertar en BD
+    // Insertar categoria en la base de datos
     $sql = "INSERT INTO categoria (
         titulo,
         descripcion,
