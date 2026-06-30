@@ -678,15 +678,23 @@ $resultado = $stmt->get_result();
             .hero-card{ padding:28px 22px; }
             .nav-right{ width:auto; gap:15px; }
             .nav-icon span{ display:none; }
+            .top-navbar{ height:72px; padding:0 16px; }
         }
 
         @media(max-width:600px){
-            .top-navbar{ padding:0 15px; }
+            .top-navbar{ padding:0 12px; }
             .nav-left{ width:auto; }
             .navbar-logo{ height:42px; }
             .service-buttons{ flex-direction:column; }
             .contact{ flex-direction:column; gap:14px; }
             .contact div{ justify-content:center; }
+            .main-content{ padding:16px 12px 20px; }
+        }
+
+        @media(max-width:480px){
+            .nav-right{ gap:8px; }
+            .menu-toggle{ width:42px; height:42px; }
+            .navbar-logo{ height:36px; }
         }
 
 

@@ -989,6 +989,19 @@ $estadoTexto  = ((int)$usuario['estado'] === 1) ? 'Activo' : 'Inactivo';
 
         @media(max-width:900px){
             .account-grid{ grid-template-columns:1fr; }
+            .main-content{ padding:20px; }
+        }
+
+        @media(max-width:600px){
+            .main-content{ padding:16px 12px 20px; }
+            .account-card{ padding:20px; }
+        }
+
+        @media(max-width:480px){
+            .nav-right{ gap:8px; }
+            .menu-toggle{ width:42px; height:42px; }
+            .navbar-logo{ height:36px; }
+            .account-card{ padding:16px; }
         }
 
         .account-card{
@@ -1052,6 +1065,7 @@ $estadoTexto  = ((int)$usuario['estado'] === 1) ? 'Activo' : 'Inactivo';
 
         @media(max-width:560px){
             .field-row{ grid-template-columns:1fr; }
+            .account-card h2{ font-size:20px; }
         }
 
 </style>

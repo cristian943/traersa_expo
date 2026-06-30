@@ -832,15 +832,28 @@
             .modal-content{ max-height:95vh; }
             .modal-body{ padding:22px; }
             .modal-body h2{ font-size:26px; }
+            .top-navbar{ height:72px; padding:0 16px; }
         }
 
         @media(max-width:600px){
-            .top-navbar{ padding:0 15px; }
+            .top-navbar{ padding:0 12px; }
             .nav-left{ width:auto; }
             .navbar-logo{ height:42px; }
             .service-buttons{ flex-direction:column; }
             .contact{ flex-direction:column; gap:14px; }
             .contact div{ justify-content:center; }
+            .main-content{ padding:16px 12px 20px; }
+            .hero-card{ padding:20px 16px; }
+            .modal-body{ padding:18px; }
+            .modal-body h2{ font-size:22px; }
+        }
+
+        @media(max-width:480px){
+            .nav-right{ gap:8px; }
+            .menu-toggle{ width:42px; height:42px; }
+            .navbar-logo{ height:36px; }
+            .service-buttons .btn-primary,
+            .service-buttons .btn-secondary{ width:100%; min-width:0; }
         }
 
     </style>
