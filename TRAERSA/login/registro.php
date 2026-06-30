@@ -37,7 +37,7 @@
     <div class="decoration-line line-left"></div>
     <div class="decoration-line line-right"></div>
 
-    <a href="Inicio_sesion.html" class="btn-volver">VOLVER</a>
+    <a href="Inicio_sesion.php" class="btn-volver">VOLVER</a>
 
     <main class="login-card">
         <h2>REGISTRO</h2>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <button type="submit" class="btn-submit">REGISTRAR</button>
-            <p class="footer-form">¿Ya tienes cuenta? <a href="Inicio_sesion.html">Inicia sesión.</a></p>
+            <p class="footer-form">¿Ya tienes cuenta? <a href="Inicio_sesion.php">Inicia sesión.</a></p>
             <p class="footer-form">¿Olvidaste tu contraseña? <a href="recuperar_contra.html">Recupérala.</a></p>
         </form>
     </main>
