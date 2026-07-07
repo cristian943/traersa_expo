@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard TRAERSA</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css\Estilo.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <aside class="sidebar fade-up" id="sidebar">
+
+        <div class="logo-container">
+
+            <img src="imagenes\logo2.png" href="admin.html">
+            <h1>TRAERSA</h1>
+        </div>
+
+
+
+
+        <div class="menu-section">
+
+            <div class="menu-title">OPERACIONES</div>
+
+            <a href="empleado.html" class="menu-item ">
+                <i class="fa-solid fa-tags"></i>
+                <span>Servicios</span>
+            </a>
+
+            <a href="empleado.html" class="menu-item ">
+                <i class="fa-solid fa-tags"></i>
+                <span>Proceso</span>
+            </a>
+
+
+        </div>
+
+
+
+
+        <div class="sidebar-bottom">
+
+            <button class="btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Cerrar sesión</span>
+            </button>
+
+        </div>
+
+    </aside>
+    <main class="main-content fade-up">
+
+
+
+        <section class="process-section">
+
+            <div class="process-header">
+
+                <div>
+                    <small>Gestión logística</small>
+                    <h1>PROCESO DE <span>ENVÍOS</span></h1>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar guía, cliente o servicio">
+                    <button class="btn-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="process-table">
+
+                <!-- FILA -->
+
+                <div class="process-row">
+
+                    <div class="process-id">
+                        TRX-2026-001
+                    </div>
+
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-001
+                        <p>Servicio Express</p>
+                    </div>
+
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Guatemala → Petén
+                    </div>
+
+                    <div class="process-price">
+                        Q350
+                    </div>
+
+                    <div class="process-status running">
+                        EN RUTA
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+                <!-- FILA -->
+
+                <div class="process-row">
+
+                    <div class="process-id">
+                        TRX-2026-002
+                    </div>
+
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-002
+                        <p>Envío Nacional</p>
+                    </div>
+
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Mixco → Xela
+                    </div>
+
+                    <div class="process-price">
+                        Q450
+                    </div>
+
+                    <div class="process-status completed">
+                        ENTREGADO
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+                <!-- FILA -->
+
+                <div class="process-row">
+
+                    <div class="process-id">
+                        TRX-2026-003
+                    </div>
+
+                    <div class="process-client">
+                        <strong>Cliente:</strong> CL-003
+                        <p>Carga pesada</p>
+                    </div>
+
+                    <div class="process-route">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Puerto → Capital
+                    </div>
+
+                    <div class="process-price">
+                        Q2500
+                    </div>
+
+                    <div class="process-status warehouse">
+                        CENTRO LOGÍSTICO
+                    </div>
+
+                    <button class="btn-view open-modal">
+                        VER PROCESO
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer class="footer">
+
+            <div class="footer-container">
+
+                <div class="footer-box">
+
+                    <h4>Síguenos en redes sociales</h4>
+
+                    <div class="social">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Servicios</h4>
+
+                    <ul>
+                        <li>Gestión Aduanal</li>
+                        <li>Transporte Terrestre</li>
+                        <li>Transporte Marítimo</li>
+                        <li>Almacenaje</li>
+                        <li>Proyectos Especiales</li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Grupo TRAERSA</h4>
+
+                    <ul>
+                        <li>Únete a nuestro equipo</li>
+                        <li>Sobre nosotros</li>
+                        <li>Deseas ser proveedor</li>
+                    </ul>
+
+                </div>
+
+                <div class="footer-box">
+
+                    <h4>Nuestros valores</h4>
+
+                    <ul>
+                        <li>Sostenibilidad</li>
+                        <li>Garantía total</li>
+                        <li>Responsabilidad</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="contact">
+
+                <div>
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>+502 78562384</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>traersa2026@gmail.com</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>31 av 2-48 zona 6 de mixco</span>
+                </div>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+    <script>
+
+        const sidebar = document.getElementById("sidebar");
+        const menuToggle = document.getElementById("menuToggle");
+        const overlay = document.getElementById("overlay");
+
+        menuToggle.addEventListener("click", () => {
+
+            if (window.innerWidth <= 900) {
+
+                sidebar.classList.toggle("mobile-active");
+                overlay.classList.toggle("active");
+
+            } else {
+
+                sidebar.classList.toggle("closed");
+
+            }
+
+        });
+
+        overlay.addEventListener("click", () => {
+
+            sidebar.classList.remove("mobile-active");
+            overlay.classList.remove("active");
+
+        });
+
+        const menuItems = document.querySelectorAll(".menu-item");
+
+        menuItems.forEach(item => {
+
+            item.addEventListener("click", () => {
+
+                menuItems.forEach(el => {
+                    el.classList.remove("active");
+                });
+
+                item.classList.add("active");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

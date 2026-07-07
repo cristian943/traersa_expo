@@ -1,0 +1,101 @@
+<?php if(isset($_GET['error'])): ?>
+
+<div class="alert alert-danger text-center">
+    <?= htmlspecialchars($_GET['error']) ?>
+</div>
+
+<?php endif; ?>
+
+<?php if(isset($_GET['success'])): ?>
+
+<div class="alert alert-success text-center">
+    <?= htmlspecialchars($_GET['success']) ?>
+</div>
+
+<?php endif; ?>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - TRAERSA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css\style.css">
+</head>
+
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="Video/AdminiStrador.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="decoration-line line-left"></div>
+    <div class="decoration-line line-right"></div>
+
+    <a href="Inicio_sesion.html" class="btn-volver">VOLVER</a>
+
+    <main class="login-card">
+        <h2>REGISTRO</h2>
+        <form action="registrar.php" method="POST">
+            <div class="input-group">
+                <label>Usuario</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <input type="text" placeholder="Usuario" name="nombre" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Correo Electrónico</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <input type="email" placeholder="Correo Electrónico" name="email" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Contraseña" name="password" required>
+                    <i class="fa-solid fa-eye eye-toggle"></i>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Confirmar contraseña</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Confirmar contraseña" name="confirmar" required>
+                    <i class="fa-solid fa-eye eye-toggle"></i>
+                </div>
+            </div>
+            <button type="submit" class="btn-submit">REGISTRAR</button>
+            <p class="footer-form">¿Ya tienes cuenta? <a href="Inicio_sesion.html">Inicia sesión.</a></p>
+            <p class="footer-form">¿Olvidaste tu contraseña? <a href="recuperar_contra.html">Recupérala.</a></p>
+        </form>
+    </main>
+    <script>
+        document.querySelectorAll('.eye-toggle').forEach(eye => {
+            eye.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if (input.type === "password") {
+                    input.type = "text";
+                    this.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    input.type = "password";
+                    this.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+    <footer class="main-footer">© TRAERSA</footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
